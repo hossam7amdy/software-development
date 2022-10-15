@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.4;
+  font-family: sans-serif;
+}
+
+/* PRODUCT */
+.product {
+  border: 4px solid black;
+  margin: 50px auto;
+  position: relative;
+  width: 825px;
+}
+
+.product-title {
+  text-transform: uppercase;
+  text-align: center;
+  background: #f7f7f7;
+  font-size: 22px;
+  padding: 10px;
+}
+
+/* PRODUCT INFORMATION */
+.price {
+  font-size: 24px;
+}
+.shipping {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  color: #777;
+}
+.sale {
+  color: #fff;
+  background-color: #c50404;
+  /* display: inline-block; */
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 7px 15px;
+  position: absolute;
+  top: -17px;
+  left: -35px;
+}
+
+.more-info:link,
+.more-info:visited {
+  color: black;
+}
+.more-info:hover,
+.more-info:active {
+  text-decoration: none;
+}
+
+.more-info {
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+.color-black {
+  background-color: #000000;
+  width: 22px;
+  height: 22px;
+}
+.color-blue {
+  background-color: #0000ff;
+  width: 22px;
+  height: 22px;
+}
+.color-red {
+  background-color: #cb0b0b;
+  width: 22px;
+  height: 22px;
+}
+.color-yellow {
+  background-color: #ffff00;
+  width: 22px;
+  height: 22px;
+}
+.color-green {
+  background-color: #008000;
+  width: 22px;
+  height: 22px;
+}
+.color-brown {
+  background-color: #deb887;
+  width: 22px;
+  height: 22px;
+}
+
+/* PRODUCT DETAILS */
+.details-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.details-list {
+  list-style: square;
+  margin-left: 20px;
+}
+
+.details-list li {
+  margin-bottom: 10px;
+}
+
+/* BUTTON */
+.add-cart {
+  background: #000;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  padding: 15px;
+  width: 100%;
+  border-top: 4px solid black;
+}
+.add-cart:hover {
+  color: #000;
+  background: #fff;
+}
+
+/*
+ FLOATING LAYOUT
+.product-img {
+  float: left;
+  margin-right: 40px;
+}
+.product-info {
+  float: left;
+  width: 243px;
+  margin-right: 40px;
+}
+.details {
+  margin-top: 20px;
+  float: right;
+  width: 243px;
+}
+.price {
+  float: left;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+.shipping {
+  float: right;
+  padding-top: 15px;
+}
+.product-description {
+  clear: both;
+  margin-bottom: 10px;
+}
+*/
+
+/* Applying FLEXBOX */
+/* .containter {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.details {
+  flex: 1;
+}
+.product-info {
+  flex: 1;
+} */
+.price-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.product-description {
+  margin-bottom: 15px;
+}
+.product-colors {
+  display: flex;
+  gap: 10px;
+}
+
+/* Applying CSS GRID */
+.product {
+  display: grid;
+  grid-template-columns: 250px 1fr 1fr;
+
+  align-items: center;
+  column-gap: 40px;
+}
+.product-title {
+  grid-column: 1 / -1;
+}
+.add-cart {
+  grid-column: 1 / -1;
+}

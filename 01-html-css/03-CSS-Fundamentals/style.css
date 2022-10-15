@@ -1,0 +1,189 @@
+* {
+  /* Global reset */
+  margin: 0;
+  padding: 0;
+  color: #444;
+  font-family: sans-serif;
+}
+
+/* PAGE SECTIONS */
+body {
+  border-top: 10px solid #1098ad;
+  position: relative;
+}
+
+article {
+  margin-bottom: 20px;
+}
+
+aside {
+  background-color: #f7f7f7;
+  border-top: 5px solid blue;
+  border-bottom: 5px solid blue;
+  padding: 50px 0;
+  width: 500px;
+}
+
+button {
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+
+.containter {
+  width: 825px;
+  margin: 0 auto;
+}
+
+.main-header {
+  background-color: #f7f7f7;
+  padding: 20px 40px;
+  margin-bottom: 60px;
+  height: 80px;
+}
+
+/* PAGE ELEMENTS */
+h1,
+h2,
+h3 {
+  color: #1098ad;
+}
+
+h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+h1::first-letter {
+  font-style: normal;
+  margin-right: 10px;
+}
+
+h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h2::after {
+  content: "TOP";
+  color: #444;
+  background-color: #fff708;
+  font-size: 20px;
+  display: inline-block;
+  position: absolute;
+  top: -15px;
+  right: -25px;
+}
+
+h3 {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+h4 {
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+nav {
+  text-align: center;
+}
+
+nav a:link {
+  margin: 10px 5px;
+  display: inline-block;
+}
+
+p {
+  font-size: 22px;
+  list-style: 1.5;
+  margin-bottom: 15px;
+}
+
+li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+li:first-child {
+  font-weight: bold;
+}
+
+li:last-child {
+  padding: 0;
+  font-style: italic;
+}
+
+ol,
+ul {
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+/* ID elements */
+#author {
+  font-size: 12px;
+}
+
+#copyright {
+  font-size: 12px;
+}
+
+.post-img {
+  width: 100%;
+  height: auto;
+}
+
+.related-list {
+  list-style: none;
+}
+
+.related-author {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.post-header {
+  margin-bottom: 30px;
+}
+
+/* Styling links */
+a:link {
+  color: #1098ad;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1098ad;
+}
+
+a:hover {
+  color: orangered;
+  font-weight: bold;
+  text-decoration: underline orangered;
+}
+
+a:active {
+  background-color: black;
+  font-style: italic;
+}
+
+/* CSS THEORY #1: CONFLICTS BETWEEN SELECTORS */
+
+/* footer p {
+  color: red;
+}
+
+.copyright {
+  color: green;
+}
+
+#copyright {
+  color: blue;
+} */

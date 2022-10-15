@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: beige;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin: 15px 20px;
+}
+
+.first {
+  background-color: azure;
+}
+
+#six-header {
+  font-size: large;
+  color: blueviolet;
+}
+
+.your-name {
+  background-color: rgb(160, 160, 146);
+  width: 300px;
+  margin: 15px;
+  padding: 15px;
+  border: 5px solid #444;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+.your-name p {
+  text-align: center;
+}
+
+input,
+button {
+  padding: 10px;
+}

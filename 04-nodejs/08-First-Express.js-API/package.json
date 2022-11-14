@@ -1,0 +1,19 @@
+{
+  "name": "08-first-express.js-api",
+  "version": "1.0.0",
+  "description": "- [Stack Overflow Annual Developer Survey](https://insights.stackoverflow.com/survey/)\r -",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,114 @@
+## Topics Covered
+
+- What is Node.js
+- Reactor Pattern
+- Node.js Architecture
+- Event Queues (I/O Polling, Macrotasks, Microtasks)
+- Changes from Node v11
+- CommonJS vs ES modules
+- Libuv (thread pool)
+- DNS is problematic in Node.js
+- Custom Promises — Bluebird
+- Summary
+
+## What is Node.js
+
+Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine. It uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.
+
+**JavaScript**
+
+- Q: What are you JS?
+- A: Single-threaded, non-blocking, asynchronous, concurrent, event-driven runtime.
+
+- Q: What do you have?
+- A: I have call stack, event loop, callback queue, and other APIs.
+
+- Q: Do `V8` ll stack, event loop, callback queue, and other APIs?
+- A: No, `V8` is just a JS engine (has call stack and a heap).
+
+## Reactor Pattern: _event-driven model_
+
+![Visualization of the event-driven model.](image-1.png)
+
+**Node.js** is written using the Reactor pattern, which provides what is commonly referred to as an event-driven model.
+
+- After receiving the request from the EventLoop, the Event Demultiplexer decides what type of hardware I/O operation needs to be performed, based on the I/O request.
+- The operation is delegated to the appropriate unit.
+- When the operation is complete, the Event Demultiplexer receives a notification and places the result in the EventQueue.
+- The EventLoop then retrieves the result from the EventQueue and executes the appropriate callback.
+
+## Node.js Architecture
+
+Diagram: Microtasks
+![Diagram: Microtasks](image-2.png)
+Full diagram: Macrotasks and Microtasks
+![Full diagram: Macrotasks and Microtasks](image.png)
+
+- Event Queues (Macrotasks, I/O Polling, Microtasks)
+- Macrotasks = (Timers, I/O, Immediate, close events)
+- Microtasks = (Promises, process.nextTick)
+
+## Changes from Node v11
+
+```js
+setTimeout(() => console.log("Timeout 1"));
+setTimeout(() => {
+  console.log("Timeout 2");
+  Promise.resolve().then(() => console.log("promise resolve"));
+});
+setTimeout(() => console.log("Timeout 3"));
+```
+
+- Node v10: Timeout 1, Timeout 2, Timeout 3, promise resolve
+- Node v20: Timeout 1, Timeout 2, promise resolve, Timeout 3
+
+## CommonJS vs ES modules
+
+```js
+process.nextTick(() => {
+  console.log("nextTick");
+});
+
+Promise.resolve().then(() => {
+  console.log("promise resolve");
+});
+
+console.log("console.log");
+```
+
+- CommonJs: console.log, nextTick, promise resolve
+- ES modules: console.log, promise resolve, nextTick
+- _NOTE:_ **ES modules** function asynchronously, meaning that when the program begins, it does not initiate solely as a program in the conventional CommonJS fashion.
+
+## Libuv (thread pool)
+
+Blocking and Non-Blocking I/O
+![Visualisation of Blocking and Non-Blocking I/O](image-3.png)
+
+libuv is a multi-platform support library with a focus on asynchronous I/O.
+
+## DNS is problematic in Node.js
+
+In Node.js, the dns.lookup function is a Blocking I/O operation when resolving hostnames.
+
+- [Fixing DNS in Node.js](https://httptoolkit.com/blog/configuring-nodejs-dns/)
+
+## Custom Promises — Bluebird
+
+_Why not natives?_
+
+You may have noticed that people often utilize custom-written promises, such as Bluebird.js. However, Bluebird.js offers much more than just a set of useful methods. It distinguishes itself by providing advanced features, enhancing promise performance.
+
+- Native Promises
+  ![Visualisation of Native Promises](image-4.png)
+
+- Bluebird Promises
+  ![Visualisation of Bluebird Promises](image-5.png)
+
+### Sources
+
+- [You Don’t Know Node.js EventLoop](https://blog.bitsrc.io/you-dont-know-node-js-eventloop-8ee16831767)
+- [What the heck is the event loop anyway? | Philip Roberts | JSConf EU](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
+- [Extracting and Reusing Pre-existing Components using bit add](https://bit.dev/blog/-extracting-and-reusing-pre-existing-components-using-bit-add-l28qlxpz/?source=post_page-----8ee16831767--------------------------------)
+- [timers: run nextTicks after each immediate and timer](https://github.com/nodejs/node/pull/22842)

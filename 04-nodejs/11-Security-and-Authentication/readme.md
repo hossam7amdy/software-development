@@ -15,7 +15,7 @@
 ### Authentication vs Authorization
 
 - **Authentication**: Who you are? = LogIn
-- **Authorization**: Are you allowed? = Access controll
+- **Authorization**: Are you allowed? = Access control
 
 ### Authentication Methods/Technologies
 

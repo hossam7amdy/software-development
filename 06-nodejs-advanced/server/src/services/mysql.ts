@@ -2,10 +2,13 @@ import {
   Pool,
   PoolConnection,
   PoolOptions,
+  QueryOptions,
   ResultSetHeader,
   RowDataPacket,
   createPool,
 } from "mysql2/promise";
+
+import { logger } from "./winston-logger";
 
 /** A wrapper class for the MySQL2 library. */
 class MySQL {
@@ -24,27 +27,59 @@ class MySQL {
   }
 
   /** For `SELECT` and `SHOW` */
-  async executeRows<T>(sql: string, values?: any) {
+  async queryRows<T>(queryOptions: QueryOptions) {
     await this.ensureConnection();
-    return this.conn.execute<(T & RowDataPacket)[]>(sql, values);
+    return this.conn.query<(T & RowDataPacket)[]>(queryOptions);
+  }
+
+  /** For multiple `SELECT` and `SHOW` with `multipleStatements` as `true` */
+  async queryRowsMultiple<T1, T2>(queryOptions: QueryOptions) {
+    await this.ensureConnection();
+    return this.conn.query<[(T1 & RowDataPacket)[], (T2 & RowDataPacket)[]]>(
+      queryOptions
+    );
   }
 
   /** For `SELECT` and `SHOW` with `rowAsArray` as `true` */
-  async executeRowsAsArray(sql: string, values?: any) {
+  async queryRowsAsArray(queryOptions: QueryOptions) {
     await this.ensureConnection();
-    return this.conn.execute<[RowDataPacket[]]>(sql, values);
+    return this.conn.query<[RowDataPacket[]]>(queryOptions);
   }
 
   /** For `INSERT`, `UPDATE`, etc. */
-  async executeResult(sql: string, values?: any) {
+  async queryResult(queryOptions: QueryOptions) {
     await this.ensureConnection();
-    return this.conn.execute<ResultSetHeader>(sql, values);
+    return this.conn.query<ResultSetHeader>(queryOptions);
   }
 
   /** For multiple `INSERT`, `UPDATE`, etc. with `multipleStatements` as `true` */
-  async executeResults(sql: string, values?: any) {
+  async queryResults(queryOptions: QueryOptions) {
     await this.ensureConnection();
-    return this.conn.execute<ResultSetHeader[]>(sql, values);
+    return this.conn.query<ResultSetHeader[]>(queryOptions);
+  }
+
+  /** For `SELECT` and `SHOW` */
+  async executeRows<T>(queryOptions: QueryOptions) {
+    await this.ensureConnection();
+    return this.conn.execute<(T & RowDataPacket)[]>(queryOptions);
+  }
+
+  /** For `SELECT` and `SHOW` with `rowAsArray` as `true` */
+  async executeRowsAsArray(queryOptions: QueryOptions) {
+    await this.ensureConnection();
+    return this.conn.execute<[RowDataPacket[]]>(queryOptions);
+  }
+
+  /** For `INSERT`, `UPDATE`, etc. */
+  async executeResult(queryOptions: QueryOptions) {
+    await this.ensureConnection();
+    return this.conn.execute<ResultSetHeader>(queryOptions);
+  }
+
+  /** For multiple `INSERT`, `UPDATE`, etc. with `multipleStatements` as `true` */
+  async executeResults(queryOptions: QueryOptions) {
+    await this.ensureConnection();
+    return this.conn.execute<ResultSetHeader[]>(queryOptions);
   }
 
   private sleep = (ms: number) =>
@@ -59,7 +94,7 @@ class MySQL {
       return await this.conn.execute("SELECT 1 + 1 AS solution");
     } catch (err) {
       if (err.code === "ECONNRESET" && maxRetries > 0) {
-        console.log(
+        logger.warn(
           `Connection reset. Retrying... (Remaining retries: ${maxRetries})`
         );
         await this.sleep(1000); // Add a delay between retries (e.g., 1 second)

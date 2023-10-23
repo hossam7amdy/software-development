@@ -7,8 +7,7 @@ import app from "./app";
 import { initDb } from "./services/mysql";
 import { initializeSocket } from "./services/socket";
 import { getDbConfig } from "./utils/env";
-import { logger } from "./services/logger";
-import { log } from "console";
+import { logger } from "./services/winston-logger";
 
 dotenv.config();
 

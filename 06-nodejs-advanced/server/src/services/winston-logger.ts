@@ -7,9 +7,7 @@ const { combine, timestamp, printf, json, errors, colorize } = format;
 const loggerPath = getLoggerPath();
 
 const formatDateTime = (date: Date): string => {
-  return date.toLocaleString("en-EG", {
-    timeZone: "Egypt/Cairo",
-  });
+  return date.toLocaleString("en-EG");
 };
 
 const config = {

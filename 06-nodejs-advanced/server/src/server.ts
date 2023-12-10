@@ -5,9 +5,7 @@ import https from "https";
 
 import app from "./app";
 import { initDb } from "./services/mysql";
-import { initializeSocket } from "./services/socket";
 import { getDbConfig } from "./utils/env";
-import { logger } from "./services/winston-logger";
 
 dotenv.config();
 
@@ -32,13 +30,7 @@ const environment = process.env.NODE_ENV;
 
 // use `npm run prod` to run in production mode
 const server = createServer(environment);
-initializeSocket(server);
 
 server.listen(port, () => {
-  logger.info("Hello again distributed logs");
-  logger.error("Hello again distributed logs");
-  logger.warn("Hello again distributed logs");
-  logger.error(new Error("something bad happened"));
-
   console.log(`Server is running on ${environment} mode on port ${port}`);
 });

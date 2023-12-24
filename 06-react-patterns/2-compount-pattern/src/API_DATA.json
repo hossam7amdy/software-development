@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Entertainment",
+    "retweets": "54",
+    "isLocal": false,
+    "text": "Omg. A tweet."
+  },
+  {
+    "category": "Entertainment",
+    "retweets": "100",
+    "isLocal": false,
+    "text": "Omg. Another."
+  },
+  {
+    "category": "Technology",
+    "retweets": "32",
+    "isLocal": false,
+    "text": "New ECMAScript features!"
+  },
+  {
+    "category": "Technology",
+    "retweets": "88",
+    "isLocal": true,
+    "text": "Wow, learning React!"
+  }
+]

@@ -1,0 +1,36 @@
+.flyout {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.flyout-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #232323;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+
+  cursor: pointer;
+}
+
+.flyout-list {
+  position: absolute;
+  top: 30px;
+  right: 0px;
+  padding: 0px;
+  width: 150px;
+
+  background-color: #292929;
+  box-shadow: 3px 3px 4px #141414;
+}
+
+.flyout-item {
+  padding: 1rem;
+  list-style: none;
+  transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}

@@ -3,3 +3,14 @@
   margin: 0 auto;
   padding: 2rem;
 }
+
+img {
+  width: 300px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.image-item {
+  position: relative;
+  width: 300px;
+}

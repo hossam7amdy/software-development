@@ -9,7 +9,7 @@ const sources = [
 
 const Image = ({ source }: { source: string }) => {
   return (
-    <div className="img-item">
+    <div className="image-item">
       <img src={source} />
       <FlyoutMenu />
     </div>

@@ -8,6 +8,15 @@
 - Users attempt to perform **Actions** on these resources, i.e. S3::GetObject, EC2::RunInstances, etc.
 - Authorization to perform an **Action** depends on a **Policy** that is attached to the user.
 
+## How it Works?
+
+4 key concepts: **Users**, **Groups**, **Roles**, and **Policies**/**Permissions**
+
+- **Users** specify individuals who can receive personal logins (i.e. access keys, secret access keys, and passwords)
+- **Groups** are collections of users (i.e. Admins, Developers, etc.)
+- **Roles** are used to delegate access to AWS resources to users, applications, or services that don't normally have access to them (i.e. EC2 instances, Lambda functions, etc.)
+- **Policies** low level permissions to resources (Allow or Deny) (i.e. S3::GetObject, EC2::RunInstances, etc.) in JSON format
+
 ### Example
 
 <img src="./assets/example.png" width="500"/>

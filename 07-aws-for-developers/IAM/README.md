@@ -19,7 +19,7 @@
 
 ### Example
 
-<img src="./assets/example.png" width="500"/>
+<img src="./images/example.png" width="500"/>
 
 - User Alice wants to create a lambda function
 - Alice is denied access because she does not have the required permissions
@@ -61,7 +61,7 @@
 
 ## Other Important Concepts
 
-<img src="./assets/concepts.png" width="500"/>
+<img src="./images/concepts.png" width="500"/>
 
 - **Groups** are collections of users
 - **Roles** are used to delegate access to AWS resources to users, applications, or services that don't normally have access to them

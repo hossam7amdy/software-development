@@ -27,7 +27,7 @@
 - Identity Pools provide AWS credentials to grant your users access to other AWS services.
 - Identity pools enable you to grant your users access to other AWS services, such as Amazon S3 or DynamoDB.
 
-<img src="./assets/core-concepts.png" width="500px" />
+<img src="./images/core-concepts.png" width="500px" />
 
 ## Create a User Pool
 
@@ -38,7 +38,7 @@ You can integrate your app with user pools in the following ways:
 1. AWS Amplify
 2. AWS SDK
 
-<img src="./assets/app-integration.png" width="500px" />
+<img src="./images/app-integration.png" width="500px" />
 
 ## Triggers
 

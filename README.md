@@ -9,6 +9,6 @@ Because all components of the MEAN stack support programs that are written in Ja
 3. [React - The Complete Guide (incl Hooks, React Router, Redux) Complete React Developer in 2022 (w/ Redux, Hooks, GraphQL](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 
 4. [Complete NodeJS Developer in 2022 (GraphQL, MongoDB, + more)](https://www.udemy.com/course/complete-nodejs-developer-zero-to-mastery/)
-5. [AWS Certified Cloud Practitioner (CLF-C01)](https://acloud.guru/overview/aws--certified-cloud-practitioner)
+5. [AWS Certified Cloud Practitioner (CLF-C01)](https://www.pluralsight.com/cloud-guru/courses/aws-certified-cloud-practitioner-clf-c01)
 6. [AWS Certified Solutions Architect Associate](https://acloudguru.com/course/aws-certified-solutions-architect-associate-saa-c02)
 7. [Serverless Stack](https://sst.dev/guide.html)

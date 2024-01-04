@@ -32,3 +32,7 @@ When the props or states get updated:
 
 `shouldComponentUpdate()` is invoked before rendering when new props or state are being received.
 `componentDidUpdate()` is invoked immediately after updating occurs. This method is not called for the initial render.
+
+## References
+
+[Overview of React.js](https://www.patterns.dev/react)

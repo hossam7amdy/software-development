@@ -54,4 +54,4 @@ The behavior adds many properties to the component
 
 ## References
 
-- [Higher-Order Components - React](https://reactjs.org/docs/higher-order-components.html)
+- [Proxy Pattern](https://reactjs.org/docs/higher-order-components.html)

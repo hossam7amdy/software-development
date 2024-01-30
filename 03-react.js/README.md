@@ -42,3 +42,7 @@
 ## Notes
 
 **Context API**: is ready to be used for low frequency unlikely updates (lik locale/theme). It's not ready to be used as a replacement for all Flux/redux-like state propagation.
+
+## References
+
+- [React - The Complete Guide (incl Hooks, React Router, Redux) Complete React Developer in 2022 (w/ Redux, Hooks, GraphQL](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)

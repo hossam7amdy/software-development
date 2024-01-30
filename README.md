@@ -2,13 +2,15 @@
 
 Because all components of the MEAN stack support programs that are written in JavaScript, MEAN applications can be written in one language for both server-side and client-side execution environments.
 
-## Courses List
+Principal technologies used in the MERN stack include:
 
-1. [Build Responsive Real-World Websites with HTML and CSS](https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/)
-2. [The Complete JavaScript Course 2022: From Zero to Expert!](https://www.udemy.com/course/the-complete-javascript-course/)
-3. [React - The Complete Guide (incl Hooks, React Router, Redux) Complete React Developer in 2022 (w/ Redux, Hooks, GraphQL](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
+- MongoDB, a cross-platform document-oriented database program.
+- Express.js, a web application framework for Node.js.
+- React, a JavaScript library for building user interfaces.
+- Node.js, an asynchronous event-driven JavaScript runtime.
 
-4. [Complete NodeJS Developer in 2022 (GraphQL, MongoDB, + more)](https://www.udemy.com/course/complete-nodejs-developer-zero-to-mastery/)
-5. [AWS Certified Cloud Practitioner (CLF-C01)](https://www.pluralsight.com/cloud-guru/courses/aws-certified-cloud-practitioner-clf-c01)
-6. [AWS Certified Solutions Architect Associate](https://acloudguru.com/course/aws-certified-solutions-architect-associate-saa-c02)
-7. [Serverless Stack](https://sst.dev/guide.html)
+## Upcoming
+
+- [AWS Certified Cloud Practitioner (CLF-C01)](https://www.pluralsight.com/cloud-guru/courses/aws-certified-cloud-practitioner-clf-c01)
+- [AWS Certified Solutions Architect Associate](https://acloudguru.com/course/aws-certified-solutions-architect-associate-saa-c02)
+- [Serverless Stack](https://sst.dev/guide.html)

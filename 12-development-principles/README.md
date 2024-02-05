@@ -37,3 +37,7 @@ Proper documentation helps developers understand and maintain the backend codeba
 ---
 
 By following these design and development principles, you’ll be well on your way to creating an efficient, secure, and maintainable backend for your applications.
+
+## References
+
+- [SOLID Principles بالعربى](https://youtube.com/playlist?list=PLnqAlQ9hFYdflFSS4NigVB7aSoYPNwHTL&si=n1cbGcFuxz__TpmL)

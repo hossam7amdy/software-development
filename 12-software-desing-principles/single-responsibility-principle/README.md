@@ -141,14 +141,6 @@ module InventoryService {
 }
 ```
 
-## Benefits
-
-By following the SRP, you can achieve the following benefits:
-
-- **Easier to understand**: By having a single responsibility, a class, function, or module becomes easier to understand, as it is focused on doing one thing well.
-- **Easier to maintain**: When a class, function, or module has a single responsibility, it is easier to maintain, as changes are localized to a single place.
-- **Easier to extend**: When a class, function, or module has a single responsibility, it is easier to extend, as new functionality can be added without affecting existing functionality.
-
 ## Conclusion
 
 The Single Responsibility Principle (SRP) is a fundamental principle of object-oriented design. By following this principle, you can create code that is easier to understand, maintain, and extend.

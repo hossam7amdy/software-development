@@ -2,6 +2,8 @@
 
 Design and development principles to follow while building the backend of any application. These principles will ensure that the backend is efficient, scalable, and maintainable.
 
+<img src="image.png" alt="S.O.I.L.D" width="720"/>
+
 ## 1. Separation of Concerns (SoC)
 
 Separation of Concerns is a fundamental principle that states that different functionalities of a system should be as independent as possible. This approach improves maintainability and scalability by allowing developers to work on separate components without affecting each other. Divide your backend into clear modules and layers, such as data storage, business logic, and network communication.

@@ -119,3 +119,7 @@ EventEmitter, which can be used to provide a more detailed account on the status
 an asynchronous process.
 
 [See (glob)](https://www.npmjs.com/package/glob)
+
+## References
+
+- [Garbage collection](https://javascript.info/garbage-collection)

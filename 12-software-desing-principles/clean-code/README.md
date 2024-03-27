@@ -1,3 +1,5 @@
+# Clean Code
+
 Code is clean if it can be understood easily – by everyone on the team. Clean code can be read and enhanced by a developer other than its original author. With understandability comes readability, changeability, extensibility and maintainability.
 
 ---
@@ -71,23 +73,31 @@ Code is clean if it can be understood easily – by everyone on the team. Clean 
 
 ## Objects and data structures
 
-1. Hide internal structure.
-2. Prefer data structures.
-3. Avoid hybrids structures (half object and half data).
-4. Should be small.
-5. Do one thing.
-6. Small number of instance variables.
-7. Base class should know nothing about their derivatives.
-8. Better to have many functions than to pass some code into a function to select a behavior.
-9. Prefer non-static methods to static methods.
+1. Objects expose behavior and hide data.
+2. Data structures expose data and have no significant behavior.
+3. Hide internal structure.
+4. Prefer data structures.
+5. Avoid hybrids structures (half object and half data).
+6. Should be small.
+7. Do one thing.
+8. Small number of instance variables.
+9. Base class should know nothing about their derivatives.
+10. Better to have many functions than to pass some code into a function to select a behavior.
+11. Prefer non-static methods to static methods.
+
+## Boundaries
+
+1. Don't pass (interface at a boundary) around your system.
+2. Learn and use the third-party code in the same way you would write it.
+3. Test third-party code.
+4. Wrap third-party code.
 
 ## Tests
 
-1. One assert per test.
-2. Readable.
-3. Fast.
-4. Independent.
-5. Repeatable.
+1. The three laws of TDD.
+2. One assert per test.
+3. Single concept per test.
+4. F.I.R.S.T. (Fast, Independent, Repeatable, Self-Validating, Timely).
 
 ## Code smells
 

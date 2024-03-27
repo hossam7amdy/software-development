@@ -45,7 +45,8 @@ SELECT * FROM users WHERE UPPER(name) = 'JOHN';
 ## Redundant and approximate conditions
 
 We can _unlocking indexes_ with redundant and approximate conditions in MySQL.
-For example, if you have an index on the `price` column, and you want to find price with tax that is less than 100, you can use the following query:
+For example, if you have an index on the `price` column, and you want to find price  
+with tax that is less than 100, you can use the following query:
 
 ```sql
 SELECT * FROM products
@@ -57,7 +58,8 @@ AND
 
 ## Select only what you need
 
-One of the oldest pieces of advice for improving query performance is to only select the columns you need. This is especially true when you have large columns (e.g. TEXT or BLOB columns).
+One of the oldest pieces of advice for improving query performance is to only select the columns you need.  
+This is especially true when you have large columns (e.g. TEXT or BLOB columns).
 
 ## Limiting rows
 
@@ -72,15 +74,20 @@ Only asks the database for the data that you actually need, this makes your quer
 
 ## Indexes joins
 
-Joins can be indexed in MySQL. This is done by creating an index on the foreign key column in the child table. If you miss this index, MySQL will have to do a full table scan on the child table to find the matching rows.
+Joins can be indexed in MySQL. This is done by creating an index on the foreign key  
+column in the child table. If you miss this index, MySQL will have to do a full table  
+scan on the child table to find the matching rows.
 
 ## Subqueries
 
 Subqueries are queries that are nested inside another query. They can be used in the SELECT, FROM, WHERE, and HAVING clauses.
 
-Subqueries in MySQL are a powerful tool for filtering data efficiently. MySQL can optimize your subqueries using the semi-join and anti-join optimization techniques. It's important to optimize your queries and test them with your dataset to ensure they perform well under various conditions!
+Subqueries in MySQL are a powerful tool for filtering data efficiently. MySQL can optimize your subqueries using the semi-join  
+and anti-join optimization techniques. It's important to optimize your queries and test them with your dataset to ensure they  
+perform well under various conditions!
 
-If you want to learn more about subqueries in MySQL, check out Chapter 8 on optimizations in the MySQL documentation. This resource is a treasure trove of information that can help you become an expert in MySQL.
+If you want to learn more about subqueries in MySQL, check out Chapter 8 on optimizations in the MySQL documentation.  
+This resource is a treasure trove of information that can help you become an expert in MySQL.
 
 ## Common table expressions (CTEs)
 

@@ -32,6 +32,19 @@ B+ Tree is a data structure that is used to store indexes in MySQL.
 - A secondary index is an index created on a column or a set of columns that are not the primary key.
 - Every single leaf node of a secondary index contains a primary key appended (MySQL InnoDB).
 
+## Primary Key data types
+
+When choosing a data type for a primary key, you have several options:
+
+- INT (4 bytes = 32 bits)
+- BIGINT (8 bytes = 64 bits) - recommended
+- UUID (16 bytes = 128 bits) - Universally Unique Identifier
+- ULID (16 bytes = 128 bits) - Universally Unique Lexicographically Sortable Identifier
+- GUID (16 bytes = 128 bits) - Globally Unique Identifier
+
+The recommended data type for a primary key is UNSIGNED BIGINT with AUTO_INCREMENT.
+This is because it is the most efficient in terms of storage and performance.
+
 ## Where to add indexes?
 
 - Start with access pattern (queries).
@@ -41,11 +54,18 @@ B+ Tree is a data structure that is used to store indexes in MySQL.
 
 ## Index selectivity & cardinality
 
-- The cardinality of an index is the number of unique values in the index.
+- The cardinality of an index is the number of unique values.
+- The selectivity of an index is the number of unique rows compared to the total number of rows.
 - The higher the selectivity, the more likely MySQL will use the index to retrieve data.
 
 ```sql
+SHOW INDEX FROM table_name;
+
+-- Cardinality
 SELECT COUNT(DISTINCT column_name) FROM table_name;
+
+-- Selectivity
+SELECT COUNT(DISTINCT column_name) / COUNT(*) FROM table_name;
 ```
 
 ## Index prefix
@@ -64,7 +84,8 @@ ALTER TABLE table_name ADD INDEX index_name (column_name(length));
 
 ### Rules for composite indexes
 
-- _Left-to-right_, no skipping: MySQL can only access the index in order, starting from the leftmost column and moving to the right. It can't skip columns in the index.
+- **Left-to-right, no skipping**: MySQL can only access the index in order, starting from
+  the leftmost column and moving to the right. It can't skip columns in the index.
 - _Stops at the first range_: MySQL stops using the index after the first range condition encountered.
 
 ### Analyzing index usage
@@ -141,7 +162,8 @@ ALTER TABLE json_data ADD INDEX (email);
 
 ```sql
 ALTER TABLE json_data ADD INDEX ((
-    CAST(`json`->>'$.email') AS CHAR(255) COLLATE utf8mb4_bin)
+    CAST(`json`->>'$.email') AS CHAR(255)
+  COLLATE utf8mb4_bin)
 );
 ```
 
@@ -211,9 +233,13 @@ ALTER TABLE people ALTER INDEX email_idx INVISIBLE;
 
 Benefits of making an index invisible: you can test the performance of queries without the index.
 
+_Note_ If it has `unique` constraint, it will still be enforced.
+
 ## Foreign Key Indexes
 
 - A foreign key is a column or a set of columns in a table that references to the primary key of another table.
 - MySQL automatically creates an index on the foreign key column(s).
+
+_Note_ Foreign keys can exist without constraints, but constraints are helpful to maintain referential integrity.
 
 _Tip_ Move referential integrity checks to the application layer.

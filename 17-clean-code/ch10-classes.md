@@ -1,4 +1,4 @@
-# Chapter 10
+# Chapter 10: Classes
 
 Focuses on writing clean classes, emphasizing that this is a higher level of code organization that is crucial for clean code.
 

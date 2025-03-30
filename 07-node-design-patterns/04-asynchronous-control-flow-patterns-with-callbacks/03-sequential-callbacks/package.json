@@ -1,0 +1,17 @@
+{
+  "name": "03-sequential-callbacks",
+  "version": "1.0.0",
+  "description": "Simple example that demonstrates sequential tasks using callbacks",
+  "engines": {
+    "node": ">=14"
+  },
+  "engineStrict": true,
+  "main": "test.js",
+  "type": "modules",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -22,7 +22,8 @@
     "lint-staged": "^10.0.10",
     "prettier": "3.5.3",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@types/node": "^22.14.0"
   },
   "husky": {
     "hooks": {
@@ -36,8 +37,6 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "@types/node": "^22.14.0"
-  },
+  "dependencies": {},
   "packageManager": "yarn@1.22.22"
 }

@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { ToFileStream } from './to-file-stream.js'
+import { ToFileStream } from './to-file-stream.ts'
 const tfs = new ToFileStream()
 
 tfs.write({ path: join('files', 'file1.txt'), content: 'Hello' })

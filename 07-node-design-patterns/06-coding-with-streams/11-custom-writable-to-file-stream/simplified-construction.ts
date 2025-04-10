@@ -1,13 +1,13 @@
 import { Writable } from 'stream'
-import { promises as fs } from 'fs'
+import type { Chunk } from './types.ts'
+import { mkdir, writeFile } from 'fs/promises'
 import { dirname, join } from 'path'
-import mkdirp from 'mkdirp-promise'
 
 const tfs = new Writable({
   objectMode: true,
-  write (chunk, encoding, cb) {
-    mkdirp(dirname(chunk.path))
-      .then(() => fs.writeFile(chunk.path, chunk.content))
+  write: (chunk: Chunk, _, cb) => {
+    mkdir(dirname(chunk.path), { recursive: true })
+      .then(() => writeFile(chunk.path, chunk.content))
       .then(() => cb())
       .catch(cb)
   }

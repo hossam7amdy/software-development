@@ -1,8 +1,8 @@
 import { createReadStream } from 'fs'
 import { createGunzip } from 'zlib'
-import parse from 'csv-parse'
-import { FilterByCountry } from './filter-by-country.js'
-import { SumProfit } from './sum-profit.js'
+import { parse } from 'csv-parse'
+import { FilterByCountry } from './filter-by-country.ts'
+import { SumProfit } from './sum-profit.ts'
 
 const csvParser = parse({ columns: true })
 

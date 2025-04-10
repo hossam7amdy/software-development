@@ -1,4 +1,4 @@
-import { ReplaceStream } from './replace-stream.js'
+import { ReplaceStream } from './replaceStream.ts'
 
 const replaceStream = new ReplaceStream('World', 'Node.js')
 replaceStream.on('data', chunk => console.log(chunk.toString()))

@@ -2,21 +2,21 @@ import { createReadStream } from 'fs'
 import { createBrotliCompress } from 'zlib'
 import { PassThrough } from 'stream'
 import { basename } from 'path'
-import { upload } from './upload.js'
+import { upload } from './upload.ts'
 
-const filepath = process.argv[2] // ①
+const filepath = process.argv[2] // 1
 const filename = basename(filepath)
-const contentStream = new PassThrough() // ②
+const contentStream = new PassThrough() // 2
 
-upload(`${filename}.br`, contentStream) // ③
-  .then((response) => {
+upload(`${filename}.br`, contentStream) // 3
+  .then(response => {
     console.log(`Server response: ${response.data}`)
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err)
     process.exit(1)
   })
 
-createReadStream(filepath) // ④
+createReadStream(filepath) // 4
   .pipe(createBrotliCompress())
   .pipe(contentStream)

@@ -1,4 +1,3 @@
-import { endianness } from 'os'
 import {
   Transform,
   type TransformCallback,

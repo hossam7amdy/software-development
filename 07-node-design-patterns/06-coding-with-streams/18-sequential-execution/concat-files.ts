@@ -1,5 +1,5 @@
 import { createReadStream, createWriteStream } from 'fs'
-import Stream, { Readable, Transform, type TransformCallback } from 'stream'
+import { Readable, Transform, type TransformCallback } from 'stream'
 
 export const concatFiles = (dest: string, files: string[]): Promise<void> => {
   return new Promise((resolve, rejects) => {

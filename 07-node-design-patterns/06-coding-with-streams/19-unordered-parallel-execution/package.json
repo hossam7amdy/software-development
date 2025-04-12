@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/superagent": "^8.1.9",
     "split": "^1.0.1",
     "superagent": "^5.3.1"
   },
   "engines": {
     "node": ">=14"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/split": "^1.0.5"
+  }
 }

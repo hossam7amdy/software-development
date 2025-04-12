@@ -44,9 +44,9 @@ pipeline(
       console.error(err)
       process.exit(1)
     }
+    console.log('All urls have been checked')
 
     const end = performance.now()
-    console.log('All urls have been checked')
-    console.log(`Took ${end - start} ms`)
+    console.log(`Pipeline took ${end - start} ms`)
   }
 )

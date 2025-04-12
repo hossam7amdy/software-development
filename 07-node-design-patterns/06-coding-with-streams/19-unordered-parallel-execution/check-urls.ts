@@ -8,6 +8,7 @@ const normalStream = new Transform({
   objectMode: true,
   async write(url, _, done) {
     try {
+      if (!url) return
       await superagent.head(url)
       this.push(`${url} is up\n`)
     } catch {
@@ -20,6 +21,7 @@ const normalStream = new Transform({
 
 const parallelStream = new ParallelStream(async (url, push, done) => {
   try {
+    if (!url) return done()
     await superagent.head(url as string)
     push(`${url} is up\n`)
   } catch {

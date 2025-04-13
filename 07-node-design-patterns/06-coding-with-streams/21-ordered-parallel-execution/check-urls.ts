@@ -4,30 +4,25 @@ import split from 'split'
 import { ParallelTransform } from './parallel-transform'
 import parallelTransform from 'parallel-transform'
 
-const myParallelTransform = new ParallelTransform(4, async function (
-  url,
-  push,
-  done
-) {
+const myParallelTransform = new ParallelTransform(4, async (url, done) => {
   if (!url) return done()
   try {
     await fetch(url)
-    push(`${url} is up\n`)
+    done(null, `${url} is up\n`)
   } catch {
-    push(`${url} is down\n`)
+    done(null, `${url} is down\n`)
   }
   done()
 })
 
-const pkgParallelTransform = parallelTransform(4, async function (url, done) {
+const pkgParallelTransform = parallelTransform(4, async (url, done) => {
   if (!url) return done()
   try {
     await checkUrl(url)
-    this.push(`${url} is up\n`)
+    done(null, `${url} is up\n`)
   } catch {
-    this.push(`${url} is down\n`)
+    done(null, `${url} is down\n`)
   }
-  done()
 })
 
 const start = performance.now()

@@ -12,12 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "parallel-transform": "^1.2.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5",
     "split": "^1.0.1"
   },
   "engines": {
     "node": ">=14"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/parallel-transform": "^1.1.4",
+    "@types/split": "^1.0.5"
+  }
 }

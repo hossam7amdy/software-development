@@ -4,24 +4,23 @@ import split from 'split'
 import { ParallelTransform } from './parallel-transform'
 import parallelTransform from 'parallel-transform'
 
-const myParallelTransform = new ParallelTransform(4, async (url, done) => {
-  if (!url) return done()
-  try {
-    await fetch(url)
-    done(null, `${url} is up\n`)
-  } catch {
-    done(null, `${url} is down\n`)
-  }
-  done()
-})
-
-const pkgParallelTransform = parallelTransform(4, async (url, done) => {
+const myParallelTransform = new ParallelTransform(16, async (url, done) => {
   if (!url) return done()
   try {
     await checkUrl(url)
-    done(null, `${url} is up\n`)
+    done(null, `${url} is up ✅\n`)
   } catch {
-    done(null, `${url} is down\n`)
+    done(null, `${url} is down ❌\n`)
+  }
+})
+
+const pkgParallelTransform = parallelTransform(16, async (url, done) => {
+  if (!url) return done()
+  try {
+    await checkUrl(url)
+    done(null, `${url} is up ✅\n`)
+  } catch {
+    done(null, `${url} is down ❌\n`)
   }
 })
 

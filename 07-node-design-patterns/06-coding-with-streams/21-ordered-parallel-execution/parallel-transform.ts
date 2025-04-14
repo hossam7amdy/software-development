@@ -7,10 +7,11 @@ import {
 type TransformFn = (chunk: any, callback: TransformCallback) => void
 
 export class ParallelTransform extends Transform {
-  queue: Array<{ chunk: any; callback: TransformCallback }>
   running: number
   maxParallel: number
   transformFn: TransformFn
+  continueCb: TransformCallback | null
+  terminateCb: TransformCallback | null
 
   constructor(
     maxParallel: number,
@@ -21,7 +22,8 @@ export class ParallelTransform extends Transform {
     this.maxParallel = maxParallel
     this.transformFn = transformFn
     this.running = 0
-    this.queue = []
+    this.continueCb = null
+    this.terminateCb = null
   }
 
   _transform(
@@ -29,24 +31,41 @@ export class ParallelTransform extends Transform {
     encoding: BufferEncoding,
     callback: TransformCallback
   ): void {
-    this.queue.push({ chunk, callback })
-    this._next()
+    this.running++
+    this.transformFn(chunk, this._onComplete.bind(this))
+
+    if (this.running < this.maxParallel) {
+      callback()
+    } else {
+      this.continueCb = callback
+    }
   }
 
-  _next() {
-    while (this.running < this.maxParallel && this.queue.length) {
-      const { chunk, callback } = this.queue.shift()!
-      this.running++
-      this.transformFn(chunk, (err, data) => {
-        this.running--
-        if (err) {
-          this.emit('error', err)
-        } else if (data) {
-          this.push(data)
-        }
-        callback()
-        this._next()
-      })
+  _flush(callback: TransformCallback): void {
+    if (this.running > 0) {
+      this.terminateCb = callback
+    } else {
+      callback()
     }
+  }
+
+  _onComplete(err?: any, data?: any) {
+    this.running--
+    if (err) {
+      this.emit('error', err)
+    } else if (data !== undefined) {
+      this.push(data)
+    }
+
+    this._continue()
+    if (this.running === 0) {
+      this.terminateCb && this.terminateCb()
+    }
+  }
+
+  _continue() {
+    const tmpCb = this.continueCb
+    this.continueCb = null
+    tmpCb && tmpCb()
   }
 }

@@ -12,11 +12,14 @@ export class ParallelTransform extends Transform {
   transformFn: TransformFn
   continueCb: TransformCallback | null
   terminateCb: TransformCallback | null
+  top: number
+  bottom: number
+  buffer: Map<number, any>
 
   constructor(
     maxParallel: number,
     transformFn: TransformFn,
-    options?: TransformOptions
+    options?: TransformOptions & { ordered?: boolean }
   ) {
     super({ ...options, objectMode: true })
     this.maxParallel = maxParallel
@@ -24,6 +27,8 @@ export class ParallelTransform extends Transform {
     this.running = 0
     this.continueCb = null
     this.terminateCb = null
+    this.top = this.bottom = 0
+    this.buffer = new Map()
   }
 
   _transform(
@@ -32,7 +37,9 @@ export class ParallelTransform extends Transform {
     callback: TransformCallback
   ): void {
     this.running++
-    this.transformFn(chunk, this._onComplete.bind(this))
+    const pos = this.top++
+
+    this.transformFn(chunk, (err, data) => this._onComplete(pos, err, data))
 
     if (this.running < this.maxParallel) {
       callback()
@@ -49,15 +56,17 @@ export class ParallelTransform extends Transform {
     }
   }
 
-  _onComplete(err?: any, data?: any) {
+  _onComplete(pos: number, err?: any, data?: any) {
     this.running--
     if (err) {
       this.emit('error', err)
-    } else if (data !== undefined) {
-      this.push(data)
+    } else {
+      this.buffer.set(pos, data)
     }
 
     this._continue()
+    this._drain()
+
     if (this.running === 0) {
       this.terminateCb && this.terminateCb()
     }
@@ -67,5 +76,13 @@ export class ParallelTransform extends Transform {
     const tmpCb = this.continueCb
     this.continueCb = null
     tmpCb && tmpCb()
+  }
+
+  _drain() {
+    while (this.buffer.has(this.bottom)) {
+      const data = this.buffer.get(this.bottom)
+      this.push(data === undefined ? null : data)
+      this.bottom++
+    }
   }
 }

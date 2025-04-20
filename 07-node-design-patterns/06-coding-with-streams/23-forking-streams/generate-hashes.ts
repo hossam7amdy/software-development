@@ -7,10 +7,6 @@ const md5Stream = createHash('md5').setEncoding('hex')
 
 const inputStream = createReadStream(filename)
 
-inputStream
-  .pipe(sha1Stream)
-  .pipe(createWriteStream(`${filename}.sha1`))
+inputStream.pipe(sha1Stream).pipe(createWriteStream(`${filename}.sha1`))
 
-inputStream
-  .pipe(md5Stream)
-  .pipe(createWriteStream(`${filename}.md5`))
+inputStream.pipe(md5Stream).pipe(createWriteStream(`${filename}.md5`))

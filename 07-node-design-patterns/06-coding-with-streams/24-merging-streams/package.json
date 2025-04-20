@@ -16,5 +16,8 @@
   "engines": {
     "node": ">=14"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/split": "^1.0.5"
+  }
 }

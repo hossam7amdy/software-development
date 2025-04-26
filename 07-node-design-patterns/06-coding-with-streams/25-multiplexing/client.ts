@@ -2,7 +2,7 @@ import { connect } from 'net'
 import { fork } from 'child_process'
 import type { Readable, Writable } from 'stream'
 
-const multiplexChannels = (sources: Readable[], destinations: Writable) => {
+const multiplexChannels = (sources: Readable[], destination: Writable) => {
   let openChannels = sources.length
   for (let i = 0; i < sources.length; i++) {
     sources[i].on('readable', () => {
@@ -13,12 +13,12 @@ const multiplexChannels = (sources: Readable[], destinations: Writable) => {
         outBuff.writeUInt32BE(chunk.length, 1)
         chunk.copy(outBuff, 5)
         console.log(`Sending packet to channel: ${i}`)
-        destinations.write(outBuff)
+        destination.write(outBuff)
       }
     })
     sources[i].on('end', () => {
       if (--openChannels === 0) {
-        destinations.end()
+        destination.end()
       }
     })
   }

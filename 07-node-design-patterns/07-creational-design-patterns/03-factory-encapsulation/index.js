@@ -1,22 +1,29 @@
-function createPerson (name) {
-  const privateProperties = {}
+class Person {
+  #name
 
-  const person = {
-    setName (name) {
-      if (!name) {
-        throw new Error('A person must have a name')
-      }
-      privateProperties.name = name
-    },
-    getName () {
-      return privateProperties.name
-    }
+  constructor(name) {
+    this.#name = name
   }
 
-  person.setName(name)
-  return person
+  /**
+   * @param {string} name
+   */
+  set name(name) {
+    if (!name) {
+      throw new Error('A person must have a name')
+    }
+    this.#name = name
+  }
+
+  get name() {
+    return this.#name
+  }
+}
+
+function createPerson(name) {
+  return new Person(name)
 }
 
 const person = createPerson('James Joyce')
 
-console.log(person.getName(), person)
+console.log(person.name, person)

@@ -1,10 +1,9 @@
-import { ImmutableBuffer } from './immutableBuffer.js'
+import { ImmutableBuffer } from './immutable-buffer.js'
 
 const hello = 'Hello!'
-const immutable = new ImmutableBuffer(hello.length,
-  ({ write }) => {
-    write(hello)
-  })
+const immutable = new ImmutableBuffer(hello.length, ({ write }) => {
+  write(hello)
+})
 
 console.log(String.fromCharCode(immutable.readInt8(0)))
 

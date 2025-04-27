@@ -1,4 +1,4 @@
-import { UrlBuilder } from './urlBuilder.js'
+import { UrlBuilder } from './url-builder'
 
 const url = new UrlBuilder()
   .setProtocol('https')

@@ -1,5 +1,5 @@
 import { promisify } from 'util'
-import type { Database } from './db'
+import type { Database } from './db.js'
 
 export class Blog {
   private readonly dbRun: Function

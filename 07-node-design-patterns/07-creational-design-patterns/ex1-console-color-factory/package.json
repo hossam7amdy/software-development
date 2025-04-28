@@ -2,10 +2,12 @@
   "name": "console-color-factory",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hossam Hamdy",
   "license": "ISC",
-  "description": ""
+  "description": "A simple console color factory for Node.js"
 }

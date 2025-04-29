@@ -11,15 +11,19 @@ async function runTests() {
 
     // Test 1: Get all posts
     console.log('\n📌 TEST 1: GET all posts')
-    const allPosts = await request.get(`${BASE_URL}/posts`).invoke<string>()
-    console.log('All posts:', JSON.parse(allPosts))
+    const allPosts = await request
+      .get(`${BASE_URL}/posts`)
+      .invoke()
+      .then(res => res.json())
+    console.log('All posts:', allPosts)
 
     // Test 2: Get a specific post
     console.log('\n📌 TEST 2: GET specific post')
     const post = await request
       .get(`${BASE_URL}/posts/my-first-post`)
-      .invoke<string>()
-    console.log('Specific post:', JSON.parse(post))
+      .invoke()
+      .then(res => res.json())
+    console.log('Specific post:', post)
 
     // Test 3: Create a new post
     console.log('\n📌 TEST 3: POST a new post')
@@ -31,23 +35,26 @@ async function runTests() {
         title: 'Test post',
         content: 'This is a test post created with our custom request builder'
       })
-      .invoke<string>()
-    console.log('New post created:', JSON.parse(newPost))
+      .invoke()
+      .then(res => res.json())
+    console.log('New post created:', newPost)
 
     // Test 4: Delete a post
     console.log('\n📌 TEST 4: DELETE a post')
     const deleteResult = await request
       .delete(`${BASE_URL}/posts/test-post`)
-      .invoke<string>()
-    console.log('Delete result:', JSON.parse(deleteResult))
+      .invoke()
+      .then(res => res.json())
+    console.log('Delete result:', deleteResult)
 
     // Test 5: Try to get a non-existent post
     console.log('\n📌 TEST 5: GET non-existent post')
     try {
       const nonExistentPost = await request
         .get(`${BASE_URL}/posts/non-existent`)
-        .invoke<string>()
-      console.log('Result:', JSON.parse(nonExistentPost))
+        .invoke()
+        .then(res => res.json())
+      console.log('Result:', nonExistentPost)
     } catch (error) {
       console.error('Error fetching non-existent post:', error)
     }
@@ -57,8 +64,9 @@ async function runTests() {
     const postsWithParams = await request
       .get(`${BASE_URL}/posts`)
       .setQuery('limit', '2')
-      .invoke<string>()
-    console.log('Posts with query params:', JSON.parse(postsWithParams))
+      .invoke()
+      .then(res => res.json())
+    console.log('Posts with query params:', postsWithParams)
 
     console.log('\n✅ All tests completed!')
   } catch (error) {

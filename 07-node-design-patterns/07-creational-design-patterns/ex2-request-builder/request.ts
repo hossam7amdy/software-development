@@ -1,23 +1,18 @@
 import { URL } from 'url'
+import https from 'https'
 import http, { validateHeaderValue } from 'http'
 import type { RequestOptions } from 'http'
 
-type Method = 'GET' | 'HEAD' | 'PUT' | 'DELETE' | 'POST' | 'PATCH'
-
 class RequestBuilder {
+  #url: URL
   #options: RequestOptions
   #body: any | null = null
-  #searchParams: URLSearchParams | null = null
 
-  constructor(url: string, method: Method = 'GET') {
+  constructor(url: string, method: string = 'GET') {
+    this.#url = new URL(url)
     this.#options = { headers: {} }
     this.#options.method = method
-
-    const parsedUrl = new URL(url)
-    this.#options.host = parsedUrl.host
-    this.#options.port = parsedUrl.port
-    this.#options.path = parsedUrl.pathname
-    this.#options.hostname = parsedUrl.hostname
+    this.#options.timeout = 30000 // Default timeout: 30s
   }
 
   setHeader(name: string, value: string) {
@@ -27,10 +22,7 @@ class RequestBuilder {
   }
 
   setQuery(key: string, value: string) {
-    if (this.#searchParams === null) {
-      this.#searchParams = new URLSearchParams()
-    }
-    this.#searchParams.append(key, value)
+    this.#url.searchParams.append(key, value)
     return this
   }
 
@@ -39,38 +31,76 @@ class RequestBuilder {
     return this
   }
 
-  invoke<T extends unknown>(): Promise<T> {
-    if (this.#searchParams) {
-      this.#options.path += `?${this.#searchParams.toString()}`
-    }
+  setTimeout(ms: number) {
+    this.#options.timeout = ms
+    return this
+  }
+
+  invoke(): Promise<Response> {
+    this.#options.host = this.#url.host
+    this.#options.port = this.#url.port
+    this.#options.hostname = this.#url.hostname
+    this.#options.path = this.#url.pathname + this.#url.search
+    this.#options.port ??= this.#options.protocol === 'https' ? 443 : 80
+
+    let bodyData: string | undefined
     if (this.#body) {
-      this.#body = JSON.stringify(this.#body)
-      this.#options.headers!['content-length'] = Buffer.byteLength(this.#body)
+      bodyData = JSON.stringify(this.#body)
+      this.#options.headers!['content-length'] =
+        Buffer.byteLength(bodyData).toString()
+      this.#options.headers!['content-type'] = 'application/json'
     }
 
     return new Promise((resolve, reject) => {
-      const req = http.request(this.#options, res => {
-        const chunks: unknown[] = []
-        res.setEncoding('utf8')
+      // Choose http or https module based on protocol
+      const requester = this.#options.protocol === 'https:' ? https : http
+
+      const req = requester.request(this.#options, res => {
+        const chunks: Buffer[] = []
         res.on('data', chunk => {
-          chunks.push(chunk)
+          chunks.push(Buffer.from(chunk))
         })
         res.on('error', err => {
           reject(err)
         })
         res.on('end', () => {
-          resolve(chunks.join('') as T)
+          const bodyBuffer = Buffer.concat(chunks)
+
+          const headers = new Headers()
+          Object.entries(res.headers).forEach(([key, value]) => {
+            if (typeof value === 'string') {
+              headers.append(key, value)
+            } else if (Array.isArray(value)) {
+              value.forEach(v => headers.append(key, v))
+            }
+          })
+
+          const response = new Response(bodyBuffer, {
+            headers,
+            status: res.statusCode || 200,
+            statusText: res.statusMessage || ''
+          })
+
+          resolve(response)
         })
       })
 
-      if (this.#body) {
-        req.write(this.#body, err => {
-          if (err) reject(err)
-        })
-      }
+      // Set timeout
+      req.setTimeout(this.#options.timeout!, () => {
+        req.destroy()
+        reject(new Error(`Request timeout after ${this.#options.timeout}ms`))
+      })
+
+      // Handle request errors
       req.on('error', err => {
         reject(err)
       })
+
+      // Send body data if available
+      if (bodyData) {
+        req.write(bodyData)
+      }
+
       req.end()
     })
   }

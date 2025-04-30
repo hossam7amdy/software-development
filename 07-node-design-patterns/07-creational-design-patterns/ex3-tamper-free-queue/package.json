@@ -1,0 +1,17 @@
+{
+  "name": "tamper-free-queue",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "engineStrict": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hossam Hamdy",
+  "license": "ISC",
+  "description": "A simple tamper-free (immutable) queue for Node.js"
+}

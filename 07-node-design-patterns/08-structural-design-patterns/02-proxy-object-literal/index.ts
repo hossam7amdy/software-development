@@ -1,25 +1,23 @@
 class StackCalculator {
-  constructor () {
-    this.stack = []
-  }
+  private stack: number[] = []
 
-  putValue (value) {
+  putValue(value: number) {
     this.stack.push(value)
   }
 
-  getValue () {
-    return this.stack.pop()
+  getValue() {
+    return this.stack.pop()!
   }
 
-  peekValue () {
+  peekValue() {
     return this.stack[this.stack.length - 1]
   }
 
-  clear () {
+  clear() {
     this.stack = []
   }
 
-  divide () {
+  divide() {
     const divisor = this.getValue()
     const dividend = this.getValue()
     const result = dividend / divisor
@@ -27,7 +25,7 @@ class StackCalculator {
     return result
   }
 
-  multiply () {
+  multiply() {
     const multiplicand = this.getValue()
     const multiplier = this.getValue()
     const result = multiplier * multiplicand
@@ -36,10 +34,10 @@ class StackCalculator {
   }
 }
 
-function createSafeCalculator (calculator) {
+function createSafeCalculator(calculator) {
   return {
     // proxied method
-    divide () {
+    divide() {
       // additional validation logic
       const divisor = calculator.peekValue()
       if (divisor === 0) {
@@ -49,19 +47,19 @@ function createSafeCalculator (calculator) {
       return calculator.divide()
     },
     // delegated methods
-    putValue (value) {
+    putValue(value) {
       return calculator.putValue(value)
     },
-    getValue () {
+    getValue() {
       return calculator.getValue()
     },
-    peekValue () {
+    peekValue() {
       return calculator.peekValue()
     },
-    clear () {
+    clear() {
       return calculator.clear()
     },
-    multiply () {
+    multiply() {
       return calculator.multiply()
     }
   }

@@ -1,25 +1,26 @@
 class StackCalculator {
-  constructor () {
+  private stack: number[]
+  constructor() {
     this.stack = []
   }
 
-  putValue (value) {
+  putValue(value: number) {
     this.stack.push(value)
   }
 
-  getValue () {
-    return this.stack.pop()
+  getValue() {
+    return this.stack.pop()!
   }
 
-  peekValue () {
+  peekValue() {
     return this.stack[this.stack.length - 1]
   }
 
-  clear () {
+  clear() {
     this.stack = []
   }
 
-  divide () {
+  divide() {
     const divisor = this.getValue()
     const dividend = this.getValue()
     const result = dividend / divisor
@@ -27,7 +28,7 @@ class StackCalculator {
     return result
   }
 
-  multiply () {
+  multiply() {
     const multiplicand = this.getValue()
     const multiplier = this.getValue()
     const result = multiplier * multiplicand
@@ -36,46 +37,30 @@ class StackCalculator {
   }
 }
 
-class SafeCalculator {
-  constructor (calculator) {
-    this.calculator = calculator
-  }
-
-  // proxied method
-  divide () {
-    // additional validation logic
-    const divisor = this.calculator.peekValue()
-    if (divisor === 0) {
-      throw Error('Division by 0')
+const safeCalculatorHandler = {
+  get: (target: StackCalculator, property: string) => {
+    if (property === 'divide') {
+      // proxied method
+      return function () {
+        // additional validation logic
+        const divisor = target.peekValue()
+        if (divisor === 0) {
+          throw Error('Division by 0')
+        }
+        // if valid delegates to the subject
+        return target.divide()
+      }
     }
-    // if valid delegates to the subject
-    return this.calculator.divide()
-  }
 
-  // delegated methods
-  putValue (value) {
-    return this.calculator.putValue(value)
-  }
-
-  getValue () {
-    return this.calculator.getValue()
-  }
-
-  peekValue () {
-    return this.calculator.peekValue()
-  }
-
-  clear () {
-    return this.calculator.clear()
-  }
-
-  multiply () {
-    return this.calculator.multiply()
+    // delegated methods and properties
+    return target[property]
   }
 }
 
 const calculator = new StackCalculator()
-const safeCalculator = new SafeCalculator(calculator)
+const safeCalculator = new Proxy(calculator, safeCalculatorHandler)
+
+console.log(safeCalculator instanceof StackCalculator) // true!
 
 calculator.putValue(3)
 calculator.putValue(2)

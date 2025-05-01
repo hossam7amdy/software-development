@@ -1,25 +1,23 @@
 class StackCalculator {
-  constructor () {
-    this.stack = []
-  }
+  private stack: number[] = []
 
-  putValue (value) {
+  putValue(value: number) {
     this.stack.push(value)
   }
 
-  getValue () {
-    return this.stack.pop()
+  getValue() {
+    return this.stack.pop()!
   }
 
-  peekValue () {
+  peekValue() {
     return this.stack[this.stack.length - 1]
   }
 
-  clear () {
+  clear() {
     this.stack = []
   }
 
-  divide () {
+  divide() {
     const divisor = this.getValue()
     const dividend = this.getValue()
     const result = dividend / divisor
@@ -27,7 +25,7 @@ class StackCalculator {
     return result
   }
 
-  multiply () {
+  multiply() {
     const multiplicand = this.getValue()
     const multiplier = this.getValue()
     const result = multiplier * multiplicand
@@ -36,30 +34,23 @@ class StackCalculator {
   }
 }
 
-const safeCalculatorHandler = {
-  get: (target, property) => {
-    if (property === 'divide') {
-      // proxied method
-      return function () {
-        // additional validation logic
-        const divisor = target.peekValue()
-        if (divisor === 0) {
-          throw Error('Division by 0')
-        }
-        // if valid delegates to the subject
-        return target.divide()
-      }
+function patchToSafeCalculator(calculator: StackCalculator) {
+  const divideOrig = calculator.divide
+  calculator.divide = () => {
+    // additional validation logic
+    const divisor = calculator.peekValue()
+    if (divisor === 0) {
+      throw Error('Division by 0')
     }
-
-    // delegated methods and properties
-    return target[property]
+    // if valid delegates to the subject
+    return divideOrig.apply(calculator)
   }
+
+  return calculator
 }
 
 const calculator = new StackCalculator()
-const safeCalculator = new Proxy(calculator, safeCalculatorHandler)
-
-console.log(safeCalculator instanceof StackCalculator) // true!
+const safeCalculator = patchToSafeCalculator(calculator)
 
 calculator.putValue(3)
 calculator.putValue(2)
@@ -68,8 +59,8 @@ console.log(calculator.multiply()) // 3*2 = 6
 safeCalculator.putValue(2)
 console.log(safeCalculator.multiply()) // 6*2 = 12
 
-calculator.putValue(0)
-console.log(calculator.divide()) // 12/0 = Infinity
+// calculator.putValue(0)
+// console.log(calculator.divide()) // 12/0 -> Error('Division by 0')
 
 safeCalculator.clear()
 safeCalculator.putValue(4)

@@ -1,20 +1,20 @@
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import level from 'level'
-import { createFSAdapter } from './fs-adapter.js'
+import { Level } from 'level'
+import { createFSAdapter2 } from './fs-adapter.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const db = level(join(__dirname, 'db'), {
+const db = new Level(join(__dirname, 'db'), {
   valueEncoding: 'binary'
 })
-const fs = createFSAdapter(db)
+const fs = createFSAdapter2(db)
 
 fs.writeFile('file.txt', 'Hello!', () => {
   fs.readFile('file.txt', { encoding: 'utf8' }, (err, res) => {
     if (err) {
       return console.error(err)
     }
-    console.log(res)
+    console.log(res.toString())
   })
 })
 

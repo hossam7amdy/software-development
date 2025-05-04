@@ -1,0 +1,16 @@
+{
+  "name": "timestamped-logs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "console",
+    "logs",
+    "timestamp"
+  ],
+  "author": "Hossam Hamdy (hossam7amdy)",
+  "license": "ISC",
+  "description": "Simple plugin to add timestamps to console logs"
+}

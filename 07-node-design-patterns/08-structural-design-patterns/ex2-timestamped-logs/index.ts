@@ -2,7 +2,7 @@ import {
   timestampedLogsProxy,
   timestampLogsAugmentation,
   timestampLogsComposition
-} from './timestamped-logs'
+} from './timestamped-logs.ts'
 
 const testTimestampedLogsProxy = () => {
   console.log('\n========== Testing Proxy =============')

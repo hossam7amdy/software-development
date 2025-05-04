@@ -1,4 +1,4 @@
-export const timestampLogsComposition = (console: Console) => {
+export const timestampedLogsComposition = (console: Console) => {
   // Keep a reference to the real console.log
   const originals = {
     log: console.log,
@@ -52,7 +52,7 @@ export const timestampLogsComposition = (console: Console) => {
   return wrappedConsole
 }
 
-export const timestampLogsAugmentation = (console: Console) => {
+export const timestampedLogsAugmentation = (console: Console) => {
   const originalLog = console.log
   const originalDebug = console.debug
   const originalError = console.error

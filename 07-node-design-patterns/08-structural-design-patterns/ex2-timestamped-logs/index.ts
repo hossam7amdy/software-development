@@ -1,7 +1,7 @@
 import {
   timestampedLogsProxy,
-  timestampLogsAugmentation,
-  timestampLogsComposition
+  timestampedLogsAugmentation,
+  timestampedLogsComposition
 } from './timestamped-logs.ts'
 
 const testTimestampedLogsProxy = () => {
@@ -17,7 +17,7 @@ const testTimestampedLogsProxy = () => {
 
 const testTimestampLogsAugmentation = () => {
   console.log('\n========== Testing Augmentation =============')
-  const logger = timestampLogsAugmentation(console)
+  const logger = timestampedLogsAugmentation(console)
 
   logger.log('Augmentation:', 'log')
   logger.debug('Augmentation:', 'debug')
@@ -28,7 +28,7 @@ const testTimestampLogsAugmentation = () => {
 
 const testTimestampLogsComposition = () => {
   console.log('\n========== Testing Composition =============')
-  const logger = timestampLogsComposition(console)
+  const logger = timestampedLogsComposition(console)
 
   logger.log('Composition:', 'log')
   logger.debug('Composition:', 'debug')

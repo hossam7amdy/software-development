@@ -1,0 +1,17 @@
+{
+  "name": "colored-console-output",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "license": "ISC",
+  "description": "A simple Node.js module to print colored text in the console.",
+  "keywords": [
+    "console",
+    "color",
+    "output",
+    "nodejs"
+  ]
+}

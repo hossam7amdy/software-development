@@ -1,0 +1,23 @@
+{
+  "name": "http-client-cache",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cache",
+    "http",
+    "client"
+  ],
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "license": "ISC",
+  "description": "A simple HTTP plugin with caching capabilities",
+  "peerDependencies": {
+    "superagent": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/superagent": "^8.1.9"
+  }
+}

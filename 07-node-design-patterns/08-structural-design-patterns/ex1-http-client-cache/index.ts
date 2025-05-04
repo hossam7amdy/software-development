@@ -13,15 +13,34 @@ for (let i = 0; i < 10; i++) {
     console.log('HEAD', res.statusCode)
   })
 
-  superagentCache.get('http://localhost:3001/books/1', (err, res) => {
-    if (err) {
-      console.error('Error:', err)
-      return
-    }
-    console.log('GET CB', res.body)
-  })
+  superagent
+    .get('http://localhost:3001/books/1')
+    .set({})
+    .send({})
+    .end((err, res) => {
+      if (err) {
+        console.error('Error:', err)
+        return
+      }
+      console.log('GET CB', res.body)
+    })
+
+  // BUG: Error: .end() was called twice. This is not supported in superagent
+  // superagentCache
+  //   .get('http://localhost:3001/books/1')
+  //   .set({})
+  //   .send({})
+  //   .end((err, res) => {
+  //     if (err) {
+  //       console.error('Error:', err)
+  //       return
+  //     }
+  //     console.log('GET CB', res.body)
+  //   })
   superagentCache
     .get('http://localhost:3001/books/1')
+    .set({})
+    .send({})
     .then(res => console.log('GET Promise', res.body))
     .catch(console.error)
 

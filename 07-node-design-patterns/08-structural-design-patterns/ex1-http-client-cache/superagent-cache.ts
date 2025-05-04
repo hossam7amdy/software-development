@@ -33,14 +33,14 @@ const handlers = {
         console.log(cachedResponse ? 'cache hit' : 'cache miss')
 
         if (cachedResponse) {
-          if (callback) {
-            callback(null, cachedResponse)
-            return Object.assign(request_, {
-              end: () => request_
-            })
-          }
-
-          return Promise.resolve(cachedResponse)
+          callback && callback(null, cachedResponse)
+          const promises = Promise.resolve(cachedResponse)
+          return Object.assign(request_, {
+            end: () => request_,
+            then: promises.then.bind(promises),
+            catch: promises.catch.bind(promises),
+            finally: promises.finally.bind(promises)
+          })
         }
 
         if (callback) {

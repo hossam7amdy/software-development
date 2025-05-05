@@ -1,0 +1,16 @@
+{
+  "name": "the-lazy-buffer",
+  "description": "A virtual proxy for a buffer that loads data lazily.",
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "license": "ISC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lazy",
+    "buffer"
+  ]
+}

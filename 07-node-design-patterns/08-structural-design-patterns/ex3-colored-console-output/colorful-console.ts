@@ -37,7 +37,9 @@ export const colorfulConsoleComposition = (
       enumerable: true,
       get() {
         return function (...args: unknown[]) {
-          colorfulConsole.log(colors[color], ...args, colors.reset)
+          colorfulConsole.log(
+            `${colors[color]}${args.join(' ')}${colors.reset}`
+          )
         }
       },
       set(val) {
@@ -61,13 +63,13 @@ export const colorfulConsoleAugmentation = (
   const colorfulConsole = console as ColorfulConsole
 
   colorfulConsole.red = (...messages) => {
-    console.log(colors.red, ...messages, colors.reset)
+    console.log(`${colors.red}${messages.join(' ')}${colors.reset}`)
   }
   colorfulConsole.yellow = (...messages) => {
-    console.log(colors.yellow, ...messages, colors.reset)
+    console.log(`${colors.yellow}${messages.join(' ')}${colors.reset}`)
   }
   colorfulConsole.green = (...messages) => {
-    console.log(colors.green, ...messages, colors.reset)
+    console.log(`${colors.green}${messages.join(' ')}${colors.reset}`)
   }
 
   return colorfulConsole
@@ -78,15 +80,21 @@ export const colorfulConsoleProxy = (console: Console): ColorfulConsole => {
     get(target, property) {
       if (property === 'red') {
         return (message: unknown, ...rest: unknown[]) => {
-          console.log(colors.red, message, ...rest, colors.reset)
+          console.log(
+            `${colors.red}${message} ${rest.join(' ')}${colors.reset}`
+          )
         }
       } else if (property === 'yellow') {
         return (message: unknown, ...rest: unknown[]) => {
-          console.log(colors.yellow, message, ...rest, colors.reset)
+          console.log(
+            `${colors.yellow}${message} ${rest.join(' ')}${colors.reset}`
+          )
         }
       } else if (property === 'green') {
         return (message: unknown, ...rest: unknown[]) => {
-          console.log(colors.green, message, ...rest, colors.reset)
+          console.log(
+            `${colors.green}${message} ${rest.join(' ')}${colors.reset}`
+          )
         }
       }
       return Reflect.get(target, property)

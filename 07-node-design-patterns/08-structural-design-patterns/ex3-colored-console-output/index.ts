@@ -11,7 +11,7 @@ const testColorfulConsoleComposition = () => {
   logger.red('Composition:', 'red')
   logger.yellow('Composition:', 'yellow')
   logger.green('Composition:', 'green')
-  logger.log('Composition (normal): ', 'log')
+  logger.log('Composition (normal):', 'log')
 }
 
 const testColorfulConsoleAugmentation = () => {

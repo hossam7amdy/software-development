@@ -12,17 +12,18 @@ export function createLazyBuffer(size: number): Buffer {
         buf = Buffer.alloc(size)
       }
       // allow reads of whitelisted props before allocation
+      if (buf === null && readWhitelist.has(method)) {
+        return method === 'toString' ? () => '' : size
+      }
       if (buf === null && !readWhitelist.has(method)) {
         throw new Error('Buffer not initialized. Call write* first.')
       }
-      // forward to real Buffer (once allocated)
-      const target = buf ?? Buffer.allocUnsafe(0) // dummy for whitelisted reads
-      const val = Reflect.get(target, property)
-      return typeof val === 'function' ? val.bind(target) : val
+
+      const fn = Reflect.get(buf!, property)
+      return typeof fn === 'function' ? fn.bind(buf) : fn
     }
   }
 
-  // use a Buffer‐typed prototype so instanceof works
   const dummy = Object.create(Buffer.prototype)
   return new Proxy(dummy, handler)
 }

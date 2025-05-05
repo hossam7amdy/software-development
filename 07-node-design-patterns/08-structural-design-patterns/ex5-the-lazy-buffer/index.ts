@@ -1,11 +1,14 @@
+import { strictEqual } from 'assert'
 import { createLazyBuffer } from './lazy-buffer.ts'
 
-const buf = createLazyBuffer(10)
+const size = 10
+const buf = createLazyBuffer(size)
 
 // whitelisted props
-console.log(buf.length)
-console.log(buf.byteLength)
-console.log(buf instanceof Buffer)
+strictEqual(buf.length, size)
+strictEqual(buf.byteLength, size)
+strictEqual(buf.toString(), '')
+strictEqual(buf instanceof Buffer, true)
 
 buf.write('Hi') // Writes 'Hi' at position 0 (utf8 encoding).
 

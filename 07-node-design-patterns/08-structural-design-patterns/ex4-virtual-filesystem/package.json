@@ -1,0 +1,24 @@
+{
+  "name": "virtual-filesystem",
+  "description": "A virtual filesystem adapter that write the file data in memory rather than in LevelDB.",
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "level": "^8.0.1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "engineStrict": true,
+  "keywords": [
+    "virtual",
+    "filesystem",
+    "level"
+  ]
+}

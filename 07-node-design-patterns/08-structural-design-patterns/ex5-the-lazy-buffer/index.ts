@@ -12,6 +12,11 @@ strictEqual(buf instanceof Buffer, true)
 
 buf.write('Hi') // Writes 'Hi' at position 0 (utf8 encoding).
 
+// actual props
+strictEqual(buf.length, size)
+strictEqual(buf.byteLength, size)
+strictEqual(buf instanceof Buffer, true)
+
 console.log(buf.toString('utf8')) // 'Hi' (remaining bytes are zeros).
 
 console.log(buf.toJSON()) // { type: 'Buffer', data: [ 72, 105, 0, 0, 0 ] }

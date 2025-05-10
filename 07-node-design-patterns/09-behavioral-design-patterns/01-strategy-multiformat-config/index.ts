@@ -1,7 +1,7 @@
-import { Config } from './config.js'
-import { jsonStrategy, iniStrategy } from './strategies.js'
+import { Config } from './config.ts'
+import { jsonStrategy, iniStrategy } from './strategies.ts'
 
-async function main () {
+async function main() {
   const iniConfig = new Config(iniStrategy)
   await iniConfig.load('samples/conf.ini')
   iniConfig.set('book.nodejs', 'design patterns')

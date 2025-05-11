@@ -1,6 +1,6 @@
-import { CheckUrls } from './checkUrls.js'
+import { CheckUrls } from './CheckUrls.ts'
 
-async function main () {
+async function main() {
   const checkUrls = new CheckUrls([
     'https://nodejsdesignpatterns.com',
     'https://example.com',

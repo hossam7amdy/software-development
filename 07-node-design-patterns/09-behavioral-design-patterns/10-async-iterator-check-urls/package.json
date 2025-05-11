@@ -6,9 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "superagent": "^5.2.2"
-  },
   "engines": {
     "node": ">=14"
   },

@@ -42,37 +42,39 @@ export class FileLogger extends Logger {
 
   private _write(level: string, message: string) {
     this.streams[level].write(message, err => {
-      if (err) throw err
+      if (err) this.emit('error', err)
     })
   }
 
   private _close() {
     for (const stream in this.streams) {
-      this.streams[stream].close()
+      this.streams[stream].close(err => {
+        if (err) this.emit('error', err)
+      })
     }
   }
 
   debug(...messages: unknown[]): void {
     const level = 'debug'
-    const formattedMessage = this._format(level, messages)
+    const formattedMessage = this._format(level, ...messages)
     this._write(level, formattedMessage)
   }
 
   info(...messages: unknown[]): void {
     const level = 'info'
-    const formattedMessage = this._format(level, messages)
+    const formattedMessage = this._format(level, ...messages)
     this._write(level, formattedMessage)
   }
 
   warn(...messages: unknown[]): void {
     const level = 'warn'
-    const formattedMessage = this._format(level, messages)
+    const formattedMessage = this._format(level, ...messages)
     this._write(level, formattedMessage)
   }
 
   error(...messages: unknown[]): void {
     const level = 'error'
-    const formattedMessage = this._format(level, messages)
+    const formattedMessage = this._format(level, ...messages)
     this._write(level, formattedMessage)
   }
 }

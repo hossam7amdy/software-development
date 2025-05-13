@@ -1,0 +1,16 @@
+{
+  "name": "queues-with-iterators",
+  "description": "A simple queue implementation using iterators",
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "license": "ISC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "queue",
+    "iterator"
+  ]
+}

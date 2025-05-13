@@ -1,0 +1,16 @@
+{
+  "name": "warehouse-item",
+  "description": "A warehouse item state pattern",
+  "version": "1.0.0",
+  "author": "Hossam Hamdy (@hossam7amdy)",
+  "license": "ISC",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "warehouse",
+    "state-pattern"
+  ]
+}

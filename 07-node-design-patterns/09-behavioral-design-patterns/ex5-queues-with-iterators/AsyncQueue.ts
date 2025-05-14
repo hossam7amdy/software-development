@@ -49,4 +49,15 @@ export class AsyncQueue<T> {
       }
     }
   }
+
+  // async *[Symbol.asyncIterator]() {
+  //   while (true) {
+  //     const value = await this.dequeue()
+  //     if (value === undefined && this.#terminated) {
+  //       return value
+  //     } else {
+  //       yield value
+  //     }
+  //   }
+  // }
 }

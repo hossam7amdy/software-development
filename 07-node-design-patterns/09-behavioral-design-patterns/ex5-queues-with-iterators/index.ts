@@ -1,4 +1,4 @@
-import { AsyncQueue } from './AsyncQueue'
+import { AsyncQueue } from './AsyncQueue.ts'
 
 async function main() {
   const queue = new AsyncQueue<string>()

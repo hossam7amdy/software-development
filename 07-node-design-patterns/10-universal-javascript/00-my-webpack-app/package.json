@@ -1,0 +1,31 @@
+{
+  "name": "webpack-project",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production --config webpack.config.cjs",
+    "build:dev": "webpack --mode=development --config webpack.config.cjs",
+    "serve": "webpack serve --config webpack.config.cjs",
+    "watch": "webpack --watch --config webpack.config.cjs"
+  },
+  "keywords": [],
+  "author": "Hossam Hamdy (@hossamhamdy)",
+  "license": "ISC",
+  "devDependencies": {
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1",
+    "workbox-webpack-plugin": "^7.3.0"
+  },
+  "dependencies": {
+    "nunjucks": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "engineStrict": true
+}

@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom'
 const html = htm.bind(React.createElement)
 
 export class NotFound extends Component {
-  componentDidMount() {
-    document.title = 'Not Found'
-  }
-
   render() {
     if (this.props.staticContext) {
       this.props.staticContext.statusCode = 404

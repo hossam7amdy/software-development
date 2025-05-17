@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { AsyncPage } from './AsyncPage.js'
+import { Header } from '../components/Header.js'
 
 const html = htm.bind(React.createElement)
 
@@ -21,17 +22,18 @@ export class AuthorsIndex extends AsyncPage {
       return html`<h2>Loading...</h2>`
     }
 
-    return html`<div>
+    return html` <${Header} />
       <div>
-        ${this.state.authors.map(
-          author =>
-            html`<div key="${author.id}">
-              <p>
-                <${Link} to="${`/author/${author.id}`}">${author.name}<//>
-              </p>
-            </div>`
-        )}
-      </div>
-    </div>`
+        <div>
+          ${this.state.authors.map(
+            author =>
+              html`<div key="${author.id}">
+                <p>
+                  <${Link} to="${`/author/${author.id}`}">${author.name}<//>
+                </p>
+              </div>`
+          )}
+        </div>
+      </div>`
   }
 }

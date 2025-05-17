@@ -7,8 +7,9 @@ import { App } from './App.js'
 
 const html = htm.bind(React.createElement)
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root'),
   html`<${BrowserRouter}>
-    <${App} />
-  </${BrowserRouter}>`
+<${App} />
+</${BrowserRouter}>`
 )

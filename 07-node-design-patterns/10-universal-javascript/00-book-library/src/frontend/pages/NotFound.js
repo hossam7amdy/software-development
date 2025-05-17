@@ -10,6 +10,10 @@ export class NotFound extends Component {
   }
 
   render() {
+    if (this.props.staticContext) {
+      this.props.staticContext.statusCode = 404
+    }
+
     return html`<div>
       <div>
         <h2>404</h2>

@@ -1,6 +1,6 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require('path')
+const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 
@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const config = {
   entry: './src/frontend/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: resolve(__dirname, 'public')
   },
   devServer: {
     open: true,
@@ -17,7 +17,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Book Library'
+      template: './src/frontend/index.html'
     })
 
     // Add your plugins here

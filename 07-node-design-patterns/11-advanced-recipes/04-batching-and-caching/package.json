@@ -7,10 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "level": "^6.0.1",
-    "subleveldown": "^4.1.4",
-    "nanoid": "^2.1.11",
-    "superagent": "^5.2.2"
+    "level": "^10.0.0",
+    "nanoid": "^5.1.5"
   },
   "engines": {
     "node": ">=14"

@@ -1,11 +1,11 @@
-import { totalSales as totalSalesRaw } from './totalSales.js'
+import { totalSales as totalSalesRaw } from './totalSales.ts'
 
-const runningRequests = new Map()
+const runningRequests = new Map<string, Promise<number>>()
 
-export function totalSales (product) {
+export const totalSales = (product: string): Promise<number> => {
   if (runningRequests.has(product)) {
     console.log('Batching')
-    return runningRequests.get(product)
+    return runningRequests.get(product)!
   }
 
   const resultPromise = totalSalesRaw(product)
@@ -13,6 +13,5 @@ export function totalSales (product) {
   resultPromise.finally(() => {
     runningRequests.delete(product)
   })
-
   return resultPromise
 }

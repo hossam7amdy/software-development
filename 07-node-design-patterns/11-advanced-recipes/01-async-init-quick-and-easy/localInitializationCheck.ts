@@ -1,13 +1,12 @@
 import { once } from 'events'
-import { db } from './db.js'
+import { db } from './db.ts'
 
 db.connect()
 
-async function updateLastAccess () {
+async function updateLastAccess() {
   if (!db.connected) {
     await once(db, 'connected')
   }
-
   await db.query(`INSERT (${Date.now()}) INTO "LastAccesses"`)
 }
 

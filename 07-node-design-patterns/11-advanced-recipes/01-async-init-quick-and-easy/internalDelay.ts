@@ -1,12 +1,15 @@
-import { db } from './db.js'
+import { db } from './db.ts'
 
 db.connect()
 
-async function updateLastAccess () {
+async function query() {
   await db.query(`INSERT (${Date.now()}) INTO "LastAccesses"`)
 }
 
-updateLastAccess()
+for (let i = 0; i < 11; i++) {
+  query()
+}
+
 setTimeout(() => {
-  updateLastAccess()
+  query()
 }, 600)

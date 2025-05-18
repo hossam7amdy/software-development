@@ -4,23 +4,25 @@ const METHODS_REQUIRING_CONNECTION = ['query']
 const deactivate = Symbol('deactivate')
 
 class InitializedState {
-  async query (queryString) {
+  constructor(readonly db: DB) {}
+
+  async query(queryString: string) {
     console.log(`Query executed: ${queryString}`)
   }
 }
 
 class QueuingState {
-  constructor (db) {
-    this.db = db
+  commandsQueue: Array<() => void>
+
+  constructor(readonly db: DB) {
     this.commandsQueue = []
 
     METHODS_REQUIRING_CONNECTION.forEach(methodName => {
-      this[methodName] = function (...args) {
+      this[methodName] = (...args: unknown[]) => {
         console.log('Command queued:', methodName, args)
         return new Promise((resolve, reject) => {
           const command = () => {
-            db[methodName](...args)
-              .then(resolve, reject)
+            this.db[methodName](...args).then(resolve, reject)
           }
           this.commandsQueue.push(command)
         })
@@ -28,31 +30,36 @@ class QueuingState {
     })
   }
 
-  [deactivate] () {
+  [deactivate]() {
     this.commandsQueue.forEach(command => command())
     this.commandsQueue = []
   }
 }
 
-class DB extends EventEmitter {
-  constructor () {
+export default class DB extends EventEmitter {
+  connected: boolean
+  state: InitializedState | QueuingState
+
+  constructor() {
     super()
+    this.connected = false
     this.state = new QueuingState(this)
   }
 
-  async query (queryString) {
-    return this.state.query(queryString)
-  }
-
-  connect () {
+  connect() {
     // simulate the delay of the connection
     setTimeout(() => {
       this.connected = true
       this.emit('connected')
-      const oldState = this.state
+      const queuingState = this.state
       this.state = new InitializedState(this)
-      oldState[deactivate] && oldState[deactivate]()
+      queuingState[deactivate] && queuingState[deactivate]()
     }, 500)
+  }
+
+  async query(queryString: string) {
+    // @ts-expect-error
+    return this.state.query(queryString)
   }
 }
 

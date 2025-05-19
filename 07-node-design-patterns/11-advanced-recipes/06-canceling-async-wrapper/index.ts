@@ -2,7 +2,7 @@ import { asyncRoutine } from './asyncRoutine.js'
 import { createCancelWrapper } from './cancelWrapper.js'
 import { CancelError } from './cancelError.js'
 
-async function cancelable (cancelWrapper) {
+async function cancelable(cancelWrapper: Function) {
   const resA = await cancelWrapper(asyncRoutine, 'A')
   console.log(resA)
   const resB = await cancelWrapper(asyncRoutine, 'B')
@@ -13,14 +13,13 @@ async function cancelable (cancelWrapper) {
 
 const { cancelWrapper, cancel } = createCancelWrapper()
 
-cancelable(cancelWrapper)
-  .catch(err => {
-    if (err instanceof CancelError) {
-      console.log('Function canceled')
-    } else {
-      console.error(err)
-    }
-  })
+cancelable(cancelWrapper).catch(err => {
+  if (err instanceof CancelError) {
+    console.log('Function canceled')
+  } else {
+    console.error(err)
+  }
+})
 
 setTimeout(() => {
   cancel()

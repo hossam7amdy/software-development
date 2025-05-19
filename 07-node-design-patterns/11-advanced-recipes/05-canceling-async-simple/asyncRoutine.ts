@@ -1,4 +1,4 @@
-export function asyncRoutine (label) {
+export function asyncRoutine(label: string) {
   console.log(`Starting async routine ${label}`)
   return new Promise(resolve => {
     setTimeout(() => {

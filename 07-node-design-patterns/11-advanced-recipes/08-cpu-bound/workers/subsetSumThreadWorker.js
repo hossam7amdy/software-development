@@ -9,6 +9,10 @@ parentPort.on('message', msg => {
   })
 
   subsetSum.on('end', data => {
+    parentPort.postMessage({
+      event: 'finish',
+      data: subsetSum.totalSubsets
+    })
     parentPort.postMessage({ event: 'end', data: data })
   })
 

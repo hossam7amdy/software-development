@@ -1,14 +1,16 @@
 import { EventEmitter } from 'events'
 
 export class SubsetSum extends EventEmitter {
-  constructor(sum, set) {
+  totalSubsets: number
+  constructor(
+    readonly sum: number,
+    readonly set: number[]
+  ) {
     super()
-    this.sum = sum
-    this.set = set
     this.totalSubsets = 0
   }
 
-  _combine(set, subset) {
+  _combine(set: number[], subset: number[]) {
     for (let i = 0; i < set.length; i++) {
       const newSubset = subset.concat(set[i])
       this._combine(set.slice(i + 1), newSubset)
@@ -16,7 +18,7 @@ export class SubsetSum extends EventEmitter {
     }
   }
 
-  _processSubset(subset) {
+  _processSubset(subset: number[]) {
     this.totalSubsets++
     console.log('Subset', this.totalSubsets, subset)
     const res = subset.reduce((prev, item) => prev + item, 0)

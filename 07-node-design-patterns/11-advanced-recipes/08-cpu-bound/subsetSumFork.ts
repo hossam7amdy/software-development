@@ -1,30 +1,33 @@
 import { EventEmitter } from 'events'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import { ProcessPool } from './processPool.js'
+import { ProcessPool } from './processPool'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const workerFile = join(__dirname,
-  'workers', 'subsetSumProcessWorker.js')
+const workerFile = join(__dirname, 'workers', 'subsetSumProcessWorker.ts')
 const workers = new ProcessPool(workerFile, 2)
 
 export class SubsetSum extends EventEmitter {
-  constructor (sum, set) {
+  totalSubsets: number
+  constructor(
+    readonly sum: number,
+    readonly set: number[]
+  ) {
     super()
-    this.sum = sum
-    this.set = set
+    this.totalSubsets = 0
   }
 
-  async start () {
+  async start() {
     const worker = await workers.acquire()
     worker.send({ sum: this.sum, set: this.set })
 
-    const onMessage = msg => {
+    const onMessage = (msg: any) => {
       if (msg.event === 'end') {
         worker.removeListener('message', onMessage)
         workers.release(worker)
+      } else if (msg.event === 'finish') {
+        this.totalSubsets = msg.data
       }
-
       this.emit(msg.event, msg.data)
     }
 

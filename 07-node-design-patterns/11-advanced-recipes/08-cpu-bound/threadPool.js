@@ -1,7 +1,7 @@
 import { Worker } from 'worker_threads'
 
 export class ThreadPool {
-  constructor (file, poolMax) {
+  constructor(file, poolMax) {
     this.file = file
     this.poolMax = poolMax
     this.pool = []
@@ -9,7 +9,7 @@ export class ThreadPool {
     this.waiting = []
   }
 
-  acquire () {
+  async acquire() {
     return new Promise((resolve, reject) => {
       let worker
       if (this.pool.length > 0) {
@@ -35,7 +35,7 @@ export class ThreadPool {
     })
   }
 
-  release (worker) {
+  release(worker) {
     if (this.waiting.length > 0) {
       const { resolve } = this.waiting.shift()
       return resolve(worker)

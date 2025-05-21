@@ -4,18 +4,18 @@ import { fileURLToPath } from 'url'
 import { ThreadPool } from './threadPool.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const workerFile = join(__dirname,
-  'workers', 'subsetSumThreadWorker.js')
+const workerFile = join(__dirname, 'workers', 'subsetSumThreadWorker.js')
 const workers = new ThreadPool(workerFile, 2)
 
 export class SubsetSum extends EventEmitter {
-  constructor (sum, set) {
+  constructor(sum, set) {
     super()
     this.sum = sum
     this.set = set
+    this.totalSubsets = 0
   }
 
-  async start () {
+  async start() {
     const worker = await workers.acquire()
     worker.postMessage({ sum: this.sum, set: this.set })
 
@@ -23,6 +23,8 @@ export class SubsetSum extends EventEmitter {
       if (msg.event === 'end') {
         worker.removeListener('message', onMessage)
         workers.release(worker)
+      } else if (msg.event === 'finish') {
+        this.totalSubsets = msg.data
       }
 
       this.emit(msg.event, msg.data)

@@ -1,0 +1,22 @@
+{
+  "name": "ex1-proxy-with-pre-initialization-queues",
+  "version": "1.0.0",
+  "author": "Hossam Hamdy (@hossamhamdy)",
+  "private": true,
+  "type": "module",
+  "license": "ISC",
+  "description": "A simple proxy server with pre-initialization queues",
+  "keywords": [
+    "proxy",
+    "server",
+    "queues",
+    "pre-initialization"
+  ],
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

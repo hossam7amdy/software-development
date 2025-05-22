@@ -1,0 +1,17 @@
+{
+  "name": "04-batching-and-caching",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "level": "^10.0.0",
+    "nanoid": "^5.1.5"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "engineStrict": true
+}

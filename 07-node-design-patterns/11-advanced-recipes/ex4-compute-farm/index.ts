@@ -12,7 +12,11 @@ async function computeFib(n: number) {
     body: JSON.stringify({ code, args: [n] })
   })
   const result = await response.text()
-  console.log(`fib(${n}) = ${result}`)
+  if (response.ok) {
+    console.log(`fib(${n}) = ${result}`)
+  } else {
+    console.error(`Error calculating fib(${n})`, result)
+  }
 }
 
 let executing = true

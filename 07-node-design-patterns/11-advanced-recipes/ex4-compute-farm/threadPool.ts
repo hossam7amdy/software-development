@@ -15,6 +15,13 @@ export class ThreadPool {
     this.pool = []
     this.active = []
     this.waiting = []
+
+    // Debug logging
+    setInterval(() => {
+      console.log(
+        `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`
+      )
+    }, 1000)
   }
 
   acquire(): Promise<Worker> {

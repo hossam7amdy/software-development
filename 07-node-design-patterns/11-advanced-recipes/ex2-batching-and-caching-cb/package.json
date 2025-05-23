@@ -1,5 +1,8 @@
 {
-  "name": "04-batching-and-caching",
+  "name": "ex2-batching-and-caching-cb",
+  "description": "Example 2: Batching and Caching with Callbacks",
+  "author": "Hossam Hamdy <@hossamhamdy>",
+  "license": "MIT",
   "version": "1.0.0",
   "private": true,
   "type": "module",

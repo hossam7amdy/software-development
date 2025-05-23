@@ -38,7 +38,7 @@ export class ProcessPool {
       })
       worker.once('exit', code => {
         console.log(`Worked exited with code ${code}`)
-        this.active = this.pool.filter(w => w !== worker)
+        this.pool = this.pool.filter(w => w !== worker)
         this.active = this.active.filter(w => w !== worker)
       })
     })

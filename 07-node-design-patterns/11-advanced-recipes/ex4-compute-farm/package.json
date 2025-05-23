@@ -1,0 +1,17 @@
+{
+  "name": "ex4-compute-farm",
+  "description": "Example 4: Executing a compute farm using the worker threads and child process modules",
+  "author": "Hossam Hamdy <@hossamhamdy>",
+  "license": "MIT",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true
+}

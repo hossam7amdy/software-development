@@ -12,7 +12,9 @@ export class ThreadPool {
     private readonly file: string,
     private readonly maxPool: number
   ) {
-    this.pool = []
+    this.pool = Array.from({ length: maxPool }, () =>
+      this._createLazyWorker(file)
+    )
     this.active = []
     this.waiting = []
 
@@ -22,6 +24,18 @@ export class ThreadPool {
         `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`
       )
     }, 1000)
+  }
+
+  private _createLazyWorker(file: string): Worker {
+    let worker: Worker | null = null
+    return new Proxy<Worker>(Object.create(Worker.prototype), {
+      get(_, prop) {
+        if (worker === null) {
+          worker = new Worker(file)
+        }
+        return worker[prop]
+      }
+    })
   }
 
   acquire(): Promise<Worker> {

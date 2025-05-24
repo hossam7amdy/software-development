@@ -1,5 +1,5 @@
 import { fork } from 'child_process'
-import type { ChildProcess } from 'child_process'
+import { ChildProcess } from 'child_process'
 
 export class ProcessPool {
   private pool: ChildProcess[]
@@ -13,7 +13,9 @@ export class ProcessPool {
     private readonly file: string,
     private readonly maxPool: number
   ) {
-    this.pool = []
+    this.pool = Array.from({ length: maxPool }, () =>
+      this._forkLazyProcess(file)
+    )
     this.active = []
     this.waiting = []
 
@@ -23,6 +25,18 @@ export class ProcessPool {
         `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`
       )
     }, 1000)
+  }
+
+  private _forkLazyProcess(file: string): ChildProcess {
+    let childProcess: ChildProcess | null = null
+    return new Proxy(Object.create(ChildProcess.prototype), {
+      get(_, prop) {
+        if (childProcess === null) {
+          childProcess = fork(file)
+        }
+        return childProcess[prop]
+      }
+    })
   }
 
   acquire(): Promise<ChildProcess> {

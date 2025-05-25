@@ -1,4 +1,4 @@
-import { StackCalculator } from './stack-calculator'
+import { StackCalculator } from './stack-calculator.js'
 
 const enhancedCalculatorHandler = {
   get(calculator: StackCalculator, method: string) {

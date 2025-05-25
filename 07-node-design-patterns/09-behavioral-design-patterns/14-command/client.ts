@@ -1,6 +1,6 @@
-import { createPostStatusCmd } from './createPostStatusCmd.ts'
-import { statusUpdateService } from './statusUpdateService.ts'
-import { Invoker } from './invoker.ts'
+import { createPostStatusCmd } from './createPostStatusCmd.js'
+import { statusUpdateService } from './statusUpdateService.js'
+import { Invoker } from './invoker.js'
 
 // The Client code
 const invoker = new Invoker()

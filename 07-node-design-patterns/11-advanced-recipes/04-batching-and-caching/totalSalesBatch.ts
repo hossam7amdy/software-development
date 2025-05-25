@@ -1,4 +1,4 @@
-import { totalSales as totalSalesRaw } from './totalSales.ts'
+import { totalSales as totalSalesRaw } from './totalSales.js'
 
 const runningRequests = new Map<string, Promise<number>>()
 

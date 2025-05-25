@@ -1,5 +1,5 @@
 import { Readable } from 'stream'
-import { Matrix } from './matrix.ts'
+import { Matrix } from './matrix.js'
 
 const matrix2x2 = new Matrix([
   [1, 2, 3],

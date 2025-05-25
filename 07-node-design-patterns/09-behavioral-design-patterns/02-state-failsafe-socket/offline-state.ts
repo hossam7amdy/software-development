@@ -1,4 +1,4 @@
-import { FailSafeSocket } from './failsafe-socket'
+import { FailSafeSocket } from './failsafe-socket.js'
 import { createConnection } from 'net'
 
 export class OfflineState {

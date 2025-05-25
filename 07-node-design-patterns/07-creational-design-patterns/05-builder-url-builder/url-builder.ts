@@ -1,4 +1,4 @@
-import { URL } from './url'
+import { URL } from './url.js'
 
 export class UrlBuilder {
   public protocol: string

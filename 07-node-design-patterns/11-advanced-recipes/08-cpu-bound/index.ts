@@ -1,8 +1,8 @@
 import { createServer } from 'http'
 
-// import { SubsetSum } from './subsetSum.ts'
-// import { SubsetSum } from './subsetSumDefer.ts'
-// import { SubsetSum } from './subsetSumFork.ts'
+// import { SubsetSum } from './subsetSum.js'
+// import { SubsetSum } from './subsetSumDefer.js'
+// import { SubsetSum } from './subsetSumFork.js'
 import { SubsetSum } from './subsetSumThreads.js'
 
 const PORT = 3000

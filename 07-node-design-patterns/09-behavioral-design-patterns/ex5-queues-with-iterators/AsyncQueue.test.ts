@@ -1,4 +1,4 @@
-import { AsyncQueue } from './AsyncQueue.ts'
+import { AsyncQueue } from './AsyncQueue.js'
 
 async function runStressTest() {
   console.log('Starting AsyncQueue stress test...')

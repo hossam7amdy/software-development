@@ -1,4 +1,4 @@
-import { FailSafeSocket } from './failsafe-socket'
+import { FailSafeSocket } from './failsafe-socket.js'
 
 const failsafeSocket = new FailSafeSocket({ port: 3000 })
 

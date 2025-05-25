@@ -1,4 +1,4 @@
-import { statusUpdateService } from './statusUpdateService.ts'
+import { statusUpdateService } from './statusUpdateService.js'
 
 type Service = typeof statusUpdateService
 

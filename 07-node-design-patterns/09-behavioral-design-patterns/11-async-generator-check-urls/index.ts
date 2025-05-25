@@ -1,4 +1,4 @@
-import { CheckUrls } from './CheckUrls.ts'
+import { CheckUrls } from './CheckUrls.js'
 
 async function main() {
   const checkUrls = new CheckUrls([

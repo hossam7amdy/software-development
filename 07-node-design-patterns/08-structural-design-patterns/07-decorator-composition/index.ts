@@ -1,5 +1,5 @@
-import { StackCalculator } from './stack-calculator'
-import { EnhancedCalculator } from './enhanced-calculator'
+import { StackCalculator } from './stack-calculator.js'
+import { EnhancedCalculator } from './enhanced-calculator.js'
 
 const calculator = new StackCalculator()
 const enhancedCalculator = new EnhancedCalculator(calculator)

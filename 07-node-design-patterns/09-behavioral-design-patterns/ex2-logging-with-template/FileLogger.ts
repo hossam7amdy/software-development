@@ -2,7 +2,7 @@ import { createWriteStream, mkdirSync, WriteStream } from 'fs'
 import type { PathLike } from 'fs'
 import { join } from 'path'
 
-import { Logger } from './Logger.ts'
+import { Logger } from './Logger.js'
 
 const createWriteStreamLazy = (path: string) => {
   let stream: WriteStream | null = null

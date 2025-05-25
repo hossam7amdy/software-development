@@ -1,7 +1,7 @@
 import { pipeline } from 'stream'
 import { createReadStream, createWriteStream } from 'fs'
 import split from 'split'
-import { ParallelTransform } from './parallel-transform'
+import { ParallelTransform } from './parallel-transform.js'
 import parallelTransform from 'parallel-transform'
 
 const myParallelTransform = new ParallelTransform(16, async (url, done) => {

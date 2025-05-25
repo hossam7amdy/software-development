@@ -2,7 +2,7 @@ import { createReadStream, createWriteStream } from 'fs'
 import { pipeline, Transform } from 'stream'
 import split from 'split'
 import superagent from 'superagent'
-import { ParallelStream } from './parallel-stream'
+import { ParallelStream } from './parallel-stream.js'
 
 const normalStream = new Transform({
   objectMode: true,

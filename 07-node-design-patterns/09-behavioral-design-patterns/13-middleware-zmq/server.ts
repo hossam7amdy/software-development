@@ -1,8 +1,8 @@
 import { Reply } from 'zeromq'
 
-import { ZmqMiddlewareManager } from './zmqMiddlewareManager.ts'
-import { jsonMiddleware } from './jsonMiddleware.ts'
-import { zlibMiddleware } from './zlibMiddleware.ts'
+import { ZmqMiddlewareManager } from './zmqMiddlewareManager.js'
+import { jsonMiddleware } from './jsonMiddleware.js'
+import { zlibMiddleware } from './zlibMiddleware.js'
 
 async function main() {
   const socket = new Reply()
@@ -15,7 +15,9 @@ async function main() {
   zmq.use({
     async inbound(message) {
       console.log('Received', message)
+      // @ts-ignore
       if (message.action === 'ping') {
+        // @ts-ignore
         await zmq.send({ action: 'pong', echo: message.echo })
       }
       return message

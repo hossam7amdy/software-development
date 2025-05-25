@@ -1,8 +1,9 @@
 import { createWriteStream, mkdirSync } from 'fs'
-import { PathLike, WriteStream } from 'fs'
+import { WriteStream } from 'fs'
+import type { PathLike } from 'fs'
 import { join } from 'path'
 
-import type { IStrategy } from './IStrategy.ts'
+import type { IStrategy } from './IStrategy.js'
 
 const createWriteStreamLazy = (path: string) => {
   let stream: WriteStream | null = null

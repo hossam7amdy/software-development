@@ -1,4 +1,4 @@
-import { salesDb } from './db.ts'
+import { salesDb } from './db.js'
 import { nanoid } from 'nanoid'
 
 const products = ['book', 'game', 'app', 'song', 'movie']

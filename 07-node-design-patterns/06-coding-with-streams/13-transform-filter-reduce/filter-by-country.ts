@@ -3,7 +3,7 @@ import {
   type TransformCallback,
   type TransformOptions
 } from 'stream'
-import type { Record } from './types.ts'
+import type { Record } from './types.js'
 
 export class FilterByCountry extends Transform {
   country: string

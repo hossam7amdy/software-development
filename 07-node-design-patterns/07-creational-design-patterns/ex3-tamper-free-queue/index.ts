@@ -1,6 +1,6 @@
 import { createServer } from 'http'
 import { setTimeout as wait } from 'timers/promises'
-import Queue from './queue.ts'
+import Queue from './queue.js'
 
 const queue = new Queue(enqueue => {
   enqueue('Task1')

@@ -1,7 +1,7 @@
 import { writeFile, mkdir } from 'fs/promises'
 import { dirname } from 'path'
 import { Writable, type WritableOptions } from 'stream'
-import type { Chunk } from './types.ts'
+import type { Chunk } from './types.js'
 
 export class ToFileStream extends Writable {
   constructor(options?: WritableOptions) {

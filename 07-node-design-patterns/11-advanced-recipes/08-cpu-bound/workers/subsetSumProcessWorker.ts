@@ -1,4 +1,4 @@
-import { SubsetSum } from '../subsetSum.ts'
+import { SubsetSum } from '../subsetSum.js'
 
 process.on('message', (msg: any) => {
   const subsetSum = new SubsetSum(msg.sum, msg.set)

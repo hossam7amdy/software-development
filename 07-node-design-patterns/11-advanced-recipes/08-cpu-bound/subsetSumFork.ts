@@ -1,10 +1,10 @@
 import { EventEmitter } from 'events'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import { ProcessPool } from './processPool'
+import { ProcessPool } from './processPool.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const workerFile = join(__dirname, 'workers', 'subsetSumProcessWorker.ts')
+const workerFile = join(__dirname, 'workers', 'subsetSumProcessWorker.js')
 const workers = new ProcessPool(workerFile, 2)
 
 export class SubsetSum extends EventEmitter {

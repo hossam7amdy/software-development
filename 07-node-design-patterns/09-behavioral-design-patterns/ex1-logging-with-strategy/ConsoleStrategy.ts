@@ -1,7 +1,7 @@
 import { stdout } from 'process'
 import { styleText } from 'util'
 
-import type { IStrategy } from './IStrategy.ts'
+import type { IStrategy } from './IStrategy.js'
 
 const colorMap = {
   error: 'red',

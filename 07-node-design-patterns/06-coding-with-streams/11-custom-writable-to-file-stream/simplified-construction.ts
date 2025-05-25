@@ -1,5 +1,5 @@
 import { Writable } from 'stream'
-import type { Chunk } from './types.ts'
+import type { Chunk } from './types.js'
 import { mkdir, writeFile } from 'fs/promises'
 import { dirname, join } from 'path'
 

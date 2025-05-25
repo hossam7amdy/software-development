@@ -1,7 +1,7 @@
 import { stdout } from 'process'
 import { styleText } from 'util'
 
-import { Logger } from './Logger.ts'
+import { Logger } from './Logger.js'
 
 export class ConsoleLogger extends Logger {
   private _write(message: string) {

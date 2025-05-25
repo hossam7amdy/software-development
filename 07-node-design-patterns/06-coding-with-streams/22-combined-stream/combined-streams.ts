@@ -5,7 +5,7 @@ import {
   createDecipheriv,
   scryptSync
 } from 'crypto'
-import pumpify from './pumpify.ts'
+import pumpify from './pumpify.js'
 
 function createKey(password: string) {
   return scryptSync(password, 'salt', 24)

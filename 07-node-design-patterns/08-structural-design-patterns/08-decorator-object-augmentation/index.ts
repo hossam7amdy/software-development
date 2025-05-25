@@ -1,5 +1,5 @@
-import { StackCalculator } from './stack-calculator'
-import { patchCalculator } from './patch-calculator'
+import { StackCalculator } from './stack-calculator.js'
+import { patchCalculator } from './patch-calculator.js'
 
 const calculator = new StackCalculator()
 const enhancedCalculator = patchCalculator(calculator)

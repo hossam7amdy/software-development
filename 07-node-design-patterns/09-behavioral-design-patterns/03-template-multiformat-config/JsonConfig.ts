@@ -1,4 +1,4 @@
-import { Config } from './Config'
+import { Config } from './Config.js'
 
 export class JsonConfig extends Config {
   _serialize(data: Record<string, any>): string {

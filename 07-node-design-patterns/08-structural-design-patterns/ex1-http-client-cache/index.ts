@@ -1,6 +1,6 @@
 import superagent from 'superagent'
 import { setTimeout as wait } from 'timers/promises'
-import { superagentCachePlugin } from './superagent-cache.ts'
+import { superagentCachePlugin } from './superagent-cache.js'
 
 const superagentCache = superagentCachePlugin(superagent)
 

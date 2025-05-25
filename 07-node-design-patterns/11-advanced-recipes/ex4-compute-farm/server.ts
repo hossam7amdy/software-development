@@ -1,7 +1,7 @@
 import { createServer } from 'http'
 
-// import { ComputeFarm } from './computeFarmThreads.ts'
-import { ComputeFarm } from './computeFarmProcesses.ts'
+// import { ComputeFarm } from './computeFarmThreads.js'
+import { ComputeFarm } from './computeFarmProcesses.js'
 
 const PORT = 3000
 const HOST = 'localhost'

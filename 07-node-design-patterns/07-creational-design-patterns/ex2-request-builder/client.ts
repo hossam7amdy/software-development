@@ -1,4 +1,4 @@
-import { request } from './request'
+import { request } from './request.js'
 
 const BASE_URL = 'http://localhost:3000'
 

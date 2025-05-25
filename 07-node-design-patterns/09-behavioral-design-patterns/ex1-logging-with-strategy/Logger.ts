@@ -1,6 +1,6 @@
 import { EOL } from 'os'
 
-import type { IStrategy } from './IStrategy.ts'
+import type { IStrategy } from './IStrategy.js'
 
 export class Logger {
   constructor(private strategy: IStrategy) {}

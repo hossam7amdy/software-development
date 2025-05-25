@@ -1,4 +1,4 @@
-import { totalSales as totalSalesRaw } from './totalSales.ts'
+import { totalSales as totalSalesRaw } from './totalSales.js'
 
 type Callback = (err: Error | null, result: number) => void
 

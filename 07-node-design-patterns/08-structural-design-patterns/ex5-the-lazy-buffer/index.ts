@@ -1,5 +1,5 @@
 import { strictEqual } from 'assert'
-import { createLazyBuffer } from './lazy-buffer.ts'
+import { createLazyBuffer } from './lazy-buffer.js'
 
 const size = 10
 const buf = createLazyBuffer(size)

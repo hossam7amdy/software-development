@@ -1,4 +1,4 @@
-import { salesDb } from './db'
+import { salesDb } from './db.js'
 
 export const totalSales = async (product: string): Promise<number> => {
   let sum = 0

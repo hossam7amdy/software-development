@@ -1,9 +1,9 @@
 import { EOL } from 'os'
 import { createServer } from 'http'
 
-// import { totalSales } from './totalSales.ts'
-// import { totalSales } from './totalSalesBatch.ts'
-import { totalSales } from './totalSalesCache.ts'
+// import { totalSales } from './totalSales.js'
+// import { totalSales } from './totalSalesBatch.js'
+import { totalSales } from './totalSalesCache.js'
 
 const port = 3000
 const host = 'localhost'

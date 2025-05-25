@@ -1,5 +1,5 @@
 import { callbackify } from 'util'
-import { salesDb } from './db'
+import { salesDb } from './db.js'
 
 const totalSalesAsync = async (product: string): Promise<number> => {
   let sum = 0

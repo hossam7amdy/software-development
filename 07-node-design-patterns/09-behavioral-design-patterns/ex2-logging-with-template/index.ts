@@ -1,5 +1,5 @@
-import { FileLogger } from './FileLogger.ts'
-import { ConsoleLogger } from './ConsoleLogger.ts'
+import { FileLogger } from './FileLogger.js'
+import { ConsoleLogger } from './ConsoleLogger.js'
 
 function testConsoleStrategy() {
   console.log('=== Using ConsoleLogger ===')

@@ -1,4 +1,4 @@
-import { concatFiles } from './concat-files'
+import { concatFiles } from './concat-files.js'
 
 async function main() {
   try {

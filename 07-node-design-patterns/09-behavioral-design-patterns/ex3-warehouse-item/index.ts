@@ -1,4 +1,4 @@
-import { WarehouseItem } from './WarehouseItem'
+import { WarehouseItem } from './WarehouseItem.js'
 
 function main() {
   const item = new WarehouseItem('5821')

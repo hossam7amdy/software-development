@@ -1,6 +1,6 @@
 import type { Socket, SocketConnectOpts } from 'net'
-import { OfflineState } from './offline-state'
-import { OnlineState } from './online-state'
+import { OfflineState } from './offline-state.js'
+import { OnlineState } from './online-state.js'
 
 export class FailSafeSocket {
   currentState: OnlineState | OfflineState

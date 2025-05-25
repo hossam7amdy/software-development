@@ -1,6 +1,6 @@
-import { ConsoleStrategy } from './ConsoleStrategy.ts'
-import { FileStrategy } from './FileStrategy.ts'
-import { Logger } from './Logger.ts'
+import { ConsoleStrategy } from './ConsoleStrategy.js'
+import { FileStrategy } from './FileStrategy.js'
+import { Logger } from './Logger.js'
 
 function testConsoleStrategy() {
   console.log('=== Using ConsoleStrategy ===')

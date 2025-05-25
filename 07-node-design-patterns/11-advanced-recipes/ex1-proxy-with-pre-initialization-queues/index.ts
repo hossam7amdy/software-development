@@ -1,5 +1,5 @@
-import { createDeferredProxy } from './deferredProxy.ts'
-import { db } from './db.ts'
+import { createDeferredProxy } from './deferredProxy.js'
+import { db } from './db.js'
 
 const proxiedDb = createDeferredProxy(db, {
   deferredMethods: ['query'],

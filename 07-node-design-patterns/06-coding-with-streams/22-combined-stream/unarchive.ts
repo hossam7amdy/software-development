@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream } from 'fs'
 import { pipeline } from 'stream'
-import { createDecryptAndDecompress } from './combined-streams.ts'
+import { createDecryptAndDecompress } from './combined-streams.js'
 
 const [, , password, source, ivHex] = process.argv
 const iv = Buffer.from(ivHex, 'hex')

@@ -1,7 +1,7 @@
 import { createReadStream, createWriteStream } from 'fs'
 import { pipeline } from 'stream'
 import split from 'split'
-import { LimitedParallelStream } from './limited-parallel-stream'
+import { LimitedParallelStream } from './limited-parallel-stream.js'
 
 const start = performance.now()
 

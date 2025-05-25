@@ -1,8 +1,8 @@
 import { Request } from 'zeromq'
 
-import { ZmqMiddlewareManager } from './zmqMiddlewareManager.ts'
-import { jsonMiddleware } from './jsonMiddleware.ts'
-import { zlibMiddleware } from './zlibMiddleware.ts'
+import { ZmqMiddlewareManager } from './zmqMiddlewareManager.js'
+import { jsonMiddleware } from './jsonMiddleware.js'
+import { zlibMiddleware } from './zlibMiddleware.js'
 
 async function main() {
   const socket = new Request()
@@ -20,7 +20,7 @@ async function main() {
   })
 
   setInterval(() => {
-    zmq.send({ action: 'ping', echo: Date.now() }).catch(err => {
+    zmq.send({ action: 'ping', echo: Date.now() } as any).catch(err => {
       console.error(err)
     })
   }, 1000)

@@ -1,7 +1,7 @@
 import { createReadStream } from 'fs'
 import { pipeline } from 'stream'
 import { basename } from 'path'
-import { createUploadStream } from './upload.ts'
+import { createUploadStream } from './upload.js'
 
 const filepath = process.argv[2]
 const filename = basename(filepath)

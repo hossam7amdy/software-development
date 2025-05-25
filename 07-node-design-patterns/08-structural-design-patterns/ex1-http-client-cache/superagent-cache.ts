@@ -1,6 +1,6 @@
 import { Response } from 'superagent'
-import type { CBHandler, URLType } from 'superagent/types.d.ts'
-import { createInMemoryCache } from './in-memory-cache.ts'
+import type { CBHandler, URLType } from 'superagent/types.js'
+import { createInMemoryCache } from './in-memory-cache.js'
 
 type Superagent = typeof import('superagent')
 

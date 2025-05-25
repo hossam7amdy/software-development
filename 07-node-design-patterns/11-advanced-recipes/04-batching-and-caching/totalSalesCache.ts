@@ -1,4 +1,4 @@
-import { totalSales as totalSalesRaw } from './totalSales.ts'
+import { totalSales as totalSalesRaw } from './totalSales.js'
 
 const CACHE_TTL = 30 * 1000 // 30 seconds TTL
 const cache = new Map<string, Promise<number>>()

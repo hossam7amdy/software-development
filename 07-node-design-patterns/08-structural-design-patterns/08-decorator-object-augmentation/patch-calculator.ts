@@ -1,4 +1,4 @@
-import { StackCalculator } from './stack-calculator'
+import { StackCalculator } from './stack-calculator.js'
 
 export function patchCalculator(calculator: StackCalculator) {
   calculator['add'] = () => {

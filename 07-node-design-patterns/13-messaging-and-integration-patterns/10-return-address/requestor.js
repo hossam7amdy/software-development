@@ -1,11 +1,11 @@
 import { AMQPRequest } from './amqpRequest.js'
 import delay from 'delay'
 
-async function main () {
+async function main() {
   const request = new AMQPRequest()
   await request.initialize()
 
-  async function sendRandomRequest () {
+  async function sendRandomRequest() {
     const a = Math.round(Math.random() * 100)
     const b = Math.round(Math.random() * 100)
     const reply = await request.send('requests_queue', { a, b })

@@ -1,4 +1,4 @@
-import { createObservable } from './create-observable'
+import { createObservable } from './create-observable.js'
 
 function calculateTotal(invoice) {
   return invoice.subtotal - invoice.discount + invoice.tax

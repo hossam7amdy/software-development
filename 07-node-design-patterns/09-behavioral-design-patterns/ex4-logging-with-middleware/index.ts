@@ -1,8 +1,8 @@
 import { styleText } from 'util'
 
-import { LoggerManager } from './LoggerManager.ts'
-import { saveToFileMiddleware } from './saveToFileMiddleware.ts'
-import { serializeMiddleware } from './serializeMiddleware.ts'
+import { LoggerManager } from './LoggerManager.js'
+import { saveToFileMiddleware } from './saveToFileMiddleware.js'
+import { serializeMiddleware } from './serializeMiddleware.js'
 
 async function main() {
   const logger = new LoggerManager()

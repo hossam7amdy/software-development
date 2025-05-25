@@ -2,7 +2,7 @@ import { createReadStream } from 'fs'
 import { createBrotliCompress } from 'zlib'
 import { PassThrough } from 'stream'
 import { basename } from 'path'
-import { upload } from './upload.ts'
+import { upload } from './upload.js'
 
 const filepath = process.argv[2] // 1
 const filename = basename(filepath)

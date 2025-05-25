@@ -1,4 +1,4 @@
-import { FailSafeSocket } from './failsafe-socket'
+import { FailSafeSocket } from './failsafe-socket.js'
 
 export class OnlineState {
   constructor(readonly failSafeSocket: FailSafeSocket) {}

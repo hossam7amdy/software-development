@@ -1,5 +1,5 @@
 import ini from 'ini'
-import { Config } from './Config'
+import { Config } from './Config.js'
 
 export class IniConfig extends Config {
   _serialize(data: Record<string, any>): string {

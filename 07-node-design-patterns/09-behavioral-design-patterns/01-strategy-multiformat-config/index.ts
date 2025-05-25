@@ -1,5 +1,5 @@
-import { Config } from './config.ts'
-import { jsonStrategy, iniStrategy } from './strategies.ts'
+import { Config } from './config.js'
+import { jsonStrategy, iniStrategy } from './strategies.js'
 
 async function main() {
   const iniConfig = new Config(iniStrategy)

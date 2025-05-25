@@ -1,6 +1,6 @@
-import type { IItemState } from './IItemState.ts'
-import { DeliveredState } from './DeliveredState.ts'
-import { WarehouseItem } from './WarehouseItem.ts'
+import type { IItemState } from './IItemState.js'
+import { DeliveredState } from './DeliveredState.js'
+import { WarehouseItem } from './WarehouseItem.js'
 
 export class StoredState implements IItemState {
   constructor(

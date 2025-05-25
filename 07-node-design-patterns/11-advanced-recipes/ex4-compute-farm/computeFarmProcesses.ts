@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import { ProcessPool } from './processPool.ts'
+import { ProcessPool } from './processPool.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const workerFile = join(__dirname, 'workers', 'farmProcessWorker.js')

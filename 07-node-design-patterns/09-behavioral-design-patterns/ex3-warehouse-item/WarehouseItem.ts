@@ -1,5 +1,5 @@
-import { ArrivingState } from './ArrivingState.ts'
-import type { IItemState } from './IItemState.ts'
+import { ArrivingState } from './ArrivingState.js'
+import type { IItemState } from './IItemState.js'
 
 export class WarehouseItem {
   id: string

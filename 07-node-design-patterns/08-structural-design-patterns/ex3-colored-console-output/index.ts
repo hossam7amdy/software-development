@@ -2,7 +2,7 @@ import {
   colorfulConsoleComposition,
   colorfulConsoleAugmentation,
   colorfulConsoleProxy
-} from './colorful-console.ts'
+} from './colorful-console.js'
 
 const testColorfulConsoleComposition = () => {
   console.log('\n========== Testing Composition =============')

@@ -1,5 +1,5 @@
-import { IniConfig } from './IniConfig'
-import { JsonConfig } from './JsonConfig'
+import { IniConfig } from './IniConfig.js'
+import { JsonConfig } from './JsonConfig.js'
 
 async function main() {
   IniConfig

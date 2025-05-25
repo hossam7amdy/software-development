@@ -2,7 +2,7 @@ import { readFileSync } from 'fs'
 
 const cache = new Map()
 
-function consistentReadSync (filename) {
+function consistentReadSync(filename) {
   if (cache.has(filename)) {
     return cache.get(filename)
   } else {

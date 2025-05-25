@@ -1,16 +1,16 @@
 import { CancelError } from './cancelError.js'
 
-export function createAsyncCancelable (generatorFunction) {
-  return function asyncCancelable (...args) {
+export function createAsyncCancelable(generatorFunction) {
+  return function asyncCancelable(...args) {
     const generatorObject = generatorFunction(...args)
     let cancelRequested = false
 
-    function cancel () {
+    function cancel() {
       cancelRequested = true
     }
 
     const promise = new Promise((resolve, reject) => {
-      async function nextStep (prevResult) {
+      async function nextStep(prevResult) {
         if (cancelRequested) {
           return reject(new CancelError())
         }

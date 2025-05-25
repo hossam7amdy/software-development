@@ -1,20 +1,20 @@
-function asyncOperation (cb) {
+function asyncOperation(cb) {
   process.nextTick(cb)
 }
 
-function task1 (cb) {
+function task1(cb) {
   asyncOperation(() => {
     task2(cb)
   })
 }
 
-function task2 (cb) {
+function task2(cb) {
   asyncOperation(() => {
     task3(cb)
   })
 }
 
-function task3 (cb) {
+function task3(cb) {
   asyncOperation(() => {
     cb() // finally executes the callback
   })

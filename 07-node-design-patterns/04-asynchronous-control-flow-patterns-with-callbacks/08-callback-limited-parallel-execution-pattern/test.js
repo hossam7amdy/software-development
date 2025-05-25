@@ -1,5 +1,5 @@
-function makeSampleTask (name) {
-  return (cb) => {
+function makeSampleTask(name) {
+  return cb => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)
@@ -23,10 +23,12 @@ let running = 0
 let completed = 0
 let index = 0
 
-function next () { // [1]
+function next() {
+  // [1]
   while (running < concurrency && index < tasks.length) {
     const task = tasks[index++]
-    task(() => { // [2]
+    task(() => {
+      // [2]
       if (++completed === tasks.length) {
         return finish()
       }
@@ -38,7 +40,7 @@ function next () { // [1]
 }
 next()
 
-function finish () {
+function finish() {
   // all the tasks completed
   console.log('All tasks executed!')
 }

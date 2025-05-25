@@ -1,5 +1,5 @@
-function makeSampleTask (name) {
-  return (cb) => {
+function makeSampleTask(name) {
+  return cb => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)
@@ -24,7 +24,7 @@ tasks.forEach(task => {
   })
 })
 
-function finish () {
+function finish() {
   // all the tasks completed
   console.log('All tasks executed!')
 }

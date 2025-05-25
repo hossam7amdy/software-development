@@ -8,10 +8,11 @@ import { TaskQueue } from './TaskQueue.js'
 
 const mkdirpPromises = promisify(mkdirp)
 
-function download (url, filename) {
+function download(url, filename) {
   console.log(`Downloading ${url}`)
   let content
-  return superagent.get(url)
+  return superagent
+    .get(url)
     .then(res => {
       content = res.text
       return mkdirpPromises(dirname(filename))
@@ -23,7 +24,7 @@ function download (url, filename) {
     })
 }
 
-function spiderLinks (currentUrl, content, nesting, queue) {
+function spiderLinks(currentUrl, content, nesting, queue) {
   if (nesting === 0) {
     return Promise.resolve()
   }
@@ -35,7 +36,7 @@ function spiderLinks (currentUrl, content, nesting, queue) {
 }
 
 const spidering = new Set()
-function spiderTask (url, nesting, queue) {
+function spiderTask(url, nesting, queue) {
   if (spidering.has(url)) {
     return Promise.resolve()
   }
@@ -45,20 +46,19 @@ function spiderTask (url, nesting, queue) {
 
   return queue
     .runTask(() => {
-      return fsPromises.readFile(filename, 'utf8')
-        .catch((err) => {
-          if (err.code !== 'ENOENT') {
-            throw err
-          }
+      return fsPromises.readFile(filename, 'utf8').catch(err => {
+        if (err.code !== 'ENOENT') {
+          throw err
+        }
 
-          // The file doesn't exist, so let’s download it
-          return download(url, filename)
-        })
+        // The file doesn't exist, so let’s download it
+        return download(url, filename)
+      })
     })
     .then(content => spiderLinks(url, content, nesting, queue))
 }
 
-export function spider (url, nesting, concurrency) {
+export function spider(url, nesting, concurrency) {
   const queue = new TaskQueue(concurrency)
   return spiderTask(url, nesting, queue)
 }

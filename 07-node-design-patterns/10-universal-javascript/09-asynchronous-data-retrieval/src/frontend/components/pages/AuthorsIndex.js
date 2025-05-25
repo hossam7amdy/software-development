@@ -7,7 +7,7 @@ import { Header } from '../Header.js'
 const html = htm.bind(react.createElement)
 
 export class AuthorsIndex extends react.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       authors: [],
@@ -15,24 +15,28 @@ export class AuthorsIndex extends react.Component {
     }
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     const { body } = await superagent.get('http://localhost:3001/api/authors')
     this.setState({ loading: false, authors: body })
   }
 
-  render () {
+  render() {
     if (this.state.loading) {
-      return html`<${Header}/><div>Loading ...</div>`
+      return html`<${Header} />
+        <div>Loading ...</div>`
     }
 
     return html`<div>
-      <${Header}/>
-      <div>${this.state.authors.map((author) =>
-        html`<div key=${author.id}>
+      <${Header} />
+      <div>
+        ${this.state.authors.map(
+          author =>
+            html`<div key=${author.id}>
           <p>
             <${Link} to="${`/author/${author.id}`}">${author.name}</>
           </p>
-        </div>`)}
+        </div>`
+        )}
       </div>
     </div>`
   }

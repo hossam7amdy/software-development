@@ -1,19 +1,18 @@
 import amqp from 'amqplib'
 
 export class AMQPReply {
-  constructor (requestsQueueName) {
+  constructor(requestsQueueName) {
     this.requestsQueueName = requestsQueueName
   }
 
-  async initialize () {
+  async initialize() {
     const connection = await amqp.connect('amqp://localhost')
     this.channel = await connection.createChannel()
-    const { queue } = await this.channel.assertQueue(
-      this.requestsQueueName)
+    const { queue } = await this.channel.assertQueue(this.requestsQueueName)
     this.queue = queue
   }
 
-  handleRequests (handler) {
+  handleRequests(handler) {
     this.channel.consume(this.queue, async msg => {
       const content = JSON.parse(msg.content.toString())
       const replyData = await handler(content)

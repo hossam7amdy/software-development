@@ -7,7 +7,7 @@ To try the sample, first install its dependencies:
 ```
 npm install
 ```
-  
+
 Next, populate the database with some sample data:
 
 ```
@@ -20,7 +20,7 @@ in the format:
 ```
 {amount, product}
 ```
-  
+
 Next, to start the server, run:
 
 ```
@@ -35,7 +35,7 @@ node loadTest.js
 
 In the file `server.js`, try to swap between the various implementations
 of the `totalSales()` API to compare their performances. Please note that
-using the vanilla implementation (`totalSales`) the load test may 
+using the vanilla implementation (`totalSales`) the load test may
 take up to a minute or more to complete.
 
 ```

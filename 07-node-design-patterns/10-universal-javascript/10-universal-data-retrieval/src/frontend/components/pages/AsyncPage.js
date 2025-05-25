@@ -1,15 +1,15 @@
 import react from 'react'
 
 export class AsyncPage extends react.Component {
-  static async preloadAsyncData (props) {
+  static async preloadAsyncData(props) {
     throw new Error('Must be implemented by sub class')
   }
 
-  render () {
+  render() {
     throw new Error('Must be implemented by sub class')
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     const location = props.match.url
     this.hasData = false
@@ -17,9 +17,10 @@ export class AsyncPage extends react.Component {
     let staticData
     let staticError
 
-    const staticContext = typeof window !== 'undefined'
-      ? window.__STATIC_CONTEXT__ // client side check for SSR preloaded data
-      : this.props.staticContext // server side check for SSR preloaded data
+    const staticContext =
+      typeof window !== 'undefined'
+        ? window.__STATIC_CONTEXT__ // client side check for SSR preloaded data
+        : this.props.staticContext // server side check for SSR preloaded data
 
     if (staticContext && staticContext[location]) {
       const { data, err } = staticContext[location]
@@ -35,7 +36,7 @@ export class AsyncPage extends react.Component {
     this.state = { ...staticData, staticError, loading: !this.hasStaticData }
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     // browser only
     if (!this.hasStaticData) {
       let staticData

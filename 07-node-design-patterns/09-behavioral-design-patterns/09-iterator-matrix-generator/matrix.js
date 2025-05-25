@@ -1,25 +1,23 @@
 export class Matrix {
-  constructor (inMatrix) {
+  constructor(inMatrix) {
     this.data = inMatrix
   }
 
-  get (row, column) {
-    if (row >= this.data.length ||
-      column >= this.data[row].length) {
+  get(row, column) {
+    if (row >= this.data.length || column >= this.data[row].length) {
       throw new RangeError('Out of bounds')
     }
     return this.data[row][column]
   }
 
-  set (row, column, value) {
-    if (row >= this.data.length ||
-      column >= this.data[row].length) {
+  set(row, column, value) {
+    if (row >= this.data.length || column >= this.data[row].length) {
       throw new RangeError('Out of bounds')
     }
     this.data[row][column] = value
   }
 
-  * [Symbol.iterator] () {
+  *[Symbol.iterator]() {
     let nextRow = 0
     let nextCol = 0
 

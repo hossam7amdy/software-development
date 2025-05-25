@@ -6,7 +6,7 @@ import { Header } from '../Header.js'
 const html = htm.bind(react.createElement)
 
 export class FourOhFour extends react.Component {
-  render () {
+  render() {
     return html`<div>
       <${Header}/>
       <div>

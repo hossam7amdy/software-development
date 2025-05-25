@@ -5,7 +5,7 @@ const dbRun = promisify(db.run.bind(db))
 const dbAll = promisify(db.all.bind(db))
 
 export class Blog {
-  initialize () {
+  initialize() {
     const initQuery = `CREATE TABLE IF NOT EXISTS posts (
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
@@ -16,12 +16,17 @@ export class Blog {
     return dbRun(initQuery)
   }
 
-  createPost (id, title, content, createdAt) {
-    return dbRun('INSERT INTO posts VALUES (?, ?, ?, ?)',
-      id, title, content, createdAt)
+  createPost(id, title, content, createdAt) {
+    return dbRun(
+      'INSERT INTO posts VALUES (?, ?, ?, ?)',
+      id,
+      title,
+      content,
+      createdAt
+    )
   }
 
-  getAllPosts () {
+  getAllPosts() {
     return dbAll('SELECT * FROM posts ORDER BY created_at DESC')
   }
 }

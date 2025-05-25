@@ -2,7 +2,7 @@ import { ImageGif } from './imageGif.js'
 import { ImageJpeg } from './imageJpeg.js'
 import { ImagePng } from './imagePng.js'
 
-function createImage (name) {
+function createImage(name) {
   if (name.match(/\.jpe?g$/)) {
     return new ImageJpeg(name)
   } else if (name.match(/\.gif$/)) {

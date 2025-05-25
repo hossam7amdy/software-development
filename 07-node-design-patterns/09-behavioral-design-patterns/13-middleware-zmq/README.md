@@ -15,5 +15,3 @@ And then:
 ```
 node client.js
 ```
-
-

@@ -1,11 +1,11 @@
 export class TaskQueue {
-  constructor (concurrency) {
+  constructor(concurrency) {
     this.concurrency = concurrency
     this.running = 0
     this.queue = []
   }
 
-  runTask (task) {
+  runTask(task) {
     return new Promise((resolve, reject) => {
       this.queue.push(() => {
         return task().then(resolve, reject)
@@ -14,7 +14,7 @@ export class TaskQueue {
     })
   }
 
-  next () {
+  next() {
     while (this.running < this.concurrency && this.queue.length) {
       const task = this.queue.shift()
       task().finally(() => {

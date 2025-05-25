@@ -7,20 +7,23 @@ import superagent from 'superagent'
 
 const httpPort = process.argv[2] || 8080
 
-async function main () {
+async function main() {
   const connection = await amqp.connect('amqp://localhost')
   const channel = await connection.createChannel()
   await channel.assertExchange('chat', 'fanout')
-  const { queue } = await channel.assertQueue(
-    `chat_srv_${httpPort}`,
-    { exclusive: true }
-  )
+  const { queue } = await channel.assertQueue(`chat_srv_${httpPort}`, {
+    exclusive: true
+  })
   await channel.bindQueue(queue, 'chat')
-  channel.consume(queue, msg => {
-    msg = msg.content.toString()
-    console.log(`From queue: ${msg}`)
-    broadcast(msg)
-  }, { noAck: true })
+  channel.consume(
+    queue,
+    msg => {
+      msg = msg.content.toString()
+      console.log(`From queue: ${msg}`)
+      broadcast(msg)
+    },
+    { noAck: true }
+  )
 
   // serve static files
   const server = createServer((req, res) => {
@@ -44,7 +47,7 @@ async function main () {
       .on('data', msg => client.send(msg))
   })
 
-  function broadcast (msg) {
+  function broadcast(msg) {
     for (const client of wss.clients) {
       if (client.readyState === ws.OPEN) {
         client.send(msg)

@@ -18,7 +18,7 @@ const httpRequestOptions = {
   }
 }
 
-const req = request(httpRequestOptions, (res) => {
+const req = request(httpRequestOptions, res => {
   console.log(`Server response: ${res.statusCode}`)
 })
 

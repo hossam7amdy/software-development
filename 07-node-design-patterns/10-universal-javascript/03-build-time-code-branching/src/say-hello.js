@@ -1,6 +1,6 @@
 import nunjucks from 'nunjucks'
 
-export function sayHello (name) {
+export function sayHello(name) {
   if (typeof __BROWSER__ !== 'undefined') {
     // client side code
     const template = '<h1>Hello <i>{{ name }}</i></h1>'

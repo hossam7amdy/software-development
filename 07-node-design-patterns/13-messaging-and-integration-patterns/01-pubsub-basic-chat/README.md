@@ -5,12 +5,12 @@ This sample demonstrates how to implement a basic chat application in Node.js
 ## Run
 
 To run the sample, install all dependencies with:
- 
+
 ```shell script
 npm install
-``` 
- 
-Then launch the server component with: 
+```
+
+Then launch the server component with:
 
 ```shell script
 node index.js

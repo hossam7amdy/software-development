@@ -9,4 +9,3 @@ Install the necessary dependencies with `npm install` and then run:
 ```
 node index.js
 ```
-

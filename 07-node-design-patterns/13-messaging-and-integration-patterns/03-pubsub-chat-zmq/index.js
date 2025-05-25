@@ -10,7 +10,7 @@ const server = createServer((req, res) => {
 })
 
 let pubSocket
-async function initializeSockets () {
+async function initializeSockets() {
   pubSocket = new zmq.Publisher()
   await pubSocket.bind(`tcp://127.0.0.1:${yargs.argv.pub}`)
 
@@ -40,7 +40,7 @@ wss.on('connection', client => {
   })
 })
 
-function broadcast (msg) {
+function broadcast(msg) {
   for (const client of wss.clients) {
     if (client.readyState === ws.OPEN) {
       client.send(msg)

@@ -8,7 +8,7 @@ import { FourOhFour } from './components/pages/FourOhFour.js'
 const html = htm.bind(react.createElement)
 
 export class App extends react.Component {
-  render () {
+  render() {
     return html`
       <${Switch}>
         <${Route}

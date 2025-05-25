@@ -10,7 +10,6 @@ Install all the necessary dependencies with:
 npm install
 ```
 
-
 ## Run
 
 To run the example server:

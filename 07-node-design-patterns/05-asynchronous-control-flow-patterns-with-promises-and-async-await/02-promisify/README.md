@@ -1,6 +1,6 @@
 # 02-promisify
 
-This sample demonstrates how to *promisify* a Node.js-style callback-based function.
+This sample demonstrates how to _promisify_ a Node.js-style callback-based function.
 
 ## Run
 

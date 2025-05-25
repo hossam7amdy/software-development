@@ -13,10 +13,10 @@ docker run -it -p 6379:6379 redis redis-server --appendonly yes
 ```
 
 To run the sample, install all dependencies with:
- 
+
 ```shell script
 npm install
-``` 
+```
 
 Then run (in two separate terminals):
 
@@ -24,7 +24,7 @@ Then run (in two separate terminals):
 node index.js 8081
 node index.js 8082
 ```
-  
+
 To access the application open a browser tab at the address:
 
 ```

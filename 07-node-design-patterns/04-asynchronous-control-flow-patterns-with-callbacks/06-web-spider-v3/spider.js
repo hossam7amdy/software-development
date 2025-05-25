@@ -4,7 +4,7 @@ import superagent from 'superagent'
 import mkdirp from 'mkdirp'
 import { urlToFilename, getPageLinks } from './utils.js'
 
-function saveFile (filename, contents, cb) {
+function saveFile(filename, contents, cb) {
   mkdirp(path.dirname(filename), err => {
     if (err) {
       return cb(err)
@@ -13,7 +13,7 @@ function saveFile (filename, contents, cb) {
   })
 }
 
-function download (url, filename, cb) {
+function download(url, filename, cb) {
   console.log(`Downloading ${url}`)
   superagent.get(url).end((err, res) => {
     if (err) {
@@ -29,7 +29,7 @@ function download (url, filename, cb) {
   })
 }
 
-function spiderLinks (currentUrl, body, nesting, cb) {
+function spiderLinks(currentUrl, body, nesting, cb) {
   if (nesting === 0) {
     return process.nextTick(cb)
   }
@@ -42,7 +42,7 @@ function spiderLinks (currentUrl, body, nesting, cb) {
   let completed = 0
   let hasErrors = false
 
-  function done (err) {
+  function done(err) {
     if (err) {
       hasErrors = true
       return cb(err)
@@ -55,7 +55,7 @@ function spiderLinks (currentUrl, body, nesting, cb) {
   links.forEach(link => spider(link, nesting - 1, done))
 }
 
-export function spider (url, nesting, cb) {
+export function spider(url, nesting, cb) {
   const filename = urlToFilename(url)
   fs.readFile(filename, 'utf8', (err, fileContent) => {
     if (err) {

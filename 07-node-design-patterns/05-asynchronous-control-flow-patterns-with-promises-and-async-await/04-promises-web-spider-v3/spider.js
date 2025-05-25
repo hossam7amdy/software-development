@@ -7,10 +7,11 @@ import { promisify } from 'util'
 
 const mkdirpPromises = promisify(mkdirp)
 
-function download (url, filename) {
+function download(url, filename) {
   console.log(`Downloading ${url}`)
   let content
-  return superagent.get(url)
+  return superagent
+    .get(url)
     .then(res => {
       content = res.text
       return mkdirpPromises(dirname(filename))
@@ -22,28 +23,28 @@ function download (url, filename) {
     })
 }
 
-function spiderLinks (currentUrl, content, nesting) {
+function spiderLinks(currentUrl, content, nesting) {
   if (nesting === 0) {
     return Promise.resolve()
   }
 
   const links = getPageLinks(currentUrl, content)
-  const promises = links
-    .map(link => spider(link, nesting - 1))
+  const promises = links.map(link => spider(link, nesting - 1))
 
   return Promise.all(promises)
 }
 
 const spidering = new Set()
-export function spider (url, nesting) {
+export function spider(url, nesting) {
   if (spidering.has(url)) {
     return Promise.resolve()
   }
   spidering.add(url)
 
   const filename = urlToFilename(url)
-  return fsPromises.readFile(filename, 'utf8')
-    .catch((err) => {
+  return fsPromises
+    .readFile(filename, 'utf8')
+    .catch(err => {
       if (err.code !== 'ENOENT') {
         throw err
       }

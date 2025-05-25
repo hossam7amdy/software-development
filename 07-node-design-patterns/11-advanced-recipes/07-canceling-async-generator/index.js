@@ -2,7 +2,7 @@ import { asyncRoutine } from './asyncRoutine.js'
 import { createAsyncCancelable } from './createAsyncCancelable.js'
 import { CancelError } from './cancelError.js'
 
-const cancelable = createAsyncCancelable(function * () {
+const cancelable = createAsyncCancelable(function* () {
   const resA = yield asyncRoutine('A')
   console.log(resA)
   const resB = yield asyncRoutine('B')

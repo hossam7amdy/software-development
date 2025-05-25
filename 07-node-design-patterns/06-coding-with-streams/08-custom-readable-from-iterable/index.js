@@ -9,6 +9,6 @@ const mountains = [
 ]
 
 const mountainsStream = Readable.from(mountains)
-mountainsStream.on('data', (mountain) => {
+mountainsStream.on('data', mountain => {
   console.log(`${mountain.name.padStart(14)}\t${mountain.height}m`)
 })

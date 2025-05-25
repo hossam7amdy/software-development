@@ -2,7 +2,6 @@
 
 This examples shows how to create a complicate pipeline using `stream.pipeline()`.
 
-
 ## Run
 
 To run the example:

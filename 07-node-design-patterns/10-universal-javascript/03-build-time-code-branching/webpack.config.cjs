@@ -81,18 +81,20 @@ module.exports = {
       name: true
     },
     minimize: true,
-    minimizer: [new TerserPlugin({
-      terserOptions: {
-        mangle: false,
-        output: {
-          beautify: true
-        },
-        compress: {
-          dead_code: true,
-          if_return: true
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          mangle: false,
+          output: {
+            beautify: true
+          },
+          compress: {
+            dead_code: true,
+            if_return: true
+          }
         }
-      }
-    })]
+      })
+    ]
   },
 
   devServer: {

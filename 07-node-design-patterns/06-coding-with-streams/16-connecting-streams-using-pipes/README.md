@@ -2,7 +2,6 @@
 
 This examples shows how to connect streams using `.pipe()`.
 
-
 ## Run
 
 To run the example:

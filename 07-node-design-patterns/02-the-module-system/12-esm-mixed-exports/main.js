@@ -1,9 +1,9 @@
-import mylog, { info } from "./logger.js";
-import { count, increment } from "./test.js";
+import mylog, { info } from './logger.js'
+import { count, increment } from './test.js'
 
-mylog("Hello");
-info("World");
+mylog('Hello')
+info('World')
 
-console.log(count);
-increment();
-console.log(count);
+console.log(count)
+increment()
+console.log(count)

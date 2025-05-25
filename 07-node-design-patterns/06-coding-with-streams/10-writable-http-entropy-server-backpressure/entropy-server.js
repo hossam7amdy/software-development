@@ -5,9 +5,10 @@ const chance = new Chance()
 
 const server = createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' })
-  function generateMore () { // ①
+  function generateMore() {
+    // ①
     while (chance.bool({ likelihood: 95 })) {
-      const randomChunk = chance.string({ length: (16 * 1024) - 1 }) // ②
+      const randomChunk = chance.string({ length: 16 * 1024 - 1 }) // ②
       const shouldContinue = res.write(`${randomChunk}\n`) // ③
       if (!shouldContinue) {
         console.log('back-pressure')

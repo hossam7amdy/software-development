@@ -1,27 +1,27 @@
 import { EventEmitter } from 'events'
 
 export class TaskQueue extends EventEmitter {
-  constructor (concurrency) {
+  constructor(concurrency) {
     super()
     this.concurrency = concurrency
     this.running = 0
     this.queue = []
   }
 
-  pushTask (task) {
+  pushTask(task) {
     this.queue.push(task)
     process.nextTick(this.next.bind(this))
     return this
   }
 
-  next () {
+  next() {
     if (this.running === 0 && this.queue.length === 0) {
       return this.emit('empty')
     }
 
     while (this.running < this.concurrency && this.queue.length) {
       const task = this.queue.shift()
-      task((err) => {
+      task(err => {
         if (err) {
           this.emit('error', err)
         }

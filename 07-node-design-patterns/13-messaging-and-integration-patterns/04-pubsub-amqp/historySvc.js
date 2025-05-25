@@ -4,7 +4,7 @@ import timestamp from 'monotonic-timestamp'
 import JSONStream from 'JSONStream'
 import amqp from 'amqplib'
 
-async function main () {
+async function main() {
   const db = level('./msgHistory')
 
   const connection = await amqp.connect('amqp://localhost')
@@ -22,9 +22,7 @@ async function main () {
 
   createServer((req, res) => {
     res.writeHead(200)
-    db.createValueStream()
-      .pipe(JSONStream.stringify())
-      .pipe(res)
+    db.createValueStream().pipe(JSONStream.stringify()).pipe(res)
   }).listen(8090)
 }
 

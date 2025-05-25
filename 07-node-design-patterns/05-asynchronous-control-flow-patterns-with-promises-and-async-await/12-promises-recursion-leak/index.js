@@ -1,4 +1,4 @@
-function delay (milliseconds) {
+function delay(milliseconds) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(new Date())
@@ -7,27 +7,25 @@ function delay (milliseconds) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function leakingLoop () {
-  return delay(1)
-    .then(() => {
-      console.log(`Tick ${Date.now()}`)
-      return leakingLoop()
-    })
+function leakingLoop() {
+  return delay(1).then(() => {
+    console.log(`Tick ${Date.now()}`)
+    return leakingLoop()
+  })
 }
 
 // eslint-disable-next-line no-unused-vars
-function nonLeakingLoop () {
-  delay(1)
-    .then(() => {
-      console.log(`Tick ${Date.now()}`)
-      nonLeakingLoop()
-    })
+function nonLeakingLoop() {
+  delay(1).then(() => {
+    console.log(`Tick ${Date.now()}`)
+    nonLeakingLoop()
+  })
 }
 
 // eslint-disable-next-line no-unused-vars
-function nonLeakingLoopWithErrors () {
+function nonLeakingLoopWithErrors() {
   return new Promise((resolve, reject) => {
-    (function internalLoop () {
+    ;(function internalLoop() {
       delay(1)
         .then(() => {
           console.log(`Tick ${Date.now()}`)
@@ -41,7 +39,7 @@ function nonLeakingLoopWithErrors () {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function nonLeakingLoopAsync () {
+async function nonLeakingLoopAsync() {
   while (true) {
     await delay(1)
     console.log(`Tick ${Date.now()}`)
@@ -49,7 +47,7 @@ async function nonLeakingLoopAsync () {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function leakingLoopAsync () {
+async function leakingLoopAsync() {
   await delay(1)
   console.log(`Tick ${Date.now()}`)
   return leakingLoopAsync()

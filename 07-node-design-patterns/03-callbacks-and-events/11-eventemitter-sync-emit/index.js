@@ -2,18 +2,18 @@ import { EventEmitter } from 'events'
 import { readFileSync } from 'fs'
 
 class FindRegexSync extends EventEmitter {
-  constructor (regex) {
+  constructor(regex) {
     super()
     this.regex = regex
     this.files = []
   }
 
-  addFile (file) {
+  addFile(file) {
     this.files.push(file)
     return this
   }
 
-  find () {
+  find() {
     for (const file of this.files) {
       let content
       try {

@@ -2,7 +2,8 @@ import { createServer } from 'http'
 import httpProxy from 'http-proxy'
 import consul from 'consul'
 
-const routing = [ // ①
+const routing = [
+  // ①
   {
     path: '/api',
     service: 'api-service',
@@ -19,10 +20,14 @@ const consulClient = consul() // ②
 const proxy = httpProxy.createProxyServer()
 
 const server = createServer((req, res) => {
-  const route = routing.find((route) => req.url.startsWith(route.path)) // ③
-  consulClient.agent.service.list((err, services) => { // ④
-    const servers = !err && Object.values(services)
-      .filter(service => service.Tags.includes(route.service))
+  const route = routing.find(route => req.url.startsWith(route.path)) // ③
+  consulClient.agent.service.list((err, services) => {
+    // ④
+    const servers =
+      !err &&
+      Object.values(services).filter(service =>
+        service.Tags.includes(route.service)
+      )
 
     if (err || !servers.length) {
       res.writeHead(502)

@@ -32,15 +32,19 @@ module.exports = function (env, argv) {
       historyApiFallback: true,
       open: true
     },
-    optimization: isProd ? {
-      minimize: true,
-      minimizer: [new TerserPlugin()]
-    } : {},
-    plugins: isProd ? [] : [
-      new HtmlWebpackPlugin({
-        title: 'My library'
-      }),
-      new HtmlWebpackRootPlugin()
-    ]
+    optimization: isProd
+      ? {
+          minimize: true,
+          minimizer: [new TerserPlugin()]
+        }
+      : {},
+    plugins: isProd
+      ? []
+      : [
+          new HtmlWebpackPlugin({
+            title: 'My library'
+          }),
+          new HtmlWebpackRootPlugin()
+        ]
   }
 }

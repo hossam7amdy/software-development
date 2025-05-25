@@ -3,7 +3,7 @@ import { readFile } from 'fs'
 
 const cache = new Map()
 
-function consistentReadAsync (filename, callback) {
+function consistentReadAsync(filename, callback) {
   if (cache.has(filename)) {
     // deferred callback invocation
     process.nextTick(() => callback(cache.get(filename)))
@@ -16,7 +16,7 @@ function consistentReadAsync (filename, callback) {
   }
 }
 
-function createFileReader (filename) {
+function createFileReader(filename) {
   const listeners = []
   consistentReadAsync(filename, value => {
     listeners.forEach(listener => listener(value))

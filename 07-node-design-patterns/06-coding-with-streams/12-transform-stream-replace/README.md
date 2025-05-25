@@ -2,7 +2,6 @@
 
 This examples shows how to create a custom transform stream.
 
-
 ## Run
 
 To run the example:
@@ -16,4 +15,3 @@ or
 ```bash
 node simplified-construction.js
 ```
-

@@ -1,7 +1,7 @@
 import zmq from 'zeromq'
 import { processTask } from './processTask.js'
 
-async function main () {
+async function main() {
   const fromVentilator = new zmq.Pull()
   const toSink = new zmq.Push()
 

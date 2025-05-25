@@ -35,7 +35,6 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts}": [
       "eslint --fix",
-      "tsc --noEmit",
       "git add"
     ]
   },

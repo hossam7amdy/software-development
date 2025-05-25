@@ -2,7 +2,6 @@
 
 This examples shows how to create a parallel execution flow using streams.
 
-
 ## Dependencies
 
 Install all necessary dependencies with:
@@ -10,7 +9,6 @@ Install all necessary dependencies with:
 ```bash
 npm install
 ```
-
 
 ## Run
 

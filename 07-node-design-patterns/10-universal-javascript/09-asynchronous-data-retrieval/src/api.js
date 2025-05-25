@@ -6,13 +6,15 @@ const server = fastify({ logger: true }) // ①
 
 server.register(fastifyCors, { origin: true }) // ②
 
-server.get('/api/authors', // ③
+server.get(
+  '/api/authors', // ③
   async function (req, reply) {
     return authors.map(({ id, name }) => ({ id, name }))
   }
 )
 
-server.get('/api/author/:authorId', // ④
+server.get(
+  '/api/author/:authorId', // ④
   async function (req, reply) {
     const author = authors.find(({ id }) => id === req.params.authorId)
     if (!author) {

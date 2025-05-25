@@ -9,4 +9,3 @@ To run the example launch:
 ```
 node index.js
 ```
-

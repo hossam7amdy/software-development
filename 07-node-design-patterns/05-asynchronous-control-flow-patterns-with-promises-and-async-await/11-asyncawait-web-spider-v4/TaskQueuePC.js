@@ -1,5 +1,5 @@
 export class TaskQueuePC {
-  constructor (concurrency) {
+  constructor(concurrency) {
     this.taskQueue = []
     this.consumerQueue = []
 
@@ -9,7 +9,7 @@ export class TaskQueuePC {
     }
   }
 
-  async consumer () {
+  async consumer() {
     while (true) {
       try {
         const task = await this.getNextTask()
@@ -20,8 +20,8 @@ export class TaskQueuePC {
     }
   }
 
-  getNextTask () {
-    return new Promise((resolve) => {
+  getNextTask() {
+    return new Promise(resolve => {
       if (this.taskQueue.length !== 0) {
         return resolve(this.taskQueue.shift())
       }
@@ -30,7 +30,7 @@ export class TaskQueuePC {
     })
   }
 
-  runTask (task) {
+  runTask(task) {
     return new Promise((resolve, reject) => {
       const taskWrapper = () => {
         const taskPromise = task()

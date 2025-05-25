@@ -13,4 +13,3 @@ node index.js 2201307499
 # Launch in production mode (without profiler)
 NODE_ENV=production node index.js 2201307499
 ```
-

@@ -7,15 +7,18 @@ import { authors } from '../../../data/authors.js'
 const html = htm.bind(react.createElement)
 
 export class AuthorsIndex extends react.Component {
-  render () {
+  render() {
     return html`<div>
-      <${Header}/>
-      <div>${authors.map((author) =>
-        html`<div key=${author.id}>
+      <${Header} />
+      <div>
+        ${authors.map(
+          author =>
+            html`<div key=${author.id}>
           <p>
             <${Link} to="${`/author/${author.id}`}">${author.name}</>
           </p>
-        </div>`)}
+        </div>`
+        )}
       </div>
     </div>`
   }

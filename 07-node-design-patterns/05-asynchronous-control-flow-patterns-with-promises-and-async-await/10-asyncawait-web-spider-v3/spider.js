@@ -7,7 +7,7 @@ import { promisify } from 'util'
 
 const mkdirpPromises = promisify(mkdirp)
 
-async function download (url, filename) {
+async function download(url, filename) {
   console.log(`Downloading ${url}`)
   const { text: content } = await superagent.get(url)
   await mkdirpPromises(dirname(filename))
@@ -16,7 +16,7 @@ async function download (url, filename) {
   return content
 }
 
-async function spiderLinks (currentUrl, content, nesting) {
+async function spiderLinks(currentUrl, content, nesting) {
   if (nesting === 0) {
     return
   }
@@ -29,7 +29,7 @@ async function spiderLinks (currentUrl, content, nesting) {
 
 const spidering = new Set()
 
-export async function spider (url, nesting) {
+export async function spider(url, nesting) {
   if (spidering.has(url)) {
     return
   }

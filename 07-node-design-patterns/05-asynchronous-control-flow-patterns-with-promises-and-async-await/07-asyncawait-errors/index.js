@@ -1,4 +1,4 @@
-function delayError (milliseconds) {
+function delayError(milliseconds) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       reject(new Error(`Error after ${milliseconds}ms`))
@@ -6,7 +6,7 @@ function delayError (milliseconds) {
   })
 }
 
-async function playingWithErrors (throwSyncError) {
+async function playingWithErrors(throwSyncError) {
   try {
     if (throwSyncError) {
       throw new Error('This is a synchronous error')

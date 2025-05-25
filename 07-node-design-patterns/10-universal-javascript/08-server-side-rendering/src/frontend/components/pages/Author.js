@@ -7,7 +7,7 @@ import { authors } from '../../../data/authors.js'
 const html = htm.bind(react.createElement)
 
 export class Author extends react.Component {
-  render () {
+  render() {
     const author = authors.find(
       author => author.id === this.props.match.params.authorId
     )
@@ -20,13 +20,13 @@ export class Author extends react.Component {
     }
 
     return html`<div>
-      <${Header}/>
+      <${Header} />
       <h2>${author.name}</h2>
       <p>${author.bio}</p>
       <h3>Books</h3>
       <ul>
-        ${author.books.map((book) =>
-          html`<li key=${book.id}>${book.title} (${book.year})</li>`
+        ${author.books.map(
+          book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
         )}
       </ul>
     </div>`

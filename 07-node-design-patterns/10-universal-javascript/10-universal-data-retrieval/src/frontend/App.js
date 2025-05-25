@@ -6,10 +6,11 @@ import { routes } from './routes.js'
 const html = htm.bind(react.createElement)
 
 export class App extends react.Component {
-  render () {
+  render() {
     return html`<${Switch}>
-      ${routes.map(routeConfig =>
-        html`<${Route} key=${routeConfig.path} ...${routeConfig}/>`
+      ${routes.map(
+        routeConfig =>
+          html`<${Route} key=${routeConfig.path} ...${routeConfig} />`
       )}
     </>`
   }

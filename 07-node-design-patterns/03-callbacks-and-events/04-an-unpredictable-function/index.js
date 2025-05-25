@@ -3,7 +3,7 @@ import { readFile } from 'fs'
 
 const cache = new Map()
 
-function inconsistentRead (filename, cb) {
+function inconsistentRead(filename, cb) {
   if (cache.has(filename)) {
     // invoked synchronously
     cb(cache.get(filename))
@@ -16,7 +16,7 @@ function inconsistentRead (filename, cb) {
   }
 }
 
-function createFileReader (filename) {
+function createFileReader(filename) {
   const listeners = []
   inconsistentRead(filename, value => {
     listeners.forEach(listener => listener(value))

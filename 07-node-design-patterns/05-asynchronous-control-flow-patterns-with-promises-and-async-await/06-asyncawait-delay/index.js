@@ -1,4 +1,4 @@
-function delay (milliseconds) {
+function delay(milliseconds) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(new Date())
@@ -6,7 +6,7 @@ function delay (milliseconds) {
   })
 }
 
-async function playingWithDelays () {
+async function playingWithDelays() {
   console.log('Delaying...', new Date())
 
   const dateAfterOneSecond = await delay(1000)
@@ -18,7 +18,6 @@ async function playingWithDelays () {
   return 'done'
 }
 
-playingWithDelays()
-  .then(result => {
-    console.log(`After 4 seconds: ${result}`)
-  })
+playingWithDelays().then(result => {
+  console.log(`After 4 seconds: ${result}`)
+})

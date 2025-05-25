@@ -1,6 +1,6 @@
 /* eslint standard/no-callback-literal: 0 */
 
-function addCps (a, b, callback) {
+function addCps(a, b, callback) {
   callback(a + b)
 }
 

@@ -1,5 +1,5 @@
 export class Image {
-  constructor (path) {
+  constructor(path) {
     this.path = path
   }
 }

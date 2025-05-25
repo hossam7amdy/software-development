@@ -2,7 +2,6 @@
 
 This examples shows how to use the adapter pattern to build an FS-like interface that writes to level db instead
 
-
 ## Dependencies
 
 Install all necessary dependencies with:
@@ -10,7 +9,6 @@ Install all necessary dependencies with:
 ```bash
 npm install
 ```
-
 
 ## Run
 

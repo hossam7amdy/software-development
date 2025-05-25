@@ -4,7 +4,7 @@ import superagent from 'superagent'
 import mkdirp from 'mkdirp'
 import { urlToFilename, getPageLinks } from './utils.js'
 
-function saveFile (filename, contents, cb) {
+function saveFile(filename, contents, cb) {
   mkdirp(path.dirname(filename), err => {
     if (err) {
       return cb(err)
@@ -13,7 +13,7 @@ function saveFile (filename, contents, cb) {
   })
 }
 
-function download (url, filename, cb) {
+function download(url, filename, cb) {
   console.log(`Downloading ${url}`)
   superagent.get(url).end((err, res) => {
     if (err) {
@@ -29,7 +29,7 @@ function download (url, filename, cb) {
   })
 }
 
-function spiderLinks (currentUrl, body, nesting, queue) {
+function spiderLinks(currentUrl, body, nesting, queue) {
   if (nesting === 0) {
     return
   }
@@ -42,7 +42,7 @@ function spiderLinks (currentUrl, body, nesting, queue) {
   links.forEach(link => spider(link, nesting - 1, queue))
 }
 
-function spiderTask (url, nesting, queue, cb) {
+function spiderTask(url, nesting, queue, cb) {
   const filename = urlToFilename(url)
   fs.readFile(filename, 'utf8', (err, fileContent) => {
     if (err) {
@@ -66,13 +66,13 @@ function spiderTask (url, nesting, queue, cb) {
 }
 
 const spidering = new Set()
-export function spider (url, nesting, queue) {
+export function spider(url, nesting, queue) {
   if (spidering.has(url)) {
     return
   }
 
   spidering.add(url)
-  queue.pushTask((done) => {
+  queue.pushTask(done => {
     spiderTask(url, nesting, queue, done)
   })
 }

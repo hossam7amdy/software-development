@@ -5,7 +5,4 @@ import { App } from './App.js'
 
 const html = htm.bind(react.createElement)
 
-ReactDOM.render(
-  html`<${App}/>`,
-  document.getElementsByTagName('body')[0]
-)
+ReactDOM.render(html`<${App} />`, document.getElementsByTagName('body')[0])

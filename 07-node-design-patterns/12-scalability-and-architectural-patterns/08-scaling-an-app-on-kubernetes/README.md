@@ -6,7 +6,6 @@ This examples demonstrates how to deploy and scale a simple Node.js webserver on
 
 Install [docker](https://docs.docker.com/get-docker/) and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 
-
 Once minikube is initialized (`minikube start`), on mac and linux, make sure to run `eval $(minikube docker-env)` to connect the docker daemon to the minikube virtual machine.
 
 ## Run
@@ -67,7 +66,6 @@ kubectl set image deployment/hello-web hello-web=hello-web:v2 --record
 ```
 
 Wait few seconds and make some new requests. You should now see v2.
-
 
 ### Cleanup
 

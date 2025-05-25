@@ -1,6 +1,6 @@
 import { AMQPReply } from './amqpReply.js'
 
-async function main () {
+async function main() {
   const reply = new AMQPReply('requests_queue')
   await reply.initialize()
 

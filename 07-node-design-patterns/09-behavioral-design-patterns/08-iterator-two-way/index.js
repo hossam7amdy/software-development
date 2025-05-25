@@ -1,4 +1,4 @@
-function * twoWayGenerator () {
+function* twoWayGenerator() {
   try {
     const what = yield null
     yield 'Hello ' + what

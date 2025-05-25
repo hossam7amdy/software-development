@@ -23,20 +23,20 @@ One of the most dangerous situations is to have an API that behaves synchronousl
 under certain conditions and asynchronously under others.
 
 ```javascript
-import { readFile } from "fs";
+import { readFile } from 'fs'
 
-const cache = new Map();
+const cache = new Map()
 
 function inconsistentRead(filename, cb) {
   if (cache.has(filename)) {
     // invoked synchronously
-    cb(cache.get(filename));
+    cb(cache.get(filename))
   } else {
     // asynchronous function
-    readFile(filename, "utf8", (err, data) => {
-      cache.set(filename, data);
-      cb(data);
-    });
+    readFile(filename, 'utf8', (err, data) => {
+      cache.set(filename, data)
+      cb(data)
+    })
   }
 }
 ```

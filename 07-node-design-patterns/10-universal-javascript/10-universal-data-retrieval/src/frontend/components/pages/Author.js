@@ -8,15 +8,17 @@ import { Header } from '../Header.js'
 const html = htm.bind(react.createElement)
 
 export class Author extends AsyncPage {
-  static async preloadAsyncData (props) {
-    const { body } = await superagent.get(`http://localhost:3001/api/author/${props.match.params.authorId}`)
+  static async preloadAsyncData(props) {
+    const { body } = await superagent.get(
+      `http://localhost:3001/api/author/${props.match.params.authorId}`
+    )
     return { author: body }
   }
 
-  render () {
+  render() {
     if (this.state.loading) {
       return html`<div>
-        <${Header}/>
+        <${Header} />
         <div>Loading ...</div>
       </div>`
     }
@@ -29,13 +31,13 @@ export class Author extends AsyncPage {
     }
 
     return html`<div>
-      <${Header}/>
+      <${Header} />
       <h2>${this.state.author.name}</h2>
       <p>${this.state.author.bio}</p>
       <h3>Books</h3>
       <ul>
-        ${this.state.author.books.map((book) =>
-          html`<li key=${book.id}>${book.title} (${book.year})</li>`
+        ${this.state.author.books.map(
+          book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
         )}
       </ul>
     </div>`

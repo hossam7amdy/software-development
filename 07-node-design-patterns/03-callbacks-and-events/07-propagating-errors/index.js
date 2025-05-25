@@ -1,6 +1,6 @@
 import { readFile } from 'fs'
 
-function readJSON (filename, callback) {
+function readJSON(filename, callback) {
   readFile(filename, 'utf8', (err, data) => {
     let parsed
     if (err) {

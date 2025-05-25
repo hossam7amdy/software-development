@@ -1,9 +1,9 @@
 export default class Logger {
-  constructor (name) {
+  constructor(name) {
     this.name = name
   }
 
-  log (message) {
+  log(message) {
     console.log(`[${this.name}] ${message}`)
   }
 }

@@ -1,6 +1,5 @@
-
 export class CancelError extends Error {
-  constructor () {
+  constructor() {
     super('Canceled')
     this.isCanceled = true
   }

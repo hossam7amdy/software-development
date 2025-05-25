@@ -20,9 +20,13 @@ const template = ({ content, serverData }) => `<!DOCTYPE html>
   </head>
   <body>
     <div id="root">${content}</div>
-    ${serverData ? `<script type="text/javascript">
+    ${
+      serverData
+        ? `<script type="text/javascript">
 window.__STATIC_CONTEXT__=${JSON.stringify(serverData)}
-    </script>` : ''}
+    </script>`
+        : ''
+    }
     <script type="text/javascript" src="/public/main.js"></script>
   </body>
 </html>`
@@ -72,9 +76,7 @@ server.get('*', async (req, reply) => {
   const serverData = hasStaticContext ? staticContext : null
   const responseHtml = template({ content, serverData })
 
-  const code = staticContext.statusCode
-    ? staticContext.statusCode
-    : 200
+  const code = staticContext.statusCode ? staticContext.statusCode : 200
   reply.code(code).type('text/html').send(responseHtml)
 })
 

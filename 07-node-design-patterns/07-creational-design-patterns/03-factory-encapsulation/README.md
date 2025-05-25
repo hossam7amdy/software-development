@@ -10,4 +10,3 @@ To run the example launch:
 ```bash
 node index.js
 ```
-

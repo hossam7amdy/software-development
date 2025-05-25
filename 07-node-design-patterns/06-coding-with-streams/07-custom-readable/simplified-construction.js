@@ -5,7 +5,7 @@ const chance = new Chance()
 let emittedBytes = 0
 
 const randomStream = new Readable({
-  read (size) {
+  read(size) {
     const chunk = chance.string({ length: size })
     this.push(chunk, 'utf8')
     emittedBytes += chunk.length
@@ -16,7 +16,7 @@ const randomStream = new Readable({
 })
 
 randomStream
-  .on('data', (chunk) => {
+  .on('data', chunk => {
     console.log(`Chunk received (${chunk.length} bytes): ${chunk.toString()}`)
   })
   .on('end', () => {

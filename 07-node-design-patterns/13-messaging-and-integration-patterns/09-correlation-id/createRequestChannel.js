@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 
-export function createRequestChannel (channel) {
+export function createRequestChannel(channel) {
   const correlationMap = new Map()
 
-  function sendRequest (data) {
+  function sendRequest(data) {
     console.log('Sending request', data)
     return new Promise((resolve, reject) => {
       const correlationId = nanoid()
@@ -13,7 +13,7 @@ export function createRequestChannel (channel) {
         reject(new Error('Request timeout'))
       }, 10000)
 
-      correlationMap.set(correlationId, (replyData) => {
+      correlationMap.set(correlationId, replyData => {
         correlationMap.delete(correlationId)
         clearTimeout(replyTimeout)
         resolve(replyData)

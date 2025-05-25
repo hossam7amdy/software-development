@@ -18,7 +18,6 @@ sudo apt-get install consul # on debian / ubuntu based systems
 brew install consul # on mac with brew installed
 ```
 
-
 ## Run
 
 Run consul with:
@@ -44,7 +43,6 @@ npm run start:loadBalancer # or `node_modules/.bin/forever start loadBalancer.js
 Now you can finally access the application at http://localhost:8080.
 
 Try http://localhost:8080/api or simply http://localhost:8080/ to access the different apps.
-
 
 To run a benchmark:
 

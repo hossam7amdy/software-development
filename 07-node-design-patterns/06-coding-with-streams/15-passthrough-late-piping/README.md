@@ -2,7 +2,6 @@
 
 This examples shows how to create and use a PassThrough stream for late writing into a third party API accepting content from a stream. This is implemented here through a web server that can receive files and store them locally.
 
-
 ## Dependencies
 
 Install all necessary dependencies with:
@@ -10,7 +9,6 @@ Install all necessary dependencies with:
 ```bash
 npm install
 ```
-
 
 ## Run
 

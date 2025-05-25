@@ -8,7 +8,7 @@ import { TaskQueuePC } from './TaskQueuePC.js'
 
 const mkdirpPromises = promisify(mkdirp)
 
-async function download (url, filename) {
+async function download(url, filename) {
   console.log(`Downloading ${url}`)
   const { text: content } = await superagent.get(url)
   await mkdirpPromises(dirname(filename))
@@ -17,7 +17,7 @@ async function download (url, filename) {
   return content
 }
 
-async function spiderLinks (currentUrl, content, nesting, queue) {
+async function spiderLinks(currentUrl, content, nesting, queue) {
   if (nesting === 0) {
     return
   }
@@ -30,7 +30,7 @@ async function spiderLinks (currentUrl, content, nesting, queue) {
 
 const spidering = new Set()
 
-async function spiderTask (url, nesting, queue) {
+async function spiderTask(url, nesting, queue) {
   if (spidering.has(url)) {
     return
   }
@@ -52,6 +52,6 @@ async function spiderTask (url, nesting, queue) {
   return spiderLinks(url, content, nesting, queue)
 }
 
-export async function spider (url, nesting, concurrency) {
+export async function spider(url, nesting, concurrency) {
   return spiderTask(url, nesting, new TaskQueuePC(concurrency))
 }

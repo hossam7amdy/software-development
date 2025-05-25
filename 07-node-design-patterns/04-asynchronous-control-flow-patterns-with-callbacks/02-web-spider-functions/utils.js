@@ -2,9 +2,10 @@ import path from 'path'
 import { URL } from 'url'
 import slug from 'slug'
 
-export function urlToFilename (url) {
+export function urlToFilename(url) {
   const parsedUrl = new URL(url)
-  const urlPath = parsedUrl.pathname.split('/')
+  const urlPath = parsedUrl.pathname
+    .split('/')
     .filter(function (component) {
       return component !== ''
     })

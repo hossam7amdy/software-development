@@ -26,12 +26,14 @@ const template = ({ content }) => `<!DOCTYPE html>
 
 const server = fastify({ logger: true }) // ②
 
-server.register(fastifyStatic, { // ③
+server.register(fastifyStatic, {
+  // ③
   root: resolve(__dirname, '..', 'public'),
   prefix: '/public/'
 })
 
-server.get('*', async (req, reply) => { // ④
+server.get('*', async (req, reply) => {
+  // ④
   const location = req.raw.originalUrl
   const staticContext = {}
   // ⑤

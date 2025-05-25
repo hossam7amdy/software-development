@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto'
 
-function promisify (callbackBasedApi) {
-  return function promisified (...args) {
+function promisify(callbackBasedApi) {
+  return function promisified(...args) {
     return new Promise((resolve, reject) => {
       const newArgs = [
         ...args,
@@ -19,7 +19,6 @@ function promisify (callbackBasedApi) {
 }
 
 const randomBytesP = promisify(randomBytes)
-randomBytesP(32)
-  .then(buffer => {
-    console.log(`Random bytes: ${buffer.toString()}`)
-  })
+randomBytesP(32).then(buffer => {
+  console.log(`Random bytes: ${buffer.toString()}`)
+})

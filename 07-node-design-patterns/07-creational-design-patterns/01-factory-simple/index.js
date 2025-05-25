@@ -1,7 +1,7 @@
 import { Image } from './image.js'
 
 // Factory function
-function createImage (name) {
+function createImage(name) {
   return new Image(name)
 }
 

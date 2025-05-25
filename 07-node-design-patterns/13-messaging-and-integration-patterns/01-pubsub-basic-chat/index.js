@@ -16,7 +16,7 @@ wss.on('connection', client => {
   })
 })
 
-function broadcast (msg) {
+function broadcast(msg) {
   for (const client of wss.clients) {
     if (client.readyState === ws.OPEN) {
       client.send(msg)

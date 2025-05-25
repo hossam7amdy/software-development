@@ -1,10 +1,10 @@
 class Logger {
-  constructor (name) {
+  constructor(name) {
     this.count = 0
     this.name = name
   }
 
-  log (message) {
+  log(message) {
     this.count++
     console.log('[' + this.name + '] ' + message)
   }

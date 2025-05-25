@@ -1,6 +1,6 @@
 /* eslint standard/no-callback-literal: 0 */
 
-function additionAsync (a, b, callback) {
+function additionAsync(a, b, callback) {
   setTimeout(() => callback(a + b), 100)
 }
 

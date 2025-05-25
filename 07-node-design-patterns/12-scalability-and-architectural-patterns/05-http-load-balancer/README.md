@@ -2,7 +2,6 @@
 
 This example demostrates how to run a set of Node.js servers behind a load balancer
 
-
 ## Dependencies
 
 Install all the necessary dependencies with:
@@ -19,7 +18,6 @@ sudo apt-get install nginx # on debian / ubuntu based systems
 brew install nginx # on mac with brew installed
 ```
 
-
 ## Run
 
 To run 4 instances of the example server using `forever`:
@@ -27,7 +25,6 @@ To run 4 instances of the example server using `forever`:
 ```bash
 npm start # or `node_modules/.bin/forever start app.js 8081 && node_modules/.bin/forever start app.js 8082 && node_modules/.bin/forever start app.js 8083 && node_modules/.bin/forever start app.js 8084`
 ```
-
 
 Now run nginx with:
 

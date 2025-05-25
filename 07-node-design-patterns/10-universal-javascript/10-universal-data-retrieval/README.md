@@ -20,4 +20,3 @@ npm start
 ```
 
 Then you point your browser to [http://localhost:3000](localhost:3000).
-

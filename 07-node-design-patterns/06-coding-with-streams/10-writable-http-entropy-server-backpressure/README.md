@@ -2,7 +2,6 @@
 
 This examples shows how to write into a writable stream, specifically an HTTP response sent by a server also taking back-pressure into account.
 
-
 ## Dependencies
 
 Install all necessary dependencies with:
@@ -10,7 +9,6 @@ Install all necessary dependencies with:
 ```bash
 npm install
 ```
-
 
 ## Run
 

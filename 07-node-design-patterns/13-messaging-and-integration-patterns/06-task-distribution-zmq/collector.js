@@ -1,6 +1,6 @@
 import zmq from 'zeromq'
 
-async function main () {
+async function main() {
   const sink = new zmq.Pull()
   await sink.bind('tcp://*:5017')
 

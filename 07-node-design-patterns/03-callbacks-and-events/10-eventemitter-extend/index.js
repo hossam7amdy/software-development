@@ -2,18 +2,18 @@ import { EventEmitter } from 'events'
 import { readFile } from 'fs'
 
 class FindRegex extends EventEmitter {
-  constructor (regex) {
+  constructor(regex) {
     super()
     this.regex = regex
     this.files = []
   }
 
-  addFile (file) {
+  addFile(file) {
     this.files.push(file)
     return this
   }
 
-  find () {
+  find() {
     for (const file of this.files) {
       readFile(file, 'utf8', (err, content) => {
         if (err) {
@@ -37,5 +37,7 @@ findRegexInstance
   .addFile('fileA.txt')
   .addFile('fileB.json')
   .find()
-  .on('found', (file, match) => console.log(`Matched "${match}" in file ${file}`))
+  .on('found', (file, match) =>
+    console.log(`Matched "${match}" in file ${file}`)
+  )
   .on('error', err => console.error(`Error emitted ${err.message}`))

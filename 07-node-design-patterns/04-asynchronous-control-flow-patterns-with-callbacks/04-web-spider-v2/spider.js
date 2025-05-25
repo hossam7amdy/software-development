@@ -4,7 +4,7 @@ import superagent from 'superagent'
 import mkdirp from 'mkdirp'
 import { urlToFilename, getPageLinks } from './utils.js'
 
-function saveFile (filename, contents, cb) {
+function saveFile(filename, contents, cb) {
   mkdirp(path.dirname(filename), err => {
     if (err) {
       return cb(err)
@@ -13,7 +13,7 @@ function saveFile (filename, contents, cb) {
   })
 }
 
-function download (url, filename, cb) {
+function download(url, filename, cb) {
   console.log(`Downloading ${url}`)
   superagent.get(url).end((err, res) => {
     if (err) {
@@ -29,7 +29,7 @@ function download (url, filename, cb) {
   })
 }
 
-function spiderLinks (currentUrl, body, nesting, cb) {
+function spiderLinks(currentUrl, body, nesting, cb) {
   if (nesting === 0) {
     // Remember Zalgo?
     return process.nextTick(cb)
@@ -40,12 +40,14 @@ function spiderLinks (currentUrl, body, nesting, cb) {
     return process.nextTick(cb)
   }
 
-  function iterate (index) { // [2]
+  function iterate(index) {
+    // [2]
     if (index === links.length) {
       return cb()
     }
 
-    spider(links[index], nesting - 1, function (err) { // [3]
+    spider(links[index], nesting - 1, function (err) {
+      // [3]
       if (err) {
         return cb(err)
       }
@@ -56,7 +58,7 @@ function spiderLinks (currentUrl, body, nesting, cb) {
   iterate(0) // [4]
 }
 
-export function spider (url, nesting, cb) {
+export function spider(url, nesting, cb) {
   const filename = urlToFilename(url)
   fs.readFile(filename, 'utf8', (err, fileContent) => {
     if (err) {

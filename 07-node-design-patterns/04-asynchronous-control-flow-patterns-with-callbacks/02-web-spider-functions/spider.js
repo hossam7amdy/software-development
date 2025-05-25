@@ -4,7 +4,7 @@ import superagent from 'superagent'
 import mkdirp from 'mkdirp'
 import { urlToFilename } from './utils.js'
 
-function saveFile (filename, contents, cb) {
+function saveFile(filename, contents, cb) {
   mkdirp(path.dirname(filename), err => {
     if (err) {
       return cb(err)
@@ -13,7 +13,7 @@ function saveFile (filename, contents, cb) {
   })
 }
 
-function download (url, filename, cb) {
+function download(url, filename, cb) {
   console.log(`Downloading ${url}`)
   superagent.get(url).end((err, res) => {
     if (err) {
@@ -29,10 +29,11 @@ function download (url, filename, cb) {
   })
 }
 
-export function spider (url, cb) {
+export function spider(url, cb) {
   const filename = urlToFilename(url)
   fs.access(filename, err => {
-    if (!err || err.code !== 'ENOENT') { // [1]
+    if (!err || err.code !== 'ENOENT') {
+      // [1]
       return cb(null, filename, false)
     }
     download(url, filename, err => {

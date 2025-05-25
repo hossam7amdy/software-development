@@ -1,17 +1,17 @@
 export class TaskQueue {
-  constructor (concurrency) {
+  constructor(concurrency) {
     this.concurrency = concurrency
     this.running = 0
     this.queue = []
   }
 
-  pushTask (task) {
+  pushTask(task) {
     this.queue.push(task)
     process.nextTick(this.next.bind(this))
     return this
   }
 
-  next () {
+  next() {
     while (this.running < this.concurrency && this.queue.length) {
       const task = this.queue.shift()
       task(() => {

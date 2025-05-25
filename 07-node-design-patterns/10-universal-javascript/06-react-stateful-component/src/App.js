@@ -5,7 +5,7 @@ import { RecentGithubProjects } from './RecentGithubProjects.js'
 const html = htm.bind(react.createElement)
 
 export class App extends react.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       query: 'javascript',
@@ -14,13 +14,13 @@ export class App extends react.Component {
     this.setQuery = this.setQuery.bind(this)
   }
 
-  setQuery (e) {
+  setQuery(e) {
     e.preventDefault()
     const label = e.currentTarget.text
     this.setState({ label, query: label.toLowerCase() })
   }
 
-  render () {
+  render() {
     return html`<div>
       <nav>
         <a href="#" onClick=${this.setQuery}>JavaScript</a>
@@ -30,7 +30,7 @@ export class App extends react.Component {
         <a href="#" onClick=${this.setQuery}>React</a>
       </nav>
       <h1>Recently updated ${this.state.label} projects</h1>
-      <${RecentGithubProjects} query=${this.state.query}/>
+      <${RecentGithubProjects} query=${this.state.query} />
     </div>`
   }
 }

@@ -7,13 +7,13 @@ const servers = [
 ]
 let i = 0
 
-export function balancedRequest (options) {
-  return new Promise((resolve) => {
+export function balancedRequest(options) {
+  return new Promise(resolve => {
     i = (i + 1) % servers.length
     options.hostname = servers[i].host
     options.port = servers[i].port
 
-    request(options, (response) => {
+    request(options, response => {
       resolve(getStream(response))
     }).end()
   })

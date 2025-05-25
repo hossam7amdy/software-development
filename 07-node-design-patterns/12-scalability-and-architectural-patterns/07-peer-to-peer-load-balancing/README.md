@@ -2,7 +2,6 @@
 
 This example demostrates how to implement peer-to-peer load balancing
 
-
 ## Dependencies
 
 Install all the necessary dependencies with:
@@ -10,7 +9,6 @@ Install all the necessary dependencies with:
 ```bash
 npm install
 ```
-
 
 ## Run
 

@@ -1,17 +1,17 @@
 class Logger {
-  constructor (name) {
+  constructor(name) {
     this.name = name
   }
 
-  log (message) {
+  log(message) {
     console.log(`[${this.name}] ${message}`)
   }
 
-  info (message) {
+  info(message) {
     this.log(`info: ${message}`)
   }
 
-  verbose (message) {
+  verbose(message) {
     this.log(`verbose: ${message}`)
   }
 }

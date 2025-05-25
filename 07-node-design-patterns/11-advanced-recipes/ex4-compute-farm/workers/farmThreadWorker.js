@@ -34,8 +34,8 @@ parentPort.on('message', async msg => {
     parentPort.postMessage({
       event: 'error',
       data: {
-        message: error.message,
-        stack: error.stack
+        message: e.message,
+        stack: e.stack
       }
     })
   }

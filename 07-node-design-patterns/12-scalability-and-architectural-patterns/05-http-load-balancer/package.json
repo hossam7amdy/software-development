@@ -5,16 +5,16 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "forever start app.js 8081 && forever start app.js 8082 && forever start app.js 8083 && forever start app.js 8084",
+    "start": "pm2 start ecosystem.config.cjs",
     "start:nginx": "nginx -c ${PWD}/nginx.conf",
-    "stop": "forever stopall",
-    "benchmark": "autocannon -c 200 -d 10 http://localhost:8080"
+    "stop": "pm2 stop ecosystem.config.cjs",
+    "benchmark": "autocannon -c 200 -d 60 http://localhost:8080"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "forever": "^3.0.0"
+    "pm2": "^6.0.6"
   },
   "devDependencies": {
     "autocannon": "^5.0.1"

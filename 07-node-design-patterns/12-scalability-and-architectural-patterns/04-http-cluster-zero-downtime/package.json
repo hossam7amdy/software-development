@@ -5,14 +5,15 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
+    "start": "node --import=tsx app.ts",
     "benchmark": "autocannon -c 200 -d 10 http://localhost:8080"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autocannon": "^4.6.0"
+    "autocannon": "^4.6.0",
+    "tsx": "^4.19.4"
   },
   "engines": {
     "node": ">=14"

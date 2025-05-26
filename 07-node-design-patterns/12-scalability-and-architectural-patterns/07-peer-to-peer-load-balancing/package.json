@@ -5,13 +5,16 @@
   "main": "client.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start ./ecosystem.config.cjs ",
+    "stop": " pm2 stop ./ecosystem.config.cjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "get-stream": "^5.1.0"
+    "get-stream": "^5.1.0",
+    "pm2": "^6.0.6"
   },
   "engines": {
     "node": ">=14"

@@ -1,5 +1,6 @@
-FROM node:14-alpine
+FROM node:alpine
 EXPOSE 8080
-COPY app.js package.json /app/
+COPY app.ts package.json /app/
+RUN npm install -g tsx
 WORKDIR /app
-CMD ["npm", "start"]
+CMD ["tsx", "app.ts"]

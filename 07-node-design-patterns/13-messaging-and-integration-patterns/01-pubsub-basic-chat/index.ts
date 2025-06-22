@@ -1,13 +1,13 @@
+import ws, { type RawData, WebSocketServer } from 'ws'
+import serveHandler from 'serve-handler'
 import { createServer } from 'http'
-import staticHandler from 'serve-handler'
-import ws from 'ws'
 
-// serve static files
 const server = createServer((req, res) => {
-  return staticHandler(req, res, { public: 'www' })
+  return serveHandler(req, res, { public: 'www' })
 })
 
-const wss = new ws.Server({ server })
+const wss = new WebSocketServer({ server })
+
 wss.on('connection', client => {
   console.log('Client connected')
   client.on('message', msg => {
@@ -16,7 +16,7 @@ wss.on('connection', client => {
   })
 })
 
-function broadcast(msg) {
+const broadcast = (msg: RawData) => {
   for (const client of wss.clients) {
     if (client.readyState === ws.OPEN) {
       client.send(msg)
@@ -24,4 +24,6 @@ function broadcast(msg) {
   }
 }
 
-server.listen(process.argv[2] || 8080)
+server.listen(process.argv[2] || 8080, () => {
+  console.log('Server is ready.')
+})

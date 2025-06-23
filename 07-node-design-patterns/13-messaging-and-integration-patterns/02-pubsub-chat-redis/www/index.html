@@ -1,25 +1,159 @@
 <!doctype html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redis Chatting Room</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chat-container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 16px 16px 16px;
+        margin: 16px;
+      }
+
+      #messages {
+        flex: 1;
+        min-height: 200px;
+        max-height: 320px;
+        overflow-y: auto;
+        margin-bottom: 16px;
+        padding-right: 4px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: #fafbfc;
+      }
+
+      .message {
+        margin: 8px 0;
+        padding: 8px 12px;
+        background: #e3f0ff;
+        border-radius: 8px;
+        word-break: break-word;
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timestamp {
+        font-size: 0.75rem;
+        color: #888;
+        margin-top: 2px;
+        align-self: flex-end;
+      }
+
+      #msgForm {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      #msgBox {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #b0b0b0;
+        font-size: 1rem;
+      }
+
+      #msgForm input[type='submit'] {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      #msgForm input[type='submit']:hover {
+        background: #125ea7;
+      }
+
+      @media (max-width: 500px) {
+        .chat-container {
+          max-width: 98vw;
+          padding: 12px 4px 8px 4px;
+        }
+
+        #messages {
+          min-height: 120px;
+          max-height: 200px;
+        }
+      }
+    </style>
+  </head>
+
   <body>
-    Messages:
-    <div id="messages"></div>
-    <form id="msgForm">
-      <input type="text" placeholder="Send a message" id="msgBox" />
-      <input type="submit" value="Send" />
-    </form>
+    <div class="chat-container">
+      <h2 style="margin-top: 0; text-align: center; color: #1976d2">
+        Chat Room
+      </h2>
+      <div id="messages" aria-live="polite" tabindex="0"></div>
+      <form id="msgForm" autocomplete="off">
+        <input
+          type="text"
+          placeholder="Type a message..."
+          id="msgBox"
+          aria-label="Message"
+          required
+          autofocus
+        />
+        <input type="submit" value="Send" />
+      </form>
+    </div>
     <script>
       const ws = new WebSocket(`ws://${window.document.location.host}`)
-      ws.onmessage = function (message) {
+      const messagesDiv = document.getElementById('messages')
+
+      function addMessage(text) {
         const msgDiv = document.createElement('div')
-        msgDiv.innerHTML = message.data
-        document.getElementById('messages').appendChild(msgDiv)
+        msgDiv.className = 'message'
+        msgDiv.innerHTML = `<span>${text}</span><span class="timestamp">${new Date().toLocaleTimeString(
+          [],
+          {
+            hour: '2-digit',
+            minute: '2-digit'
+          }
+        )}</span>`
+        messagesDiv.appendChild(msgDiv)
+        messagesDiv.scrollTop = messagesDiv.scrollHeight
       }
+
+      ws.onmessage = async function (message) {
+        let msgText = message.data
+        if (msgText instanceof Blob) msgText = await msgText.text()
+        addMessage(msgText)
+      }
+
       const form = document.getElementById('msgForm')
       form.addEventListener('submit', event => {
         event.preventDefault()
-        const message = document.getElementById('msgBox').value
+        const input = document.getElementById('msgBox')
+        const message = input.value.trim()
+        if (!message) return
         ws.send(message)
-        document.getElementById('msgBox').value = ''
+        input.value = ''
+        input.focus()
       })
     </script>
   </body>

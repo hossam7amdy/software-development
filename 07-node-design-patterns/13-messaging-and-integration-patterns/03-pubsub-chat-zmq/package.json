@@ -4,16 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch index.ts --pub 5000 --sub 5001 --sub 5002 --sub 5003 --http 8080 & tsx watch index.ts --pub 5001 --sub 5000 --sub 5002 --sub 5003 --http 8081 & tsx watch index.ts --pub 5002 --sub 5000 --sub 5001 --sub 5003 --http 8082 & tsx watch index.ts --pub 5003 --sub 5000 --sub 5001 --sub 5002 --http 8083",
+    "test": "echo \"Error: no test specified\" & exit 1"
   },
   "dependencies": {
-    "ws": "^7.2.3",
-    "serve-handler": "^6.1.2",
-    "yargs": "^15.3.1",
-    "zeromq": "^6.0.0-beta.6"
+    "serve-handler": "^6.1.6",
+    "ws": "^8.18.2",
+    "yargs-parser": "^22.0.0",
+    "zeromq": "^6.4.2"
   },
   "engines": {
     "node": ">=14"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/serve-handler": "^6.1.4",
+    "@types/ws": "^8.18.1",
+    "@types/yargs-parser": "^21.0.3"
+  }
 }

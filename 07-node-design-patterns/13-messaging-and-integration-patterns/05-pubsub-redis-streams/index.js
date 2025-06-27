@@ -1,6 +1,6 @@
 import { createServer } from 'http'
 import staticHandler from 'serve-handler'
-import ws from 'ws'
+import ws, { WebSocketServer } from 'ws'
 import Redis from 'ioredis'
 
 const redisClient = new Redis()
@@ -11,7 +11,7 @@ const server = createServer((req, res) => {
   return staticHandler(req, res, { public: 'www' })
 })
 
-const wss = new ws.Server({ server })
+const wss = new WebSocketServer({ server })
 wss.on('connection', async client => {
   console.log('Client connected')
 

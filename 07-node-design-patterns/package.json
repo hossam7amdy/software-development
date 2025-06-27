@@ -34,8 +34,7 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "dependencies": {},

@@ -27,7 +27,10 @@ These engines rely on appending data to files and merging them in the background
   - They enable efficient lookups by following pointers down a tree structure with a high **branching factor**.
   - To modify data, B-trees overwrite pages on disk. To ensure reliability in the event of a crash, they utilize a **write-ahead log (WAL)** (or redo log), which records every modification before it is applied to the tree.
 
-**Comparison:** **LSM-trees** generally offer faster write throughput (due to sequential writes) but may suffer from slower reads and **write amplification** (rewriting data during compaction). **B-trees** typically offer faster, more predictable read performance.
+**Comparison:**
+
+- **LSM-trees** generally offer faster write throughput (due to sequential writes) but may suffer from slower reads and **write amplification** (rewriting data during compaction).
+- **B-trees** typically offer faster, more predictable read performance.
 
 ## 2. Advanced Indexing Strategies
 
@@ -37,6 +40,7 @@ Beyond basic key-value lookups, the chapter introduces variations on indexing:
 - **Covering Index:** Stores specific columns within the index so that some queries can be answered by the index alone.
 - **Multi-column Indexes:** Used when queries target multiple columns. A **concatenated index** combines fields into one key (e.g., _lastname, firstname_).
 - **Multi-dimensional Indexes:** Used for geospatial data (e.g., R-trees) to search for points within a range.
+- **Full-Text Indexes:** Specialized indexes for searching text data, often using an inverted index structure.
 
 ## 3. Transaction Processing (OLTP) vs. Analytics (OLAP)
 

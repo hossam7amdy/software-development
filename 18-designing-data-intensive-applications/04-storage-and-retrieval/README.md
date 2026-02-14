@@ -1,4 +1,4 @@
-# Chapter 3: Storage and Retrieval
+# Chapter 4. Storage and Retrieval
 
 Explores the fundamental principles of how databases store data on disk and find it again. The chapter highlights that there is no single "best" storage engine; rather, different engines are optimized for different workloads—specifically distinguishing between transactional (OLTP) and analytical (OLAP) use cases.
 

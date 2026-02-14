@@ -1,4 +1,4 @@
-# Chapter 1. Reliable, Scalable, Maintainable Applications
+# Chapter 2. Defining Nonfunctional Requirements
 
 - _data-intensive_ vs _compute-intensive_
 - Types of _data systems_: database, cache, search index, stream processing, batch processing

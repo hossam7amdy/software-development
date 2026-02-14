@@ -1,4 +1,4 @@
-# Chapter 2: Data Models and Query Languages
+# Chapter 3. Data Models and Query Languages
 
 Data models define how we think about the problem we are solving and how software is written. Applications are typically built by layering data models, where each layer hides the complexity of the layer below it.
 

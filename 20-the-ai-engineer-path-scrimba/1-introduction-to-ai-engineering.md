@@ -50,3 +50,9 @@ Key aspects of system-prompts include:
   - Extreme values are almost never used
   - Don't aggressively tune _temperature_ and _top_p_ as the same time
   - If you don't have a strong reason, adjust _temperature_ only
+
+### Solo Project - PollyGlot
+
+PollyGlot is a multilingual translation tool that uses OpenAI's language models to provide accurate translations between multiple languages. The system allows users to input text in one language and receive translations in their desired target language, leveraging the capabilities of the language model to understand and generate text in various languages.
+
+- [Figma design](https://www.figma.com/design/5zQQiaSDdUu8AqVGlg9PZ3/OpenAi-API---PollyGlot?node-id=0-1&p=f)

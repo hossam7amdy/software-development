@@ -1,112 +1,48 @@
-# Chapter 2. Defining Nonfunctional Requirements
+## Chapter 2. Defining Nonfunctional Requirements
 
-- _data-intensive_ vs _compute-intensive_
-- Types of _data systems_: database, cache, search index, stream processing, batch processing
+**Functional requirements** define what an application is supposed to do, while **nonfunctional requirements** describe the general qualities the system must possess, such as _performance_, _reliability_, _scalability_, and _maintainability_. Chapter 2 explores these core nonfunctional requirements, using a social network timeline case study to demonstrate how architectural decisions (like **fan-out** and **materialization**) impact system design at scale.
 
-## Thinking about data systems
+### 1. Performance
 
-<img src="assets/data-system.png" alt="Image of one possible architecture for a data system that combines several components" width="720">
- 
-Special-purpose data system from smaller, general-purpose components.
+Performance is typically described using two main metrics:
 
-- How do you ensure that the data remains correct and complete, even when things go wrong internally?
-- How do you provide consistently good performance to clients, even when parts of your system are degraded?
-- How do you scale to handle an increase in load?
-- What does a good API for the service look like?
+- **Throughput:** The number of requests processed per second, or the data volume handled per second.
+- **Response time:** The time elapsed from a client making a request to receiving the answer.
 
-## Reliability
+**Key Terms & Comparisons:**
 
-Reliable: it can continue to work even when things go wrong.
+- **Response Time vs. Latency:** While often used interchangeably,
+  - **Response time** is what the client actually experiences (including network and queueing delays)
+  - **Latency** strictly refers to the time a request spends waiting or being latent (not actively being processed).
+- **Averages vs. Percentiles:** The average (mean) response time is poor for understanding typical user experiences; instead **percentiles** (like the median/p50, p95, p99, and p999) are preferred. High percentiles, known as **tail latencies**, are critical because they affect the user experience of the most active users, and a single slow backend call can delay an entire end-user request (an effect called **tail latency amplification**).
+- **Queueing and Overload:** As throughput reaches hardware limits, queueing delays spike. This can cause clients to resend requests, triggering a **retry storm** and leading to a **metastable failure** where the system remains overloaded. Techniques like **exponential backoff**, **circuit breakers**, and **load shedding** prevent this.
 
-_Fault_ vs _Failure_
+### 2. Reliability and Fault Tolerance
 
-- Fault: One component stops working as expected
-- Failure: The software stops providing it service to the user
+Reliability means the system continues to work correctly even when things go wrong.
 
-### Hardware Fault
+**Key Terms & Comparisons:**
 
-- **Problem**: Faulty RAM, Hard Derive crashes, or Power outage in a datacenter
-- **Solution**:
-  1. Redundant hardware components (_hardware redundancy_)
-  2. Software fault-tolerance techniques (_rolling upgrade_)
+- **Fault vs. Failure:** A **fault** occurs when a specific component (like a hard drive or a single machine) stops working. A **failure** occurs when the system _as a whole_ stops providing the required service to the user. Reliable systems are **fault-tolerant**—they prevent component faults from escalating into system-wide failures.
+- **Types of Faults:**
+  - **Hardware Faults:** Hard drive crashes, RAM corruption, or datacenter power outages. They are often mitigated by adding **redundancy** (e.g., RAID arrays, backup power, or multi-node clusters).
+  - **Software Faults:** Bugs, runaway processes, or cascading failures. These are harder to handle because they are strongly correlated across nodes and can cause simultaneous crashes.
+  - **Human Errors:** Mistakes made by operators (e.g., misconfigurations). Instead of blaming individuals, organizations are shifting toward **blameless postmortems** to learn from incidents and improve system resilience.
 
-### Software Errors
+### 3. Scalability
 
-- **Problem**: Systematic error within the system (Bug). It is hard to anticipate and could cause cascading failure
-- **Solution**: Testing, process isolation, allowing processes to crash and restart,  
-  measuring, monitoring, and analyzing system behavior in production
+Scalability is a system's ability to cope with increased load (e.g., concurrent users, data volume) while maintaining performance.
 
-### Human Errors
+**Key Comparisons in Scalability Architectures:**
 
-- **Problem**: Humans are unreliable
-- **Solution**:
-  - Design a system that is minimize errors through abstractions, clean APIs, etc.
-  - Sandbox environment with real data for testing
-  - Test all levels, Unit, Integration, E2E
-  - Allow easy recovery (rollback)
-  - Monitoring (telemetry) for performance metrics and errors
+- **Shared-Memory (Scaling Up/Vertical Scaling):** Uses a single, powerful machine with multiple CPUs and threads that share the same RAM. While simple, cost grows faster than linearly and hardware bottlenecks limit ultimate scale.
+- **Shared-Disk:** Multiple machines with independent CPUs and RAM that store data on a shared network-attached storage array (NAS or SAN). It is common in data warehousing but limited by locking overhead and network contention.
+- **Shared-Nothing (Scaling Out/Horizontal Scaling):** A distributed system of multiple independent nodes, each with its own CPU, RAM, and disk, coordinating via a standard network. This approach dominates cloud deployments because it scales linearly and offers better fault tolerance, though it introduces the complexities of data sharding and distributed systems.
 
-## Scalability
+### 4. Maintainability
 
-### Describing Load
+Because the majority of software costs lie in ongoing maintenance rather than initial development, systems should be designed to minimize pain for the engineers running them. This relies on three principles:
 
-- **Load Parameters**: help determine how much the current system is scalable
-  - requests per second in web applications
-  - ratio for read to write in a database
-  - simultaneously active users on a chat room
-  - the hit rate on cache
-
-### Describing Performance
-
-**Throughput**: The number of records or requests a system can process per second. Think of it as the volume of water flowing through a pipe. 🚰
-
-> In a batch processing system such as Hadoop, the number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size.
-
-**Response Time**: The total time between a client sending a request and receiving the full response. This includes the time spent processing the request and network delays.
-
-**Latency**: Technically, this is the duration a request is waiting to be handled (lying dormant). However, it is often used interchangeably with response time to describe how "slow" a system feels.
-
-**Percentile**: A statistical method to measure performance by ranking requests from fastest to slowest. For example, the 50th percentile (P50) is the median—half the requests are faster, half are slower.
-
-**Tail Latencies**: The high percentiles (e.g., P95, P99, P99.9). These represent the slowest requests experienced by users, often the most important metric because these users suffer the most.
-
-**Head-of-line Blocking**: When a slow request at the front of the queue forces faster requests behind it to wait, delaying everyone else. 🚦
-
-**Percentiles in Practice** when several backend calls are needed to serve a request, it takes just a sin‐gle slow backend request to slow down the entire end-user request.
-
-### Approaches for Coping with Load
-
-1. Scaling up (vertical) or scaling out (horizontal)
-2. Elasticity: automatically/manually adding computing resources when load increase
-   - Easy for stateless systems
-   - Hard for stateful systems
-
-## Maintainability
-
-**Maintainability** is the design goal of ensuring that many different people—including engineering and operations teams—can work on a system productively over time, even as requirements and technologies change.
-
-This section breaks maintainability down into three core design principles: **Operability**, **Simplicity**, and **Evolvability**.
-
-### 1. Operability: Making Life Easy for Operations
-
-A good data system facilitates routine tasks, allowing the operations team to focus on high-value activities rather than fighting fires. Systems supports operability by providing:
-
-- **Visibility:** Good monitoring to inspect runtime behavior and internals.
-- **Automation:** Good support for integration with standard tools.
-- **Independence:** Avoiding dependency on single machines so they can be taken down for maintenance without system-wide interruption.
-- **Predictability:** Exhibiting predictable behavior to minimize operational surprises.
-- **Documentation:** Providing a clear operational model.
-
-### 2. Simplicity: Managing Complexity
-
-When systems become a "big ball of mud" maintenance becomes difficult, budgets are overrun, and the risk of introducing bugs increases. To achieve simplicity, engineers must remove **accidental complexity**—complexity that is not inherent to the problem being solved but arises from the implementation itself.
-
-- **Abstraction:** One of the best tools for removing accidental complexity is abstraction. A good abstraction hides implementation details behind a clean façade, allowing reuse and higher-quality software.
-
-### 3. Evolvability: Making Change Easy
-
-Evolvability (also known as extensibility, modifiability, or plasticity) is the ease with which engineers can adapt the system to changing requirements.
-
-System requirements inevitably change due to new facts, business priorities, legal regulations, or growth. Evolvability is closely linked to _simplicity_: simple, easy-to-understand systems are easier to modify than complex ones.
-
-- **Agility:** While Agile patterns provide a framework for adapting to change in source code, this book focuses on applying these principles to larger data systems to increase agility on an architectural level.
+- **Operability:** Making routine tasks easy for operations teams through automation, good default behaviors, self-healing, and strong observability.
+- **Simplicity:** Managing complexity so new engineers can easily understand the system. A key tool here is **abstraction**, which hides complex implementation details (like machine code or complex data structures) behind a clean, reusable interface.
+- **Evolvability:** Making it easy to change the system to meet future, unanticipated requirements. Simple, loosely coupled systems reduce the risk of changes, and minimizing **irreversibility** (e.g., easily reverting a database migration) greatly improves flexibility.

@@ -1,74 +1,50 @@
-# Chapter 1. Trade-offs in Data Systems Architecture
+## Chapter 1. Trade-offs in Data Systems Architecture
 
-## Operational vs Analytical Systems
+Explores the foundational concepts and trade-offs engineers face when building data-intensive applications, where storing, processing, and managing data are the primary challenges. The chapter breaks down these trade-offs into four main categories.
 
-- **Operational systems (OLTP)** consist of the backend services and data infrastructure where data is created, for example by serving external users. Here, the application code both reads and modifies the data in its databases, based on the actions performed by the users.
-- **Analytical systems (OLAP)** serve the needs of business analysts and data scientists. They contain a read-only copy of the data from the operational systems, and they are optimized for the types of data processing that are needed for analytics.
+### 1. Operational Versus Analytical Systems
 
-> Outputs of analytics systems are made available to operational systems. For example, a machine-learning model generate recommendations for end-users, such as “people who bought X also bought Y”. Machine learning models can be deployed to operational systems using specialized tools such as TFX, Kubeflow, or MLflow.
+The chapter contrasts how different teams within an organization interact with data, leading to a split between two primary types of systems:
 
-### Characterizing Transaction Processing and Analytics
+- **Operational Systems (OLTP - Online Transaction Processing)**: These systems typically handle user-facing backend services. They are optimized for point queries (fetching a small number of records by a key) and low-latency reads and writes. They represent the current state of data.
+- **Analytical Systems (OLAP - Online Analytical Processing)**: Used by business analysts and data scientists, these systems contain a read-only copy of operational data. They are optimized for queries that scan and aggregate over large numbers of records to extract business intelligence (BI) or train machine learning models.
 
-| Property            | Operational systems (OLTP)                      | Analytical systems (OLAP)                 |
-| ------------------- | ----------------------------------------------- | ----------------------------------------- |
-| Main read pattern   | Point queries (fetch individual records by key) | Aggregate over large number of records    |
-| Main write pattern  | Create, update, and delete individual records   | Bulk import (ETL) or event stream         |
-| Human user example  | End user of web/mobile application              | Internal analyst, for decision support    |
-| Machine use example | Checking if an action is authorized             | Detecting fraud/abuse patterns            |
-| Type of queries     | Fixed set of queries, predefined by application | Analyst can make arbitrary queries        |
-| Data represents     | Latest state of data (current point in time)    | History of events that happened over time |
-| Dataset size        | Gigabytes to terabytes                          | Terabytes to petabytes                    |
+**Key Terms and Comparisons:**
 
-### Data Warehousing
+- **Data Warehouse vs. Data Lake**:
+  - **Data warehouse** is a separate relational database specifically optimized for analytics, which prevents analytical queries from degrading OLTP performance. Data is moved here via **ETL** (Extract-Transform-Load) pipelines.
+  - **Data lake**, conversely, is a centralized repository that stores data as raw files without imposing schemas (like Avro or Parquet), offering more flexibility for data scientists using tools like Python or Spark.
+- **Systems of Record vs. Derived Data**:
+  - **System of record** (or source of truth) holds the authoritative, canonical version of newly ingested data.
+  - **Derived data systems** (such as caches, search indexes, or materialized views) contain redundant data transformed from the system of record to optimize read performance; if lost, derived data can be recreated.
 
-Analytical challenges with OLTP systems
+### 2. Cloud Versus Self-Hosting
 
-- Data is in multiple operational places (_data silos_)
-- Schema for OLTPs is not flexible for analytics
-- Analytical queries are expensive
+Deciding where to deploy software involves a spectrum ranging from self-hosted (on-premises or IaaS) to fully managed cloud services or SaaS.
 
-#### Data Warehousing (Business Analysts)
+- **Self-Hosting**: Better suited for organizations with predictable workloads, specialized hardware needs, or strict data control requirements. It provides deep visibility into performance metrics and system logs.
+- **Cloud Services**: Ideal for highly variable workloads, as computing resources can be quickly scaled up or down. It replaces upfront capacity planning with metered billing and frees teams from routine system administration. However, it risks vendor lock-in and a lack of granular control.
 
-- The data warehouse contains a read-only copy of the data in all the various OLTP systems in the company
-- Data is extracted from OLTP databases (using either a periodic data dump or a continuous stream of updates)
-- Transformed into an analysis-friendly schema, cleaned up, and then loaded into the data warehouse _Extract–Transform–Load_ (ETL)
-  <img src="assets/1.1.png" alt="Simplified outline of ETL into a data warehouse" width=500 />
-- Data warehouse often uses a relational data model (SQL), perhaps using specialized business intelligence software
+**Key Terms and Comparisons:**
 
-- External (3rd-party) data. ETL often implemented by specialist data connector services such as Fivetran, Singer, or AirByte
-- Some database systems offer _hybrid transactional/analytic processing_ (HTAP), enables OLTP and analytics in a single system
-- HTAP systems internally consist of an OLTP system coupled with a separate analytical system, hidden behind a common interface
+- **Cloud Native Architecture**: Rather than just running traditional virtual machines (VMs), cloud-native systems build upon lower-level cloud abstractions, such as utilizing object storage (e.g., Amazon S3) instead of local disks.
+- **Separation of Storage and Compute**: A defining feature of cloud-native architecture where storage (disk) and computation (CPU/RAM) are decoupled. Data is stored in services like S3 and must be transferred over the network to a separate computational service for processing.
 
-#### Data Lake (Data Scientists)
+### 3. Distributed Versus Single-Node Systems
 
-- Centralized data repository that holds a copy of any data that might be useful for analysis
-- Data lake simply contains files (text, images, videos, sensor readings, sparse matrices, feature vectors, genome sequences, etc.)
-- Files in a data lake might be collections of database records, encoded using a file format such as Avro or Parquet
-- This approach has the advantage that each consumer of the data can transform it to their needs _sushi principle_ “raw data is better”
-- ETL processes have been generalized to data pipelines, the data lake has become an intermediate stop from the operational systems to the data warehouse
+While a single machine can be simpler and cheaper, **distributed systems**—multiple machines communicating via a network—are necessary for fault tolerance, scalability, geographic latency reduction, and elasticity. However, distributed systems introduce complexity, such as network failures, timeouts, and difficulties in troubleshooting (requiring **observability** tools like distributed tracing).
 
-### Systems of Record and Derived Data
+**Key Terms and Comparisons:**
 
-- A **Systems of record**, also known as _source of truth_, holds the authoritative or canonical version of some data. Each fact is represented exactly once _normalization_.
-- **Derived data systems** Data in a derived system is the result of taking some existing data from another system and transforming or processing it in some way. _Denormalized_ values, indexes, materialized views, transformed data representations, and models trained on a dataset also fall into this category.
+- **Microservices vs. Monoliths**: A **microservices architecture** decomposes a complex application into multiple independent services, each with one well-defined purpose, its own database, and managed by a separate team. While this boosts team autonomy, it complicates testing, API evolution, and deployment.
+- **Serverless (FaaS)**: An architecture where the cloud provider dynamically allocates hardware to execute code only when requests come in, enabling true pay-per-use execution without manual server provisioning.
+- **Cloud Computing vs. Supercomputing (HPC)**: While cloud computing focuses on continuous online availability, multi-tenancy, and isolated virtual machines over Clos network topologies, high-performance computing (HPC) focuses on computationally intensive offline batch jobs, shared memory architectures, and check-pointing for fault tolerance.
 
-## Cloud vs Self-hosting
+### 4. Data Systems, Law, and Society
 
-Things that are a core competency or a competitive advantage of your organization should be done in-house,  
-whereas things that are non-core, routine, or commonplace should be left to a vendor.
+The architecture of data systems is heavily influenced by legal frameworks (like GDPR and CCPA) and social ethics. Engineers must balance business goals with user privacy and safety risks.
 
-<img src="assets/1.2.png" alt="A spectrum of types of software and its operations." width=500 />
+**Key Terms and Comparisons:**
 
-### Pros and Cons of Cloud Services
-
-### Cloud-Native System Architecture
-
-- Layering of cloud services
-
-- Separation of storage and compute
-
-### Operations in the Cloud Era
-
-## Distributed vs Single-Node Systems
-
-## Data Systems, Law, and Society
+- **Right to be Forgotten**: The legal mandate requiring organizations to delete a user's personal data upon request, which creates complex engineering challenges when systems rely on immutable, append-only logs.
+- **Data Minimization**: The practice of storing only the data necessary for a specific, explicit purpose and discarding it afterward. This strongly contrasts with the traditional "big data" philosophy of hoarding data speculatively for undefined future use.

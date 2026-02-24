@@ -2,6 +2,7 @@
 
 # IDE
 .idea
+.obsidian
 
 # dependencies
 node_modules

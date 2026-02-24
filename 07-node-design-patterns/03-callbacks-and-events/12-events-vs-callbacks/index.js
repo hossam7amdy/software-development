@@ -12,5 +12,5 @@ function helloCallback(cb) {
   setTimeout(() => cb(null, 'hello world'), 100)
 }
 
-helloEvents().on('complete', message => console.log(message))
+helloEvents().on('complete', (message) => console.log(message))
 helloCallback((err, message) => console.log(message))

@@ -3,7 +3,7 @@ import { Level } from 'level'
 export const levelSubscribeAugmentation = (db: Level) => {
   db['subscribe'] = (pattern: any, listener: Function) => {
     db.on('put', (key, value) => {
-      const match = Object.keys(pattern).every(k => pattern[k] === value[k])
+      const match = Object.keys(pattern).every((k) => pattern[k] === value[k])
       if (match) {
         listener(key, value)
       }
@@ -20,7 +20,7 @@ export const levelSubscribeProxy = (db: Level) =>
         return (pattern: any, listener: Function) => {
           db.on('put', (key, value) => {
             const match = Object.keys(pattern).every(
-              k => pattern[k] === value[k]
+              (k) => pattern[k] === value[k],
             )
             if (match) {
               listener(key, value)
@@ -29,5 +29,5 @@ export const levelSubscribeProxy = (db: Level) =>
         }
       }
       return targe[property]
-    }
+    },
   })

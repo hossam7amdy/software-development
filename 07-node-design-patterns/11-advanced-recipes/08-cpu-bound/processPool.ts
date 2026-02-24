@@ -10,7 +10,7 @@ export class ProcessPool {
   }[]
   constructor(
     readonly file: string,
-    readonly poolMax: number
+    readonly poolMax: number,
   ) {
     this.pool = []
     this.active = []
@@ -28,7 +28,7 @@ export class ProcessPool {
         return this.waiting.push({ resolve, reject })
       }
       worker = fork(this.file)
-      worker.once('message', message => {
+      worker.once('message', (message) => {
         if (message === 'ready') {
           this.active.push(worker)
           return resolve(worker)
@@ -36,10 +36,10 @@ export class ProcessPool {
         worker.kill()
         reject(new Error('Improper process started'))
       })
-      worker.once('exit', code => {
+      worker.once('exit', (code) => {
         console.log(`Worked exited with code ${code}`)
-        this.pool = this.pool.filter(w => w !== worker)
-        this.active = this.active.filter(w => w !== worker)
+        this.pool = this.pool.filter((w) => w !== worker)
+        this.active = this.active.filter((w) => w !== worker)
       })
     })
   }
@@ -49,7 +49,7 @@ export class ProcessPool {
       const { resolve } = this.waiting.pop()!
       return resolve(worker)
     }
-    this.active = this.active.filter(w => w !== worker)
+    this.active = this.active.filter((w) => w !== worker)
     this.pool.push(worker)
   }
 }

@@ -1,7 +1,7 @@
 import {
   Transform,
   type TransformCallback,
-  type TransformOptions
+  type TransformOptions,
 } from 'stream'
 
 export class ReplaceStream extends Transform {
@@ -12,7 +12,7 @@ export class ReplaceStream extends Transform {
   constructor(
     searchStr: string,
     replaceStr: string,
-    options?: TransformOptions
+    options?: TransformOptions,
   ) {
     super(options)
     this.#searchStr = searchStr
@@ -23,7 +23,7 @@ export class ReplaceStream extends Transform {
   _transform(
     chunk: string,
     _encoding: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ): void {
     const pieces = (this.#tail + chunk).split(this.#searchStr)
     const lastPieces = pieces[pieces.length - 1]

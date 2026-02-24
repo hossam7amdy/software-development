@@ -16,11 +16,11 @@ async function main() {
     searchHash,
     ALPHABET,
     maxLength,
-    BATCH_SIZE
+    BATCH_SIZE,
   )
   for (const task of generatorObj) {
     await ventilator.send(JSON.stringify(task))
   }
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

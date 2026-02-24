@@ -12,5 +12,5 @@ export const statusUpdateService = {
   destroyUpdate(id: number) {
     statusUpdates.delete(id)
     console.log(`Status removed: ${id}`)
-  }
+  },
 }

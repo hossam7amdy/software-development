@@ -27,7 +27,7 @@ export class Blog {
       id,
       title,
       content,
-      createdAt
+      createdAt,
     )
   }
 

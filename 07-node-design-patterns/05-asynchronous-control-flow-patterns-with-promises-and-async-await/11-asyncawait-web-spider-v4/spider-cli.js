@@ -6,4 +6,4 @@ const concurrency = Number.parseInt(process.argv[4], 10) || 2
 
 spider(url, nesting, concurrency)
   .then(() => console.log('Download complete'))
-  .catch(err => console.error(err))
+  .catch((err) => console.error(err))

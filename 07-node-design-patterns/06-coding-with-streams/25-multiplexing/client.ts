@@ -26,7 +26,7 @@ const multiplexChannels = (sources: Readable[], destination: Writable) => {
 
 const socket = connect({ port: 3000 }, () => {
   const child = fork(process.argv[2], process.argv.slice(3), {
-    silent: true
+    silent: true,
   })
 
   multiplexChannels([child.stdout, child.stderr], socket)

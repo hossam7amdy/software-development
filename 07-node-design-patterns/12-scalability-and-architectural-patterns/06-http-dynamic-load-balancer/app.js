@@ -21,11 +21,11 @@ async function main() {
         name: serviceType,
         address,
         port,
-        tags: [serviceType]
+        tags: [serviceType],
       },
       () => {
         console.log(`${serviceType} registered successfully`)
-      }
+      },
     )
   }
 
@@ -58,7 +58,7 @@ async function main() {
   })
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err)
   process.exit(1)
 })

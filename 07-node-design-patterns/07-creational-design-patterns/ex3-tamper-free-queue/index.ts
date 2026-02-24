@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { setTimeout as wait } from 'timers/promises'
 import Queue from './queue.js'
 
-const queue = new Queue(enqueue => {
+const queue = new Queue((enqueue) => {
   enqueue('Task1')
   enqueue('Task2')
   enqueue('Task3')
@@ -13,7 +13,7 @@ const queue = new Queue(enqueue => {
       return res.end('Only POST requests can enqueue new messages!\n')
     }
     let message = ''
-    req.on('data', chunk => {
+    req.on('data', (chunk) => {
       message += chunk
     })
     req.on('end', () => {

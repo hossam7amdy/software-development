@@ -17,7 +17,7 @@ export const totalSales = (product: string): Promise<number> => {
         cache.delete(product)
       }, CACHE_TTL)
     })
-    .catch(err => {
+    .catch((err) => {
       cache.delete(product)
       throw err
     })

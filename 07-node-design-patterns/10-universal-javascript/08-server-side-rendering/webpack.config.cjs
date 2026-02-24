@@ -10,7 +10,7 @@ module.exports = function (env, argv) {
     output: {
       filename: 'main.js',
       path: resolve(__dirname, 'public'),
-      publicPath: '/'
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -21,30 +21,30 @@ module.exports = function (env, argv) {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-transform-runtime']
-            }
-          }
-        }
-      ]
+              plugins: ['@babel/plugin-transform-runtime'],
+            },
+          },
+        },
+      ],
     },
     devtool: isProd ? 'source-maps' : 'eval',
     devServer: {
       historyApiFallback: true,
-      open: true
+      open: true,
     },
     optimization: isProd
       ? {
           minimize: true,
-          minimizer: [new TerserPlugin()]
+          minimizer: [new TerserPlugin()],
         }
       : {},
     plugins: isProd
       ? []
       : [
           new HtmlWebpackPlugin({
-            title: 'My library'
+            title: 'My library',
           }),
-          new HtmlWebpackRootPlugin()
-        ]
+          new HtmlWebpackRootPlugin(),
+        ],
   }
 }

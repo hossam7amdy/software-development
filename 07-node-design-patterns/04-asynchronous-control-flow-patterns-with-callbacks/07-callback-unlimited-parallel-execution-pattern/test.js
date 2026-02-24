@@ -1,5 +1,5 @@
 function makeSampleTask(name) {
-  return cb => {
+  return (cb) => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)
@@ -12,11 +12,11 @@ const tasks = [
   makeSampleTask('Task 1'),
   makeSampleTask('Task 2'),
   makeSampleTask('Task 3'),
-  makeSampleTask('Task 4')
+  makeSampleTask('Task 4'),
 ]
 
 let completed = 0
-tasks.forEach(task => {
+tasks.forEach((task) => {
   task(() => {
     if (++completed === tasks.length) {
       finish()

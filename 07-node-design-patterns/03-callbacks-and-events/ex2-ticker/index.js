@@ -47,6 +47,6 @@ const ticker = (timer, cb) => {
   })
 
   tick
-    .on('tick', time => console.log(`Tick after ${time}ms`))
+    .on('tick', (time) => console.log(`Tick after ${time}ms`))
     .on('error', console.error)
 })()

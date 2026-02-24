@@ -21,7 +21,7 @@ export class TaskQueuePC {
   }
 
   getNextTask() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (this.taskQueue.length !== 0) {
         return resolve(this.taskQueue.shift())
       }

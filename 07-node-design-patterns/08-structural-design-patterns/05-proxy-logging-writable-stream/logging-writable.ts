@@ -10,5 +10,5 @@ export const createLoggingWritable = (writable: Writable) =>
         }
       }
       return target[method]
-    }
+    },
   })

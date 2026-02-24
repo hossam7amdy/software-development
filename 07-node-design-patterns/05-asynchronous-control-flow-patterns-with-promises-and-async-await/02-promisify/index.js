@@ -11,7 +11,7 @@ function promisify(callbackBasedApi) {
           }
 
           resolve(result)
-        }
+        },
       ]
       callbackBasedApi(...newArgs)
     })
@@ -19,6 +19,6 @@ function promisify(callbackBasedApi) {
 }
 
 const randomBytesP = promisify(randomBytes)
-randomBytesP(32).then(buffer => {
+randomBytesP(32).then((buffer) => {
   console.log(`Random bytes: ${buffer.toString()}`)
 })

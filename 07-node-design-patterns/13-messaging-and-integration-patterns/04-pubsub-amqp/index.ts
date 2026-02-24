@@ -14,12 +14,12 @@ async function main() {
   const { queue } = await channel.assertQueue(
     // (1)
     `chat_srv_${httpPort}`,
-    { exclusive: true }
+    { exclusive: true },
   )
   await channel.bindQueue(queue, 'chat', '')
   channel.consume(
     queue,
-    msg => {
+    (msg) => {
       if (msg) {
         // (2)
         const content = msg.content.toString()
@@ -27,7 +27,7 @@ async function main() {
         broadcast(content)
       }
     },
-    { noAck: true }
+    { noAck: true },
   )
 
   // serve static files
@@ -36,18 +36,18 @@ async function main() {
   })
 
   const wss = new WebSocketServer({ server })
-  wss.on('connection', client => {
+  wss.on('connection', (client) => {
     console.log('Client connected')
     client.on('message', (msg: Buffer) => {
       console.log(`Message: ${msg.toString()}`)
       channel.publish('chat', '', Buffer.from(msg))
     })
 
-    fetch('http://localhost:8090').then(response => {
+    fetch('http://localhost:8090').then((response) => {
       if (response.body)
         Readable.from(response.body)
           .pipe(JSONStream.parse('*'))
-          .on('data', msg => {
+          .on('data', (msg) => {
             client.send(msg)
           })
     })
@@ -66,7 +66,7 @@ async function main() {
   })
 }
 
-main().catch(e => {
+main().catch((e) => {
   console.error(e)
   process.exit(1)
 })

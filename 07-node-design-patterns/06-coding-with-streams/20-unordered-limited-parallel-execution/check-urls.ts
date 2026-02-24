@@ -21,7 +21,7 @@ pipeline(
     }
   }),
   createWriteStream('results.txt'),
-  err => {
+  (err) => {
     if (err) {
       console.error(err)
       process.exit(1)
@@ -30,5 +30,5 @@ pipeline(
 
     const end = performance.now()
     console.log(`Pipeline took ${end - start} ms`)
-  }
+  },
 )

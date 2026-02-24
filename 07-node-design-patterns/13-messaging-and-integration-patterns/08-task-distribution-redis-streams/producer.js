@@ -12,7 +12,7 @@ async function main() {
     searchHash,
     ALPHABET,
     maxLength,
-    BATCH_SIZE
+    BATCH_SIZE,
   )
   for (const task of generatorObj) {
     await redisClient.xadd('tasks_stream', '*', 'task', JSON.stringify(task))
@@ -21,4 +21,4 @@ async function main() {
   redisClient.disconnect()
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

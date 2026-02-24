@@ -20,14 +20,14 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': 'plain/text' })
   const subsetSum = new SubsetSum(sum, data)
   let matches = 0
-  subsetSum.on('match', match => {
+  subsetSum.on('match', (match) => {
     matches++
     res.write(`Match: ${JSON.stringify(match)}\n`)
   })
   subsetSum.on('end', () =>
     res.end(
-      `${matches} subset found out of total ${subsetSum.totalSubsets} subsets\n`
-    )
+      `${matches} subset found out of total ${subsetSum.totalSubsets} subsets\n`,
+    ),
   )
   subsetSum.start()
 })

@@ -7,7 +7,7 @@ const colorMap = {
   error: 'red',
   warn: 'yellow',
   info: 'blue',
-  debug: 'magenta'
+  debug: 'magenta',
 }
 
 export class ConsoleStrategy implements IStrategy {

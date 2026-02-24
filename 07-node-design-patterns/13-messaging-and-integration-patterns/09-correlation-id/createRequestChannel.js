@@ -13,7 +13,7 @@ export function createRequestChannel(channel) {
         reject(new Error('Request timeout'))
       }, 10000)
 
-      correlationMap.set(correlationId, replyData => {
+      correlationMap.set(correlationId, (replyData) => {
         correlationMap.delete(correlationId)
         clearTimeout(replyTimeout)
         resolve(replyData)
@@ -22,12 +22,12 @@ export function createRequestChannel(channel) {
       channel.send({
         type: 'request',
         data,
-        id: correlationId
+        id: correlationId,
       })
     })
   }
 
-  channel.on('message', message => {
+  channel.on('message', (message) => {
     const callback = correlationMap.get(message.inReplyTo)
     if (callback) {
       callback(message.data)

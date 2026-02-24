@@ -1,6 +1,6 @@
 import type { AnalyzeYearlyTrend } from './types.js'
 
-const analyzeYearlyTrend: AnalyzeYearlyTrend = crimesByYear => {
+const analyzeYearlyTrend: AnalyzeYearlyTrend = (crimesByYear) => {
   const years = Object.keys(crimesByYear).sort()
 
   if (years.length < 2) {

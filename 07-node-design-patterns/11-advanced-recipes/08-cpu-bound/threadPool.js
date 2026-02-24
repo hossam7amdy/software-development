@@ -27,10 +27,10 @@ export class ThreadPool {
         this.active.push(worker)
         resolve(worker)
       })
-      worker.once('exit', code => {
+      worker.once('exit', (code) => {
         console.log(`Worker exited with code ${code}`)
-        this.active = this.active.filter(w => worker !== w)
-        this.pool = this.pool.filter(w => worker !== w)
+        this.active = this.active.filter((w) => worker !== w)
+        this.pool = this.pool.filter((w) => worker !== w)
       })
     })
   }
@@ -40,7 +40,7 @@ export class ThreadPool {
       const { resolve } = this.waiting.shift()
       return resolve(worker)
     }
-    this.active = this.active.filter(w => worker !== w)
+    this.active = this.active.filter((w) => worker !== w)
     this.pool.push(worker)
   }
 }

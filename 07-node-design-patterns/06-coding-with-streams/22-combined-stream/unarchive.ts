@@ -10,11 +10,11 @@ pipeline(
   createReadStream(source),
   createDecryptAndDecompress(password, iv),
   createWriteStream(destination),
-  err => {
+  (err) => {
     if (err) {
       console.error(err)
       process.exit(1)
     }
     console.log(`${destination} created`)
-  }
+  },
 )

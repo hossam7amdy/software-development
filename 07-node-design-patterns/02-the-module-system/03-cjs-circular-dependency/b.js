@@ -4,5 +4,5 @@ const a = require('./a')
 
 module.exports = {
   a,
-  loaded: true // overrides the previous export
+  loaded: true, // overrides the previous export
 }

@@ -5,7 +5,7 @@ export class CheckUrls {
     try {
       const res = await fetch(url, {
         method: 'HEAD',
-        signal: AbortSignal.timeout(1000)
+        signal: AbortSignal.timeout(1000),
       })
       if (!res.ok) {
         throw new Error(res.statusText)
@@ -29,7 +29,7 @@ export class CheckUrls {
 
         const status = await this._checkUrl(nextUrl.value)
         return { value: status, done: false }
-      }
+      },
     }
   }
 }

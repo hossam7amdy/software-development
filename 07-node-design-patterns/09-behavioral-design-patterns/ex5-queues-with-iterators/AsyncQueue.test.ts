@@ -31,7 +31,7 @@ async function runStressTest() {
       console.log(`Iterated item: ${item}`)
       count++
       // Simulate processing time
-      await new Promise(resolve => setTimeout(resolve, 10))
+      await new Promise((resolve) => setTimeout(resolve, 10))
     }
     console.log(`Iteration complete, processed ${count} items`)
   })()
@@ -61,7 +61,9 @@ async function runStressTest() {
           results.push(item)
           console.log(`Consumer ${i} received: ${item}`)
           // Random processing delay
-          await new Promise(resolve => setTimeout(resolve, Math.random() * 20))
+          await new Promise((resolve) =>
+            setTimeout(resolve, Math.random() * 20),
+          )
         }
       }
 
@@ -71,7 +73,7 @@ async function runStressTest() {
   })
 
   // Wait a bit before producing
-  await new Promise(resolve => setTimeout(resolve, 100))
+  await new Promise((resolve) => setTimeout(resolve, 100))
 
   // Create multiple producers
   const producers = Array.from({ length: 3 }, (_, i) => {
@@ -83,7 +85,7 @@ async function runStressTest() {
         concurrentQueue.enqueue(value)
         console.log(`Producer ${i} enqueued: ${value}`)
         // Random production delay
-        await new Promise(resolve => setTimeout(resolve, Math.random() * 30))
+        await new Promise((resolve) => setTimeout(resolve, Math.random() * 30))
       }
 
       console.log(`Producer ${i} finished`)
@@ -102,7 +104,7 @@ async function runStressTest() {
   console.log('All consumers done')
   console.log(
     'Items processed per consumer:',
-    consumerResults.map(r => r.length)
+    consumerResults.map((r) => r.length),
   )
   console.log('Total items processed:', consumerResults.flat().length)
 
@@ -117,13 +119,13 @@ async function runStressTest() {
   } catch (err) {
     console.log(
       'Successfully caught error when enqueueing to terminated queue:',
-      err.message
+      err.message,
     )
   }
 
   console.log('\nStress test complete!')
 }
 
-runStressTest().catch(err => {
+runStressTest().catch((err) => {
   console.error('Stress test failed with error:', err)
 })

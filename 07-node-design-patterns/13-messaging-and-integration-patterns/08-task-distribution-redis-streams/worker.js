@@ -15,7 +15,7 @@ async function main() {
     consumerName,
     'STREAMS',
     'tasks_stream',
-    '0'
+    '0',
   )
   for (const [recordId, [, rawTask]] of records) {
     await processAndAck(recordId, rawTask)
@@ -32,7 +32,7 @@ async function main() {
       '1',
       'STREAMS',
       'tasks_stream',
-      '>'
+      '>',
     )
     for (const [recordId, [, rawTask]] of records) {
       await processAndAck(recordId, rawTask)
@@ -50,4 +50,4 @@ async function processAndAck(recordId, rawTask) {
   await redisClient.xack('tasks_stream', 'workers_group', recordId)
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

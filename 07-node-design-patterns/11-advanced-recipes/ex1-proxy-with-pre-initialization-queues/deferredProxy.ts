@@ -8,7 +8,7 @@ interface DeferredProxyConfig {
 
 export const createDeferredProxy = <T extends object>(
   component: T,
-  options: DeferredProxyConfig
+  options: DeferredProxyConfig,
 ) => {
   let activated: boolean = false
   const commandsQueue: Command[] = []
@@ -35,7 +35,7 @@ export const createDeferredProxy = <T extends object>(
           })
       }
       return Reflect.get(target, prop, receiver)
-    }
+    },
   }
 
   if (component['once']) {

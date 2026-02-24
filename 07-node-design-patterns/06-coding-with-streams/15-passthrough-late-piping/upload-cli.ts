@@ -9,10 +9,10 @@ const filename = basename(filepath)
 const contentStream = new PassThrough() // 2
 
 upload(`${filename}.br`, contentStream) // 3
-  .then(response => {
+  .then((response) => {
     console.log(`Server response: ${response.data}`)
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err)
     process.exit(1)
   })

@@ -1,13 +1,13 @@
 import {
   Transform,
   type TransformCallback,
-  type TransformOptions
+  type TransformOptions,
 } from 'stream'
 
 type UserTransform = (
   data: unknown,
   push: (data: unknown) => void,
-  callback: (err?: unknown) => void
+  callback: (err?: unknown) => void,
 ) => void
 
 export class ParallelStream extends Transform {
@@ -25,7 +25,7 @@ export class ParallelStream extends Transform {
   _transform(
     chunk: any,
     _enc: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ): void {
     this.running++
     this.userTransform(chunk, this.push.bind(this), this._onComplete.bind(this))

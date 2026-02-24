@@ -1,7 +1,7 @@
 import { TaskQueue } from './TaskQueue.js'
 
 function makeSampleTask(name) {
-  return cb => {
+  return (cb) => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)

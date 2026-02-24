@@ -15,5 +15,7 @@ for (const source of sources) {
     }
   })
 
-  sourceStream.pipe(split(line => line + '\n')).pipe(destStream, { end: false })
+  sourceStream
+    .pipe(split((line) => line + '\n'))
+    .pipe(destStream, { end: false })
 }

@@ -2,7 +2,7 @@ import { Level } from 'level'
 import type {
   NoParamCallback,
   ObjectEncodingOptions,
-  PathOrFileDescriptor
+  PathOrFileDescriptor,
 } from 'fs'
 
 type FSAdapter = typeof import('fs')
@@ -13,7 +13,7 @@ export const createFSAdapter = (_db: Level): FSAdapter => {
   const readFile = (
     path: PathOrFileDescriptor,
     options: ObjectEncodingOptions | undefined | null,
-    callback: (err: Error | null, data?: string | Buffer) => void
+    callback: (err: Error | null, data?: string | Buffer) => void,
   ): void => {
     if (typeof options === 'function') {
       callback = options
@@ -35,7 +35,7 @@ export const createFSAdapter = (_db: Level): FSAdapter => {
   const writeFile = (
     path: PathOrFileDescriptor,
     data: string | NodeJS.ArrayBufferView,
-    callback: NoParamCallback
+    callback: NoParamCallback,
   ): void => {
     const buffer = Buffer.from(data.toString())
     store.set(path.toString(), buffer)
@@ -54,7 +54,7 @@ export const createFSAdapter2 = (db: Level): FSAdapter => {
         return (
           path: PathOrFileDescriptor,
           options: ObjectEncodingOptions | undefined | null,
-          callback: (err: Error | null, data?: string | Buffer) => void
+          callback: (err: Error | null, data?: string | Buffer) => void,
         ): void => {
           if (typeof options === 'function') {
             callback = options
@@ -77,7 +77,7 @@ export const createFSAdapter2 = (db: Level): FSAdapter => {
         return (
           path: PathOrFileDescriptor,
           data: string | NodeJS.ArrayBufferView,
-          callback: NoParamCallback
+          callback: NoParamCallback,
         ): void => {
           const buffer = Buffer.from(data.toString())
           store.set(path.toString(), buffer)
@@ -86,7 +86,7 @@ export const createFSAdapter2 = (db: Level): FSAdapter => {
       } else {
         throw new Error('Not implemented!')
       }
-    }
+    },
   })
 
   return proxy as unknown as FSAdapter

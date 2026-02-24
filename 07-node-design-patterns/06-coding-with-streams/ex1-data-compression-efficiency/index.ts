@@ -8,14 +8,14 @@ const inputStream = createReadStream(filename)
 const summary = {
   Gzip: {},
   Deflate: {},
-  Brotli: {}
+  Brotli: {},
 }
 
 const monitor = (algorithm: keyof typeof summary) => {
   let size = 0
   const monitor = new PassThrough()
 
-  monitor.on('data', chunk => {
+  monitor.on('data', (chunk) => {
     size += chunk.length
   })
   monitor.on('end', () => {
@@ -30,7 +30,7 @@ const benchmark = (algorithm: keyof typeof summary) => {
   const start = performance.now()
   const monitor = new PassThrough()
 
-  monitor.on('data', chunk => {
+  monitor.on('data', (chunk) => {
     size += chunk.length
   })
   monitor.on('end', () => {
@@ -39,7 +39,7 @@ const benchmark = (algorithm: keyof typeof summary) => {
     summary[algorithm]['size'] = (size / 1024).toFixed(2) + 'kb'
     summary[algorithm]['time'] = (end - start).toFixed(2) + 'ms'
 
-    if (Object.values(summary).every(algo => Boolean(algo['size']))) {
+    if (Object.values(summary).every((algo) => Boolean(algo['size']))) {
       console.table(summary)
     }
   })

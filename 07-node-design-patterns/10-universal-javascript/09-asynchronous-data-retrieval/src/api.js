@@ -10,7 +10,7 @@ server.get(
   '/api/authors', // ③
   async function (req, reply) {
     return authors.map(({ id, name }) => ({ id, name }))
-  }
+  },
 )
 
 server.get(
@@ -22,7 +22,7 @@ server.get(
       return { error: 'Author not found' }
     }
     return author
-  }
+  },
 )
 
 const port = Number.parseInt(process.env.PORT) || 3001 // ⑤

@@ -13,7 +13,7 @@ function download(url, filename) {
   let content
   return superagent
     .get(url)
-    .then(res => {
+    .then((res) => {
       content = res.text
       return mkdirpPromises(dirname(filename))
     })
@@ -30,7 +30,7 @@ function spiderLinks(currentUrl, content, nesting, queue) {
   }
 
   const links = getPageLinks(currentUrl, content)
-  const promises = links.map(link => spiderTask(link, nesting - 1, queue))
+  const promises = links.map((link) => spiderTask(link, nesting - 1, queue))
 
   return Promise.all(promises)
 }
@@ -46,7 +46,7 @@ function spiderTask(url, nesting, queue) {
 
   return queue
     .runTask(() => {
-      return fsPromises.readFile(filename, 'utf8').catch(err => {
+      return fsPromises.readFile(filename, 'utf8').catch((err) => {
         if (err.code !== 'ENOENT') {
           throw err
         }
@@ -55,7 +55,7 @@ function spiderTask(url, nesting, queue) {
         return download(url, filename)
       })
     })
-    .then(content => spiderLinks(url, content, nesting, queue))
+    .then((content) => spiderLinks(url, content, nesting, queue))
 }
 
 export function spider(url, nesting, concurrency) {

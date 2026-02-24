@@ -10,7 +10,7 @@ const workers = new ThreadPool(workerFile, 2)
 export class ComputeFarm extends EventEmitter {
   constructor(
     readonly func: string,
-    readonly args: unknown
+    readonly args: unknown,
   ) {
     super()
   }

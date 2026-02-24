@@ -1,7 +1,7 @@
 import {
   timestampedLogsProxy,
   timestampedLogsAugmentation,
-  timestampedLogsComposition
+  timestampedLogsComposition,
 } from './timestamped-logs.js'
 
 const testTimestampedLogsProxy = () => {

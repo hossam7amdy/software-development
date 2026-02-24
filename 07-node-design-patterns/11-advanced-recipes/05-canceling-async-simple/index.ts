@@ -32,7 +32,7 @@ async function cancelable(abortSignal: AbortSignal) {
 // }, 100)
 
 const abortSignal = AbortSignal.timeout(200)
-cancelable(abortSignal).catch(err => {
+cancelable(abortSignal).catch((err) => {
   if (err instanceof CancelError) {
     console.log('Function canceled')
   } else {

@@ -18,6 +18,6 @@ async function playingWithDelays() {
   return 'done'
 }
 
-playingWithDelays().then(result => {
+playingWithDelays().then((result) => {
   console.log(`After 4 seconds: ${result}`)
 })

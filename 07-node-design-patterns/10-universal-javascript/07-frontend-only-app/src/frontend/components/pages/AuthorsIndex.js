@@ -12,12 +12,12 @@ export class AuthorsIndex extends react.Component {
       <${Header} />
       <div>
         ${authors.map(
-          author =>
+          (author) =>
             html`<div key=${author.id}>
           <p>
             <${Link} to="${`/author/${author.id}`}">${author.name}</>
           </p>
-        </div>`
+        </div>`,
         )}
       </div>
     </div>`

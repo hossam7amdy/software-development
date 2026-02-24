@@ -31,7 +31,7 @@ export class Config {
   async load(filePath: string) {
     console.log(`Deserializing from ${filePath}`)
     this.data = this.formatStrategy.deserialize(
-      await fs.readFile(filePath, 'utf8')
+      await fs.readFile(filePath, 'utf8'),
     )
   }
 }

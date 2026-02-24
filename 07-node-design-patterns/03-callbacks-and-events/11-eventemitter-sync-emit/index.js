@@ -25,7 +25,7 @@ class FindRegexSync extends EventEmitter {
       this.emit('fileread', file)
       const match = content.match(this.regex)
       if (match) {
-        match.forEach(elem => this.emit('found', file, elem))
+        match.forEach((elem) => this.emit('found', file, elem))
       }
     }
     return this

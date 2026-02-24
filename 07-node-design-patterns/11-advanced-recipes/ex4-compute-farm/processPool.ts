@@ -11,10 +11,10 @@ export class ProcessPool {
 
   constructor(
     private readonly file: string,
-    private readonly maxPool: number
+    private readonly maxPool: number,
   ) {
     this.pool = Array.from({ length: maxPool }, () =>
-      this._forkLazyProcess(file)
+      this._forkLazyProcess(file),
     )
     this.active = []
     this.waiting = []
@@ -22,7 +22,7 @@ export class ProcessPool {
     // Debug logging
     setInterval(() => {
       console.log(
-        `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`
+        `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`,
       )
     }, 1000)
   }
@@ -35,7 +35,7 @@ export class ProcessPool {
           childProcess = fork(file)
         }
         return childProcess[prop]
-      }
+      },
     })
   }
 
@@ -53,7 +53,7 @@ export class ProcessPool {
       }
 
       worker = fork(this.file)
-      worker.once('message', message => {
+      worker.once('message', (message) => {
         if (message === 'ready') {
           this.active.push(worker)
           return resolve(worker)
@@ -61,10 +61,10 @@ export class ProcessPool {
         worker.kill()
         reject(new Error(`Improper process started`))
       })
-      worker.once('exit', code => {
+      worker.once('exit', (code) => {
         console.log(`Process exited with code ${code}`)
-        this.pool = this.pool.filter(w => w !== worker)
-        this.active = this.active.filter(w => w !== worker)
+        this.pool = this.pool.filter((w) => w !== worker)
+        this.active = this.active.filter((w) => w !== worker)
       })
     })
   }
@@ -74,7 +74,7 @@ export class ProcessPool {
       const { resolve } = this.waiting.shift()!
       return resolve(worker)
     }
-    this.active = this.active.filter(w => worker !== w)
+    this.active = this.active.filter((w) => worker !== w)
     this.pool.push(worker)
   }
 }

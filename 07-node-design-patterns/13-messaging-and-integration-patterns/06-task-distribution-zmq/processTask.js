@@ -6,7 +6,7 @@ export function processTask(task) {
   console.log(
     'Processing from ' +
       `${variationGen(task.batchStart)} (${task.batchStart}) ` +
-      `to ${variationGen(task.batchEnd)} (${task.batchEnd})`
+      `to ${variationGen(task.batchEnd)} (${task.batchEnd})`,
   )
 
   for (let idx = task.batchStart; idx <= task.batchEnd; idx++) {

@@ -7,7 +7,7 @@ export class URL {
     public port: number | null,
     public pathname: string | null,
     public search: string | string[] | null,
-    public hash: string | null
+    public hash: string | null,
   ) {
     this.validate()
   }

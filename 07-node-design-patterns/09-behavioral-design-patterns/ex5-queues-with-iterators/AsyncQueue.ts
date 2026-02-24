@@ -27,14 +27,14 @@ export class AsyncQueue<T> {
     } else if (this.#terminated) {
       return Promise.resolve(undefined)
     }
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.#resolvers.push(resolve.bind(this))
     })
   }
 
   done() {
     this.#terminated = true
-    this.#resolvers.forEach(resolver => resolver(undefined))
+    this.#resolvers.forEach((resolver) => resolver(undefined))
     this.#resolvers = []
   }
 
@@ -46,7 +46,7 @@ export class AsyncQueue<T> {
           return { value: undefined, done: true }
         }
         return { value, done: false }
-      }
+      },
     }
   }
 

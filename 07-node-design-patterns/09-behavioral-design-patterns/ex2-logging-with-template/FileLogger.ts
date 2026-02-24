@@ -12,11 +12,11 @@ const createWriteStreamLazy = (path: string) => {
     get(_, prop) {
       if (prop === 'write' && stream === null) {
         stream = createWriteStream(path, {
-          flags: 'a' // append mode
+          flags: 'a', // append mode
         })
       }
       return stream ? stream[prop].bind(stream) : noop
-    }
+    },
   }
 
   return new Proxy(Object.create(WriteStream.prototype), handler)
@@ -26,7 +26,7 @@ const streamMap = (path: string) => ({
   error: createWriteStreamLazy(join(path, 'error.log')),
   warn: createWriteStreamLazy(join(path, 'warn.log')),
   info: createWriteStreamLazy(join(path, 'info.log')),
-  debug: createWriteStreamLazy(join(path, 'debug.log'))
+  debug: createWriteStreamLazy(join(path, 'debug.log')),
 })
 
 export class FileLogger extends Logger {
@@ -41,14 +41,14 @@ export class FileLogger extends Logger {
   }
 
   private _write(level: string, message: string) {
-    this.streams[level].write(message, err => {
+    this.streams[level].write(message, (err) => {
       if (err) this.emit('error', err)
     })
   }
 
   private _close() {
     for (const stream in this.streams) {
-      this.streams[stream].close(err => {
+      this.streams[stream].close((err) => {
         if (err) this.emit('error', err)
       })
     }

@@ -20,10 +20,10 @@ const replaceStream = new Transform({
   flush(cb) {
     this.push(tail)
     cb()
-  }
+  },
 })
 
-replaceStream.on('data', chunk => console.log(chunk.toString()))
+replaceStream.on('data', (chunk) => console.log(chunk.toString()))
 
 replaceStream.write('Hello W')
 replaceStream.write('orld!')

@@ -5,7 +5,7 @@ export function* generateTasks(searchHash, alphabet, maxWordLength, batchSize) {
   }
   console.log(
     'Finding the hashsum source string over ' +
-      `${nVariations} possible variations`
+      `${nVariations} possible variations`,
   )
 
   let batchStart = 1
@@ -15,7 +15,7 @@ export function* generateTasks(searchHash, alphabet, maxWordLength, batchSize) {
       searchHash,
       alphabet: alphabet,
       batchStart,
-      batchEnd
+      batchEnd,
     }
 
     batchStart = batchEnd + 1

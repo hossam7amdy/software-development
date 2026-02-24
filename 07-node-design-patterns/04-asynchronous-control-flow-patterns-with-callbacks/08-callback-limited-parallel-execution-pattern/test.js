@@ -1,5 +1,5 @@
 function makeSampleTask(name) {
-  return cb => {
+  return (cb) => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)
@@ -15,7 +15,7 @@ const tasks = [
   makeSampleTask('Task 4'),
   makeSampleTask('Task 5'),
   makeSampleTask('Task 6'),
-  makeSampleTask('Task 7')
+  makeSampleTask('Task 7'),
 ]
 
 const concurrency = 2

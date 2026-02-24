@@ -5,6 +5,6 @@ export const jsonMiddleware = () => {
     },
     outbound: (message: object) => {
       return Buffer.from(JSON.stringify(message))
-    }
+    },
   }
 }

@@ -22,7 +22,7 @@ async function spiderLinks(currentUrl, content, nesting) {
   }
 
   const links = getPageLinks(currentUrl, content)
-  const promises = links.map(link => spider(link, nesting - 1))
+  const promises = links.map((link) => spider(link, nesting - 1))
 
   return Promise.all(promises)
 }

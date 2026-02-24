@@ -10,8 +10,8 @@ export class App extends Component {
   render() {
     return html` <${Switch}>
       ${routes.map(
-        routeConfig =>
-          html`<${Route} key=${routeConfig.path} ...${routeConfig} />`
+        (routeConfig) =>
+          html`<${Route} key=${routeConfig.path} ...${routeConfig} />`,
       )}
     <//>`
   }

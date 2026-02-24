@@ -5,7 +5,7 @@ import { createFSAdapter2 } from './fs-adapter.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const db = new Level(join(__dirname, 'db'), {
-  valueEncoding: 'binary'
+  valueEncoding: 'binary',
 })
 const fs = createFSAdapter2(db)
 

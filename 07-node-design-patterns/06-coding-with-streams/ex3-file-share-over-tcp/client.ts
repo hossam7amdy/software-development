@@ -40,6 +40,6 @@ const mux = (destination: Writable, sources: Readable[]) => {
 const socket = connect(3000, 'localhost', () => {
   mux(
     socket,
-    filenames.map(filename => createReadStream(filename))
+    filenames.map((filename) => createReadStream(filename)),
   )
 })

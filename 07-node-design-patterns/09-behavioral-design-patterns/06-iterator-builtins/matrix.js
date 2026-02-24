@@ -37,7 +37,7 @@ export class Matrix {
         }
 
         return { value: currVal }
-      }
+      },
     }
   }
 }

@@ -6,7 +6,7 @@ async function main() {
   const channel = await connection.createChannel()
   const { queue } = await channel.assertQueue('tasks_queue')
 
-  channel.consume(queue, async rawMessage => {
+  channel.consume(queue, async (rawMessage) => {
     const found = processTask(JSON.parse(rawMessage.content.toString()))
     if (found) {
       console.log(`Found! => ${found}`)
@@ -17,4 +17,4 @@ async function main() {
   })
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

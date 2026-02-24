@@ -1,6 +1,6 @@
 import type { FindLeastCommonCrime } from './types.js'
 
-const findLeastCommonCrime: FindLeastCommonCrime = totalCrimesByType => {
+const findLeastCommonCrime: FindLeastCommonCrime = (totalCrimesByType) => {
   let minCount = Infinity
   let leastCommonType = ''
 

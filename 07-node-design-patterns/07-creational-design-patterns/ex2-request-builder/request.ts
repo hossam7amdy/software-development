@@ -55,12 +55,12 @@ class RequestBuilder {
       // Choose http or https module based on protocol
       const requester = this.#options.protocol === 'https:' ? https : http
 
-      const req = requester.request(this.#options, res => {
+      const req = requester.request(this.#options, (res) => {
         const chunks: Buffer[] = []
-        res.on('data', chunk => {
+        res.on('data', (chunk) => {
           chunks.push(Buffer.from(chunk))
         })
-        res.on('error', err => {
+        res.on('error', (err) => {
           reject(err)
         })
         res.on('end', () => {
@@ -71,14 +71,14 @@ class RequestBuilder {
             if (typeof value === 'string') {
               headers.append(key, value)
             } else if (Array.isArray(value)) {
-              value.forEach(v => headers.append(key, v))
+              value.forEach((v) => headers.append(key, v))
             }
           })
 
           const response = new Response(bodyBuffer, {
             headers,
             status: res.statusCode || 200,
-            statusText: res.statusMessage || ''
+            statusText: res.statusMessage || '',
           })
 
           resolve(response)
@@ -92,7 +92,7 @@ class RequestBuilder {
       })
 
       // Handle request errors
-      req.on('error', err => {
+      req.on('error', (err) => {
         reject(err)
       })
 

@@ -5,7 +5,7 @@ import { Logger } from './Logger.js'
 
 export class ConsoleLogger extends Logger {
   private _write(message: string) {
-    return stdout.write(message, err => {
+    return stdout.write(message, (err) => {
       if (err) this.emit('error', err)
     })
   }

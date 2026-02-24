@@ -13,7 +13,7 @@ async function cancelable(cancelWrapper: Function) {
 
 const { cancelWrapper, cancel } = createCancelWrapper()
 
-cancelable(cancelWrapper).catch(err => {
+cancelable(cancelWrapper).catch((err) => {
   if (err instanceof CancelError) {
     console.log('Function canceled')
   } else {

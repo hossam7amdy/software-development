@@ -7,7 +7,7 @@ const streamB = new Transform({
   transform(chunk, enc, done) {
     this.push(chunk.toString().toUpperCase())
     done()
-  }
+  },
 })
 const streamC = createWriteStream('package-uppercase.json')
 

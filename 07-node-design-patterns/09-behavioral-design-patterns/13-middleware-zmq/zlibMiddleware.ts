@@ -7,6 +7,6 @@ const inflateRawAsync = promisify(inflateRaw)
 export const zlibMiddleware = () => {
   return {
     inbound: (message: Buffer) => inflateRawAsync(message),
-    outbound: (message: Buffer) => deflateRawAsync(message)
+    outbound: (message: Buffer) => deflateRawAsync(message),
   }
 }

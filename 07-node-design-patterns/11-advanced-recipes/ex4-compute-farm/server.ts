@@ -22,7 +22,7 @@ server.on('request', (req, res) => {
   const chunks: any[] = []
   let totalLength = 0
 
-  req.on('data', chunk => {
+  req.on('data', (chunk) => {
     chunks.push(chunk)
     totalLength += chunk.length
   })
@@ -39,11 +39,11 @@ server.on('request', (req, res) => {
 
       const farm = new ComputeFarm(code, args)
 
-      farm.on('end', result => {
+      farm.on('end', (result) => {
         res.writeHead(200).end(`${result}`)
       })
 
-      farm.on('error', error => {
+      farm.on('error', (error) => {
         res.writeHead(500).end(error.message || 'Function execution failed')
       })
 
@@ -53,7 +53,7 @@ server.on('request', (req, res) => {
     }
   })
 
-  req.on('error', error => {
+  req.on('error', (error) => {
     console.error('Request error:', error)
     res.writeHead(400).end('Request processing failed')
   })

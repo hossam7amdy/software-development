@@ -3,7 +3,7 @@ import { PassThrough } from 'stream'
 let bytesWritten = 0
 const monitor = new PassThrough()
 
-monitor.on('data', chunk => {
+monitor.on('data', (chunk) => {
   bytesWritten += chunk.length
 })
 

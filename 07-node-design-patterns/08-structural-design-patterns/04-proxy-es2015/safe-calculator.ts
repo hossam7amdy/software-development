@@ -54,7 +54,7 @@ const safeCalculatorHandler = {
 
     // delegated methods and properties
     return target[property]
-  }
+  },
 }
 
 const calculator = new StackCalculator()

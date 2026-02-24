@@ -8,5 +8,5 @@ const html = htm.bind(react.createElement)
 
 reactDOM.render(
   html`<${BrowserRouter}><${App}/></>`,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

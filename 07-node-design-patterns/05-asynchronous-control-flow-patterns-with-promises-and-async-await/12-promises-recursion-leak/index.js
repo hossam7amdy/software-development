@@ -31,7 +31,7 @@ function nonLeakingLoopWithErrors() {
           console.log(`Tick ${Date.now()}`)
           internalLoop()
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err)
         })
     })()

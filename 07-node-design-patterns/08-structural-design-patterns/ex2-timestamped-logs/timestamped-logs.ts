@@ -4,7 +4,7 @@ export const timestampedLogsComposition = (console: Console) => {
     log: console.log,
     debug: console.debug,
     error: console.error,
-    info: console.info
+    info: console.info,
   }
 
   // original key names
@@ -14,18 +14,18 @@ export const timestampedLogsComposition = (console: Console) => {
   const wrappedConsole: Console = Object.create(null)
 
   // Copy everything else from the original console
-  Object.getOwnPropertyNames(console).forEach(key => {
+  Object.getOwnPropertyNames(console).forEach((key) => {
     if (!enhancedKeys.includes(key)) {
       Object.defineProperty(wrappedConsole, key, {
         value: console[key],
         writable: true,
         enumerable: true,
-        configurable: true
+        configurable: true,
       })
     }
   })
 
-  Object.getOwnPropertyNames(console).forEach(key => {
+  Object.getOwnPropertyNames(console).forEach((key) => {
     if (enhancedKeys.includes(key)) {
       Object.defineProperty(wrappedConsole, key, {
         configurable: true,
@@ -42,9 +42,9 @@ export const timestampedLogsComposition = (console: Console) => {
             value: val,
             writable: true,
             enumerable: true,
-            configurable: true
+            configurable: true,
           })
-        }
+        },
       })
     }
   })
@@ -91,7 +91,7 @@ export const timestampedLogsProxy = (console: Console) => {
         }
       }
       return Reflect.get(target, property)
-    }
+    },
   }
   return new Proxy(console, handlers)
 }

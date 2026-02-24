@@ -13,7 +13,7 @@ async function main() {
   const { queue } = await channel.assertQueue('chat_history')
   await channel.bindQueue(queue, 'chat', '')
 
-  channel.consume(queue, async msg => {
+  channel.consume(queue, async (msg) => {
     if (msg) {
       const content = msg.content.toString()
       console.log(`Saving message: ${content}`)
@@ -32,7 +32,7 @@ async function main() {
   })
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(error)
   process.exit(1)
 })

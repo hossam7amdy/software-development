@@ -21,7 +21,7 @@ async function main() {
         await zmq.send({ action: 'pong', echo: message.echo })
       }
       return message
-    }
+    },
   })
 
   console.log('Server started')

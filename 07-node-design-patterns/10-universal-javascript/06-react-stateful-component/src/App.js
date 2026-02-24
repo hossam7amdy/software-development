@@ -9,7 +9,7 @@ export class App extends react.Component {
     super(props)
     this.state = {
       query: 'javascript',
-      label: 'JavaScript'
+      label: 'JavaScript',
     }
     this.setQuery = this.setQuery.bind(this)
   }

@@ -12,7 +12,7 @@ function download(url, filename) {
   let content
   return superagent
     .get(url)
-    .then(res => {
+    .then((res) => {
       content = res.text
       return mkdirpPromises(dirname(filename))
     })
@@ -29,7 +29,7 @@ function spiderLinks(currentUrl, content, nesting) {
   }
 
   const links = getPageLinks(currentUrl, content)
-  const promises = links.map(link => spider(link, nesting - 1))
+  const promises = links.map((link) => spider(link, nesting - 1))
 
   return Promise.all(promises)
 }
@@ -44,7 +44,7 @@ export function spider(url, nesting) {
   const filename = urlToFilename(url)
   return fsPromises
     .readFile(filename, 'utf8')
-    .catch(err => {
+    .catch((err) => {
       if (err.code !== 'ENOENT') {
         throw err
       }
@@ -52,5 +52,5 @@ export function spider(url, nesting) {
       // The file doesn't exist, so let’s download it
       return download(url, filename)
     })
-    .then(content => spiderLinks(url, content, nesting))
+    .then((content) => spiderLinks(url, content, nesting))
 }

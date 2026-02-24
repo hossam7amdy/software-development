@@ -132,8 +132,8 @@
           [],
           {
             hour: '2-digit',
-            minute: '2-digit'
-          }
+            minute: '2-digit',
+          },
         )}</span>`
         messagesDiv.appendChild(msgDiv)
         messagesDiv.scrollTop = messagesDiv.scrollHeight
@@ -146,7 +146,7 @@
       }
 
       const form = document.getElementById('msgForm')
-      form.addEventListener('submit', event => {
+      form.addEventListener('submit', (event) => {
         event.preventDefault()
         const input = document.getElementById('msgBox')
         const message = input.value.trim()

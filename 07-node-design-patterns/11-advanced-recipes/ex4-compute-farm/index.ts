@@ -9,7 +9,7 @@ function fib(n) {
 async function computeFib(n: number) {
   const response = await fetch('http://localhost:3000/execute', {
     method: 'POST',
-    body: JSON.stringify({ code, args: [n] })
+    body: JSON.stringify({ code, args: [n] }),
   })
   const result = await response.text()
   if (response.ok) {
@@ -29,9 +29,9 @@ Promise.allSettled([
   computeFib(45),
   computeFib(45),
   computeFib(45),
-  computeFib(45)
+  computeFib(45),
 ])
-  .catch(e => {
+  .catch((e) => {
     console.error('Error ❌', e)
     process.exit(1)
   })

@@ -91,11 +91,11 @@ Circular dependencies occur when two or more modules depend on each other. This 
 ### 1. Named Exports
 
 ```javascript
-exports.info = message => {
+exports.info = (message) => {
   console.log(`info: ${message}`)
 }
 
-exports.error = message => {
+exports.error = (message) => {
   console.log(`error: ${message}`)
 }
 ```
@@ -105,11 +105,11 @@ Most of the Node.js core modules use this pattern.
 ### 2. Exporting a Function
 
 ```javascript
-module.exports = message => {
+module.exports = (message) => {
   console.log(`info: ${message}`)
 }
 
-module.exports.error = message => {
+module.exports.error = (message) => {
   console.log(`error: ${message}`)
 }
 ```
@@ -159,11 +159,11 @@ ECMAScript Modules (ESM) is a module system for JavaScript that is built into th
 1. Named Exports
 
 ```javascript
-export const info = message => {
+export const info = (message) => {
   console.log(`info: ${message}`)
 }
 
-export const error = message => {
+export const error = (message) => {
   console.log(`error: ${message}`)
 }
 ```
@@ -171,7 +171,7 @@ export const error = message => {
 2. Default Exports
 
 ```javascript
-export default message => {
+export default (message) => {
   console.log(`info: ${message}`)
 }
 ```
@@ -182,11 +182,11 @@ publicly accessible from other modules.
 3. Mixed Exports
 
 ```javascript
-export const info = message => {
+export const info = (message) => {
   console.log(`info: ${message}`)
 }
 
-export default message => {
+export default (message) => {
   console.log(`info: ${message}`)
 }
 ```

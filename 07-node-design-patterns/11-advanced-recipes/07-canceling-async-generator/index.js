@@ -12,7 +12,7 @@ const cancelable = createAsyncCancelable(function* () {
 })
 
 const { promise, cancel } = cancelable()
-promise.catch(err => {
+promise.catch((err) => {
   if (err instanceof CancelError) {
     console.log('Function canceled')
   } else {

@@ -23,7 +23,7 @@ async function spiderLinks(currentUrl, content, nesting, queue) {
   }
 
   const links = getPageLinks(currentUrl, content)
-  const promises = links.map(link => spiderTask(link, nesting - 1, queue))
+  const promises = links.map((link) => spiderTask(link, nesting - 1, queue))
 
   return Promise.all(promises)
 }

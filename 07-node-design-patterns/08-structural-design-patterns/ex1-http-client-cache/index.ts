@@ -41,13 +41,13 @@ for (let i = 0; i < 10; i++) {
     .get('http://localhost:3001/books/1')
     .set({})
     .send({})
-    .then(res => console.log('GET Promise', res.body))
+    .then((res) => console.log('GET Promise', res.body))
     .catch(console.error)
 
   superagentCache
     .post('http://localhost:3001/books')
     .send({ title: 'Clean Code' })
-    .then(res => console.log('POST', res.statusCode))
+    .then((res) => console.log('POST', res.statusCode))
     .catch(console.error)
 
   await wait(1000)

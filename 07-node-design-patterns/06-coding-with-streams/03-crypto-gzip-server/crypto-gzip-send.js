@@ -19,11 +19,11 @@ const httpRequestOptions = {
     'Content-Type': 'application/octet-stream',
     'Content-Encoding': 'gzip',
     'X-Filename': basename(filename),
-    'X-Initialization-Vector': iv.toString('hex')
-  }
+    'X-Initialization-Vector': iv.toString('hex'),
+  },
 }
 
-const req = request(httpRequestOptions, res => {
+const req = request(httpRequestOptions, (res) => {
   console.log(`Server response: ${res.statusCode}`)
 })
 

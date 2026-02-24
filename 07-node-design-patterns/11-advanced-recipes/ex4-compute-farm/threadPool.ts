@@ -10,10 +10,10 @@ export class ThreadPool {
 
   constructor(
     private readonly file: string,
-    private readonly maxPool: number
+    private readonly maxPool: number,
   ) {
     this.pool = Array.from({ length: maxPool }, () =>
-      this._createLazyWorker(file)
+      this._createLazyWorker(file),
     )
     this.active = []
     this.waiting = []
@@ -21,7 +21,7 @@ export class ThreadPool {
     // Debug logging
     setInterval(() => {
       console.log(
-        `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`
+        `Pool stats - Active: ${this.active.length}, Available: ${this.pool.length}, Waiting: ${this.waiting.length}`,
       )
     }, 1000)
   }
@@ -34,7 +34,7 @@ export class ThreadPool {
           worker = new Worker(file)
         }
         return worker[prop]
-      }
+      },
     })
   }
 
@@ -56,10 +56,10 @@ export class ThreadPool {
         this.active.push(worker)
         resolve(worker)
       })
-      worker.once('exit', code => {
+      worker.once('exit', (code) => {
         console.log(`Worker exited with code ${code}`)
-        this.pool = this.pool.filter(w => w !== worker)
-        this.active = this.active.filter(w => w !== worker)
+        this.pool = this.pool.filter((w) => w !== worker)
+        this.active = this.active.filter((w) => w !== worker)
       })
     })
   }
@@ -69,7 +69,7 @@ export class ThreadPool {
       const { resolve } = this.waiting.shift()!
       return resolve(worker)
     }
-    this.active = this.active.filter(w => worker !== w)
+    this.active = this.active.filter((w) => worker !== w)
     this.pool.push(worker)
   }
 }

@@ -24,7 +24,7 @@ class FindRegex extends EventEmitter {
 
         const match = content.match(this.regex)
         if (match) {
-          match.forEach(elem => this.emit('found', file, elem))
+          match.forEach((elem) => this.emit('found', file, elem))
         }
       })
     }
@@ -38,6 +38,6 @@ findRegexInstance
   .addFile('fileB.json')
   .find()
   .on('found', (file, match) =>
-    console.log(`Matched "${match}" in file ${file}`)
+    console.log(`Matched "${match}" in file ${file}`),
   )
-  .on('error', err => console.error(`Error emitted ${err.message}`))
+  .on('error', (err) => console.error(`Error emitted ${err.message}`))

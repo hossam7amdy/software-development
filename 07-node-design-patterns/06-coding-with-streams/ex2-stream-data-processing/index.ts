@@ -16,13 +16,13 @@ async function main() {
     console.log('\n===== ANALYSIS RESULTS =====\n')
 
     console.log(
-      'Question 1: Did the number of crimes go up or down over the years?'
+      'Question 1: Did the number of crimes go up or down over the years?',
     )
     console.log(analyzeYearlyTrend(results.crimesByYear))
     console.log('\nYearly crime counts:')
     Object.keys(results.crimesByYear)
       .sort()
-      .forEach(year => {
+      .forEach((year) => {
         console.log(`${year}: ${results.crimesByYear[year]} crimes`)
       })
 
@@ -34,7 +34,7 @@ async function main() {
 
     console.log('\nQuestion 3: What is the most common crime per area?')
     const mostCommonByArea = findMostCommonCrimePerArea(
-      results.crimeTypesByArea
+      results.crimeTypesByArea,
     )
     Object.entries(mostCommonByArea).forEach(([area, { type, count }]) => {
       console.log(`${area}: ${type} (${count} incidents)`)
@@ -43,7 +43,7 @@ async function main() {
     console.log('\nQuestion 4: What is the least common crime?')
     const leastCommonCrime = findLeastCommonCrime(results.totalCrimesByType)
     console.log(
-      `${leastCommonCrime.type} with ${leastCommonCrime.count} incidents`
+      `${leastCommonCrime.type} with ${leastCommonCrime.count} incidents`,
     )
   } catch (error) {
     console.error('Error processing London Crime Data:', error)

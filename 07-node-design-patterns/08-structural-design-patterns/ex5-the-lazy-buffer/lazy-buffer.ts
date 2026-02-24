@@ -21,7 +21,7 @@ export function createLazyBuffer(size: number): Buffer {
 
       const fn = Reflect.get(buf!, property)
       return typeof fn === 'function' ? fn.bind(buf) : fn
-    }
+    },
   }
 
   const dummy = Object.create(Buffer.prototype)

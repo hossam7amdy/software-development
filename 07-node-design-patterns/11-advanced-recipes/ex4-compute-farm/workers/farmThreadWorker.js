@@ -1,7 +1,7 @@
 import { parentPort } from 'worker_threads'
 import { runInContext, createContext } from 'vm'
 
-parentPort.on('message', async msg => {
+parentPort.on('message', async (msg) => {
   try {
     // Common globals
     const context = createContext({
@@ -13,7 +13,7 @@ parentPort.on('message', async msg => {
       Promise,
       JSON,
       Math,
-      Date
+      Date,
     })
 
     // Properly spread arguments and handle both sync/async functions
@@ -28,26 +28,26 @@ parentPort.on('message', async msg => {
 
     parentPort.postMessage({
       event: 'end',
-      data: result
+      data: result,
     })
   } catch (e) {
     parentPort.postMessage({
       event: 'error',
       data: {
         message: e.message,
-        stack: e.stack
-      }
+        stack: e.stack,
+      },
     })
   }
 })
 
 // Handle uncaught exceptions
-process.on('uncaughtException', error => {
+process.on('uncaughtException', (error) => {
   parentPort.postMessage({
     event: 'error',
     data: {
       message: error.message,
-      stack: error.stack
-    }
+      stack: error.stack,
+    },
   })
 })

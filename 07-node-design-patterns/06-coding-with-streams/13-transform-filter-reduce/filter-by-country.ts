@@ -1,7 +1,7 @@
 import {
   Transform,
   type TransformCallback,
-  type TransformOptions
+  type TransformOptions,
 } from 'stream'
 import type { Record } from './types.js'
 
@@ -17,7 +17,7 @@ export class FilterByCountry extends Transform {
   _transform(
     record: Record,
     encoding: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ): void {
     if (record.country === this.country) {
       this.push(record, encoding)

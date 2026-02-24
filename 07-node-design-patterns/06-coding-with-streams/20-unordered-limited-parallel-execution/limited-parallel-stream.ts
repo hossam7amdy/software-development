@@ -1,13 +1,13 @@
 import {
   Transform,
   type TransformOptions,
-  type TransformCallback
+  type TransformCallback,
 } from 'stream'
 
 type UserTransform = (
   chunk: any,
   push: typeof Transform.prototype.push,
-  done: TransformCallback
+  done: TransformCallback,
 ) => void
 
 export class LimitedParallelStream extends Transform {
@@ -20,7 +20,7 @@ export class LimitedParallelStream extends Transform {
   constructor(
     concurrent: number,
     userTransform: UserTransform,
-    options?: TransformOptions
+    options?: TransformOptions,
   ) {
     super({ objectMode: true, ...options })
     this.userTransform = userTransform
@@ -33,7 +33,7 @@ export class LimitedParallelStream extends Transform {
   async _transform(
     chunk: any,
     _encoding: BufferEncoding,
-    done: TransformCallback
+    done: TransformCallback,
   ): Promise<void> {
     this.running++
     this.userTransform(chunk, this.push.bind(this), this._onComplete.bind(this))

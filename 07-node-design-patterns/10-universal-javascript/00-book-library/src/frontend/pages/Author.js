@@ -10,7 +10,7 @@ const html = htm.bind(React.createElement)
 export class Author extends AsyncPage {
   static async preloadAsyncData(props) {
     const response = await fetch(
-      `http://localhost:3000/api/author/${props.match.params.authorId}`
+      `http://localhost:3000/api/author/${props.match.params.authorId}`,
     )
     const body = await response.json()
     if (!response.ok) {
@@ -38,7 +38,8 @@ export class Author extends AsyncPage {
         <h3>Books</h3>
         <ul>
           ${this.state.author.books.map(
-            book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
+            (book) =>
+              html`<li key=${book.id}>${book.title} (${book.year})</li>`,
           )}
         </ul>
       </div>`

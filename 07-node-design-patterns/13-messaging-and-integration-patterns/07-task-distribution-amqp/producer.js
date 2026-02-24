@@ -15,7 +15,7 @@ async function main() {
     searchHash,
     ALPHABET,
     maxLength,
-    BATCH_SIZE
+    BATCH_SIZE,
   )
   for (const task of generatorObj) {
     channel.sendToQueue('tasks_queue', Buffer.from(JSON.stringify(task)))
@@ -26,4 +26,4 @@ async function main() {
   connection.close()
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

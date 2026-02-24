@@ -1,6 +1,6 @@
 export function createObservable<T extends object>(
   target: T,
-  observer: Function
+  observer: Function,
 ) {
   const observable = new Proxy<T>(target, {
     set(obj, prop, newValue) {
@@ -10,7 +10,7 @@ export function createObservable<T extends object>(
         observer({ prop, prev, curr: newValue })
       }
       return true
-    }
+    },
   })
 
   return observable

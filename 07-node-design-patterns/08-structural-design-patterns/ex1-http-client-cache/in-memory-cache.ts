@@ -10,6 +10,6 @@ export function createInMemoryCache<K, V>(expiration: number = 3000) {
 
   return {
     set,
-    get: cache.get.bind(cache)
+    get: cache.get.bind(cache),
   }
 }

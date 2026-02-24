@@ -11,7 +11,7 @@ export class AuthorsIndex extends react.Component {
     super(props)
     this.state = {
       authors: [],
-      loading: true
+      loading: true,
     }
   }
 
@@ -30,12 +30,12 @@ export class AuthorsIndex extends react.Component {
       <${Header} />
       <div>
         ${this.state.authors.map(
-          author =>
+          (author) =>
             html`<div key=${author.id}>
           <p>
             <${Link} to="${`/author/${author.id}`}">${author.name}</>
           </p>
-        </div>`
+        </div>`,
         )}
       </div>
     </div>`

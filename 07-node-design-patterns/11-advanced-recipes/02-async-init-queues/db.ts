@@ -14,7 +14,7 @@ export default class DB extends EventEmitter {
     setTimeout(() => {
       this.connected = true
       this.emit('connected')
-      this.#commandsQueue.forEach(command => command())
+      this.#commandsQueue.forEach((command) => command())
       this.#commandsQueue = []
     }, 500)
   }

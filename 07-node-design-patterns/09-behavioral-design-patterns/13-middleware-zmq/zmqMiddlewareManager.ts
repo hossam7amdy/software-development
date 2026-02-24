@@ -16,9 +16,9 @@ export class ZmqMiddlewareManager {
   async handleIncomingMessages() {
     for await (const [message] of this.socket) {
       await this.executeMiddlewares(this.inboundMiddlewares, message).catch(
-        err => {
+        (err) => {
           console.error('Error while processing the message', err)
-        }
+        },
       )
     }
   }
@@ -26,7 +26,7 @@ export class ZmqMiddlewareManager {
   async send(message: Message) {
     const finalMessage = await this.executeMiddlewares(
       this.outboundMiddlewares,
-      message
+      message,
     )
     return this.socket.send(finalMessage)
   }
@@ -42,7 +42,7 @@ export class ZmqMiddlewareManager {
 
   async executeMiddlewares(
     middlewares: MiddlewareFn[],
-    initialMessage: Message
+    initialMessage: Message,
   ) {
     let message: Message = initialMessage
     for await (const middlewareFunc of middlewares) {

@@ -1,7 +1,7 @@
 import { createServer } from 'net'
 
-const server = createServer(socket => {
-  socket.on('data', data => {
+const server = createServer((socket) => {
+  socket.on('data', (data) => {
     console.log('Client data', data.toString())
   })
 })

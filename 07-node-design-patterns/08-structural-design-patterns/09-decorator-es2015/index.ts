@@ -20,7 +20,7 @@ const enhancedCalculatorHandler = {
       }
     }
     return calculator[method]
-  }
+  },
 }
 
 const calculator = new StackCalculator()

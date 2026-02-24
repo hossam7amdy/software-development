@@ -40,7 +40,7 @@ registerApiRoutes(server)
 server.register(cors, {})
 server.register(fastifyStatic, {
   root: resolve(__dirname, '..', 'public'),
-  prefix: '/public/'
+  prefix: '/public/',
 })
 
 server.get('*', async (req, reply) => {
@@ -68,8 +68,8 @@ server.get('*', async (req, reply) => {
   const staticContext = {
     [location]: {
       data: staticData,
-      err: staticError
-    }
+      err: staticError,
+    },
   }
 
   const serverApp = html`<${StaticRouter}

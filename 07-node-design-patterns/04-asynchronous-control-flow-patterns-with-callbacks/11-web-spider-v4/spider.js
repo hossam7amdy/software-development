@@ -5,7 +5,7 @@ import mkdirp from 'mkdirp'
 import { urlToFilename, getPageLinks } from './utils.js'
 
 function saveFile(filename, contents, cb) {
-  mkdirp(path.dirname(filename), err => {
+  mkdirp(path.dirname(filename), (err) => {
     if (err) {
       return cb(err)
     }
@@ -19,7 +19,7 @@ function download(url, filename, cb) {
     if (err) {
       return cb(err)
     }
-    saveFile(filename, res.text, err => {
+    saveFile(filename, res.text, (err) => {
       if (err) {
         return cb(err)
       }
@@ -39,7 +39,7 @@ function spiderLinks(currentUrl, body, nesting, queue) {
     return
   }
 
-  links.forEach(link => spider(link, nesting - 1, queue))
+  links.forEach((link) => spider(link, nesting - 1, queue))
 }
 
 function spiderTask(url, nesting, queue, cb) {
@@ -72,7 +72,7 @@ export function spider(url, nesting, queue) {
   }
 
   spidering.add(url)
-  queue.pushTask(done => {
+  queue.pushTask((done) => {
     spiderTask(url, nesting, queue, done)
   })
 }

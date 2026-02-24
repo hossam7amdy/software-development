@@ -9,7 +9,7 @@ const html = htm.bind(react.createElement)
 export class Author extends react.Component {
   render() {
     const author = authors.find(
-      author => author.id === this.props.match.params.authorId
+      (author) => author.id === this.props.match.params.authorId,
     )
 
     if (!author) {
@@ -26,7 +26,7 @@ export class Author extends react.Component {
       <h3>Books</h3>
       <ul>
         ${author.books.map(
-          book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
+          (book) => html`<li key=${book.id}>${book.title} (${book.year})</li>`,
         )}
       </ul>
     </div>`

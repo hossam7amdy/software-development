@@ -10,7 +10,7 @@ async function main() {
       '0',
       'STREAMS',
       'results_stream',
-      lastRecordId
+      lastRecordId,
     )
     for (const [, logs] of data) {
       for (const [recordId, [, message]] of logs) {
@@ -21,4 +21,4 @@ async function main() {
   }
 }
 
-main().catch(err => console.error(err))
+main().catch((err) => console.error(err))

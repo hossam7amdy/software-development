@@ -34,11 +34,11 @@ export class Invoker {
   async runRemotely(cmd: Command) {
     const response = await fetch('http://localhost:3000/cmd', {
       method: 'POST',
-      body: JSON.stringify(cmd.serialize())
+      body: JSON.stringify(cmd.serialize()),
     })
     if (!response.ok) {
       throw new Error(
-        `Failed to execute the command on the remote server. ${response.statusText}`
+        `Failed to execute the command on the remote server. ${response.statusText}`,
       )
     }
     console.log('Command executed remotely', cmd.serialize())

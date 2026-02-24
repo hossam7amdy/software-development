@@ -11,29 +11,29 @@ export const authors = [
       {
         id: 'co5p9l1n',
         title: 'Dubliners',
-        year: 1914
+        year: 1914,
       },
       {
         id: 'fo4z1im5',
         title: 'The dead',
-        year: 1914
+        year: 1914,
       },
       {
         id: 'ufzrif1v',
         title: 'A Portrait of the Artist as a Young Man',
-        year: 1916
+        year: 1916,
       },
       {
         id: '6i9gar9h',
         title: 'Ulysses',
-        year: 1922
+        year: 1922,
       },
       {
         id: 'ijyucy0f',
         title: 'Finnegans Wake',
-        year: 1939
-      }
-    ]
+        year: 1939,
+      },
+    ],
   },
   {
     id: 'h-g-wells',
@@ -47,24 +47,24 @@ export const authors = [
       {
         id: 'kb1c2k6s',
         title: 'The Time Machine',
-        year: 1895
+        year: 1895,
       },
       {
         id: 'n0462d9k',
         title: 'The War of the Worlds',
-        year: 1898
+        year: 1898,
       },
       {
         id: 'ujhuxl7b',
         title: 'The First Men in the Moon',
-        year: 1901
+        year: 1901,
       },
       {
         id: 'nd7omihb',
         title: 'Men like gods',
-        year: 1923
-      }
-    ]
+        year: 1923,
+      },
+    ],
   },
   {
     id: 'orwell',
@@ -78,18 +78,18 @@ export const authors = [
       {
         id: 'gnjdojhr',
         title: 'Animal farm',
-        year: 1945
+        year: 1945,
       },
       {
         id: 'rcz0la09',
         title: 'Nineteen Eighty-Four',
-        year: 1949
+        year: 1949,
       },
       {
         id: 'tq5iaqq4',
         title: 'Such, Such Were the Joys',
-        year: 1952
-      }
-    ]
-  }
+        year: 1952,
+      },
+    ],
+  },
 ]

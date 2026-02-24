@@ -49,13 +49,13 @@ function makePublish(ee) {
   return function (eventName, ...args) {
     const handlers = eventMap[eventName]
     if (handlers) {
-      handlers.forEach(h => h(...args))
+      handlers.forEach((h) => h(...args))
     }
   }
 }
 
 // usage.js
-const myEE = new EventEmitter(publish => {
+const myEE = new EventEmitter((publish) => {
   setImmediate(() => {
     publish('name', 'hossam hamdy')
   })
@@ -72,6 +72,6 @@ const myEE = new EventEmitter(publish => {
 // attacks. We're not focused on that right now, but instead on the API
 // ergonomics.)
 
-myEE.on('name', name => {
+myEE.on('name', (name) => {
   console.log('My name is:', name)
 })

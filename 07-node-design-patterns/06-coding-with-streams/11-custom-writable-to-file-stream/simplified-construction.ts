@@ -10,7 +10,7 @@ const tfs = new Writable({
       .then(() => writeFile(chunk.path, chunk.content))
       .then(() => cb())
       .catch(cb)
-  }
+  },
 })
 
 tfs.write({ path: join('files', 'file1.txt'), content: 'Hello' })

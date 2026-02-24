@@ -11,21 +11,21 @@ const POSTS = [
     id: 'my-first-post',
     title: 'My first post',
     content: 'Hello World!\nThis is my first post',
-    created_at: new Date('2020-02-03')
+    created_at: new Date('2020-02-03'),
   },
   {
     id: 'iterator-patterns',
     title: 'Node.js iterator patterns',
     content: "Let's talk about some iterator patterns in Node.js\n\n...",
-    created_at: new Date('2020-02-06')
+    created_at: new Date('2020-02-06'),
   },
   {
     id: 'dependency-injection',
     title: 'Dependency injection in Node.js',
     content:
       'Today we will discuss about dependency injection in Node.js\n\n...',
-    created_at: new Date('2020-02-29')
-  }
+    created_at: new Date('2020-02-29'),
+  },
 ]
 
 const logger = (req: Request, res: Response) => {
@@ -37,7 +37,7 @@ const logger = (req: Request, res: Response) => {
     const [seconds, nanoseconds] = process.hrtime(startTime)
     const durationInMs = (seconds * 1000 + nanoseconds / 1e6).toFixed(2)
     console.log(
-      `[${timestamp}] ${method} ${url} ${res.statusCode} - ${durationInMs}ms`
+      `[${timestamp}] ${method} ${url} ${res.statusCode} - ${durationInMs}ms`,
     )
   })
 }
@@ -48,7 +48,7 @@ const json = (res: Response) => {
 
 const getPostHandler = (req: Request, res: Response) => {
   const postId = req.url?.split('/').at(-1) || ''
-  const post = POSTS.find(p => p.id === postId)
+  const post = POSTS.find((p) => p.id === postId)
 
   if (!post) {
     res.writeHead(404)
@@ -63,7 +63,7 @@ const getPostHandler = (req: Request, res: Response) => {
 const addNewPostHandler = (req: Request, res: Response) => {
   let body = ''
 
-  req.on('data', chunk => {
+  req.on('data', (chunk) => {
     body += chunk.toString()
   })
 
@@ -76,14 +76,14 @@ const addNewPostHandler = (req: Request, res: Response) => {
         res.writeHead(400)
         res.end(
           JSON.stringify({
-            message: 'Missing required fields (id, title, content)'
-          })
+            message: 'Missing required fields (id, title, content)',
+          }),
         )
         return
       }
 
       // Check if post with this ID already exists
-      if (POSTS.find(p => p.id === post.id)) {
+      if (POSTS.find((p) => p.id === post.id)) {
         res.writeHead(409)
         res.end(JSON.stringify({ message: 'Post with this ID already exists' }))
         return
@@ -111,7 +111,7 @@ const listPostsHandler = (req: Request, res: Response) => {
 
 const deletePostHandler = (req: Request, res: Response) => {
   const postId = req.url?.split('/').at(-1) || ''
-  const postIndex = POSTS.findIndex(p => p.id === postId)
+  const postIndex = POSTS.findIndex((p) => p.id === postId)
 
   if (postIndex === -1) {
     res.writeHead(404)
@@ -124,7 +124,7 @@ const deletePostHandler = (req: Request, res: Response) => {
 
   res.writeHead(200)
   res.end(
-    JSON.stringify({ message: 'Post deleted successfully', post: deletedPost })
+    JSON.stringify({ message: 'Post deleted successfully', post: deletedPost }),
   )
 }
 

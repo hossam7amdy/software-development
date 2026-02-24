@@ -4,7 +4,7 @@ import { WarehouseItem } from './WarehouseItem.js'
 export class DeliveredState implements IItemState {
   constructor(
     readonly item: WarehouseItem,
-    readonly address: string
+    readonly address: string,
   ) {}
 
   store(_locationId: string): void {
@@ -12,7 +12,7 @@ export class DeliveredState implements IItemState {
   }
   deliver(_address: string): void {
     throw new Error(
-      `Cannot store item ${this.item.id} because it's already delivered.`
+      `Cannot store item ${this.item.id} because it's already delivered.`,
     )
   }
   describe(): string {

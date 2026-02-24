@@ -1,7 +1,7 @@
 import {
   Transform,
   type TransformCallback,
-  type TransformOptions
+  type TransformOptions,
 } from 'stream'
 import type { Record } from './types.js'
 
@@ -17,7 +17,7 @@ export class SumProfit extends Transform {
   _transform(
     record: Record,
     _encoding: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ): void {
     this.total += parseFloat(record.profit)
     callback()

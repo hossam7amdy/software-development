@@ -8,7 +8,7 @@ if (!SUPPORTED_LANGUAGES.includes(selectedLanguage)) {
 
 const translationModule = `./strings-${selectedLanguage}.js` // ①
 import(translationModule) // ②
-  .then(strings => {
+  .then((strings) => {
     // ③
     console.log(strings.HELLO)
   })

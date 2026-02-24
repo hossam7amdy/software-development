@@ -34,12 +34,12 @@ const demultiplexChannel = (source: Readable, destinations: Writable[]) => {
   })
 
   source.on('end', () => {
-    destinations.forEach(dest => dest.end())
+    destinations.forEach((dest) => dest.end())
     console.log('Source channel closed')
   })
 }
 
-const server = createServer(socket => {
+const server = createServer((socket) => {
   const stdoutStream = createWriteStream('stdout.log')
   const stderrStream = createWriteStream('stderr.log')
   demultiplexChannel(socket, [stdoutStream, stderrStream])

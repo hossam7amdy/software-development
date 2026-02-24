@@ -32,7 +32,7 @@ pipeline(
   myParallelTransform,
   // pkgParallelTransform,
   createWriteStream('results.txt'),
-  err => {
+  (err) => {
     if (err) {
       console.error(err)
       process.exit(1)
@@ -41,14 +41,14 @@ pipeline(
 
     const end = performance.now()
     console.log(`Pipeline took ${end - start} ms`)
-  }
+  },
 )
 
 async function checkUrl(url: string) {
   const timeout = 5 * 1000
   return fetch(url, {
-    signal: AbortSignal.timeout(timeout)
-  }).then(response => {
+    signal: AbortSignal.timeout(timeout),
+  }).then((response) => {
     if (response.ok) {
       return response
     } else {

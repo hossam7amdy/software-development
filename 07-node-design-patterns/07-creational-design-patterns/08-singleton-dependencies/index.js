@@ -24,7 +24,7 @@ async function main() {
   if (posts.length === 0) {
     console.log(
       'No post available. Run `node import-posts.js`' +
-        ' to load some sample posts'
+        ' to load some sample posts',
     )
   }
 

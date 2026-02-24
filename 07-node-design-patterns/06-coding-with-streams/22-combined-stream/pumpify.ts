@@ -50,11 +50,11 @@ export function pumpify(...streams: Stream[]): Duplex {
       // The last stream will push data when it has it
       // This implementation doesn't need to do anything here
       // as the data events will be forwarded automatically
-    }
+    },
   })
 
   // Set up the pipeline
-  pipeline(streams, err => {
+  pipeline(streams, (err) => {
     if (err) {
       combinedStream.destroy(err)
     } else {
@@ -63,7 +63,7 @@ export function pumpify(...streams: Stream[]): Duplex {
   })
 
   // Forward data events from the last stream to our combined stream
-  readable.on('data', chunk => {
+  readable.on('data', (chunk) => {
     if (!combinedStream.push(chunk)) {
       readable.pause()
     }
@@ -81,7 +81,7 @@ export function pumpify(...streams: Stream[]): Duplex {
 
   // Forward errors from any stream in the pipeline
   for (const stream of streams) {
-    stream.on('error', err => {
+    stream.on('error', (err) => {
       combinedStream.destroy(err)
     })
   }

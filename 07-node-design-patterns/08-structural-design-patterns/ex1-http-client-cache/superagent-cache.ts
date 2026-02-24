@@ -13,7 +13,7 @@ const cloneResponse = (res: Response) => {
     text: res.text,
     status: res.status,
     statusCode: res.statusCode,
-    ok: res.ok
+    ok: res.ok,
   } as Response
 }
 
@@ -39,7 +39,7 @@ const handlers = {
             end: () => request_,
             then: promises.then.bind(promises),
             catch: promises.catch.bind(promises),
-            finally: promises.finally.bind(promises)
+            finally: promises.finally.bind(promises),
           })
         }
 
@@ -49,7 +49,7 @@ const handlers = {
             callback(err, res)
           })
         } else {
-          request_.then(res => {
+          request_.then((res) => {
             cache.set(cacheKey, cloneResponse(res) as Response)
           })
         }
@@ -57,7 +57,7 @@ const handlers = {
       }
     }
     return Reflect.get(request, method)
-  }
+  },
 }
 
 export function superagentCachePlugin(superagent: Superagent): Superagent {

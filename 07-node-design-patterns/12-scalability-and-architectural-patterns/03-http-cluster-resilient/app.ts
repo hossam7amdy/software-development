@@ -10,7 +10,7 @@ if (cluster.isPrimary) {
   cluster.on('exit', (worker, code) => {
     if (code !== 0 && !worker.exitedAfterDisconnect) {
       console.log(
-        `Worker ${worker.process.pid} crashed. ` + 'Starting a new worker'
+        `Worker ${worker.process.pid} crashed. ` + 'Starting a new worker',
       )
       cluster.fork()
     }
@@ -30,7 +30,7 @@ if (cluster.isPrimary) {
     () => {
       throw new Error('Oops')
     },
-    Math.ceil(Math.random() * 3) * 1000
+    Math.ceil(Math.random() * 3) * 1000,
   )
 
   server.listen(8080, () => console.log(`Started at ${pid}`))

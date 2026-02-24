@@ -12,10 +12,10 @@ const server = createServer((req, res) => {
 })
 
 const wss = new WebSocketServer({ server })
-wss.on('connection', async client => {
+wss.on('connection', async (client) => {
   console.log('Client connected')
 
-  client.on('message', msg => {
+  client.on('message', (msg) => {
     console.log(`Message: ${msg}`)
     redisClient.xadd('chat_stream', '*', 'message', msg)
   })
@@ -44,7 +44,7 @@ async function processStreamMessages() {
       '0',
       'STREAMS',
       'chat_stream',
-      lastRecordId
+      lastRecordId,
     )
     for (const [recordId, [, message]] of records) {
       console.log(`Message from stream: ${message}`)
@@ -54,6 +54,6 @@ async function processStreamMessages() {
   }
 }
 
-processStreamMessages().catch(err => console.error(err))
+processStreamMessages().catch((err) => console.error(err))
 
 server.listen(process.argv[2] || 8080)

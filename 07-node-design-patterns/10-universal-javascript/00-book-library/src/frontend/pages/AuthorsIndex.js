@@ -26,12 +26,12 @@ export class AuthorsIndex extends AsyncPage {
       <div>
         <div>
           ${this.state.authors.map(
-            author =>
+            (author) =>
               html`<div key="${author.id}">
                 <p>
                   <${Link} to="${`/author/${author.id}`}">${author.name}<//>
                 </p>
-              </div>`
+              </div>`,
           )}
         </div>
       </div>`

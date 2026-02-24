@@ -26,7 +26,7 @@ export type ProcessLondonCrimeData = (filePath: PathLike) => Promise<{
 }>
 
 export type FindMostCommonCrimePerArea = (
-  crimeTypesByArea: CrimeTypesByArea
+  crimeTypesByArea: CrimeTypesByArea,
 ) => CrimeTypesByArea
 
 export type AnalyzeYearlyTrend = (crimesByYear: CrimeByYear) => string
@@ -38,5 +38,5 @@ export type FindLeastCommonCrime = (totalCrimesByType: TotalCrimesByType) => {
 
 export type FindMostDangerousAreas = (
   crimesByArea: CrimeByYear,
-  limit?: number
+  limit?: number,
 ) => string[]

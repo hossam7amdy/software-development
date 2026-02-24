@@ -10,11 +10,11 @@ const colors = {
   reset: '\x1b[0m',
   red: '\x1b[31m',
   yellow: '\x1b[33m',
-  green: '\x1b[32m'
+  green: '\x1b[32m',
 }
 
 export const colorfulConsoleComposition = (
-  console: Console
+  console: Console,
 ): ColorfulConsole => {
   const consoleColors = ['red', 'yellow', 'green']
 
@@ -22,23 +22,23 @@ export const colorfulConsoleComposition = (
   const colorfulConsole: ColorfulConsole = Object.create(null)
 
   // Copy everything else from the original console
-  Object.getOwnPropertyNames(console).forEach(key => {
+  Object.getOwnPropertyNames(console).forEach((key) => {
     Object.defineProperty(colorfulConsole, key, {
       value: console[key],
       writable: true,
       enumerable: true,
-      configurable: true
+      configurable: true,
     })
   })
 
-  consoleColors.forEach(color => {
+  consoleColors.forEach((color) => {
     Object.defineProperty(colorfulConsole, color, {
       configurable: true,
       enumerable: true,
       get() {
         return function (...args: unknown[]) {
           colorfulConsole.log(
-            `${colors[color]}${args.join(' ')}${colors.reset}`
+            `${colors[color]}${args.join(' ')}${colors.reset}`,
           )
         }
       },
@@ -48,9 +48,9 @@ export const colorfulConsoleComposition = (
           value: val,
           writable: true,
           enumerable: true,
-          configurable: true
+          configurable: true,
         })
-      }
+      },
     })
   })
 
@@ -58,7 +58,7 @@ export const colorfulConsoleComposition = (
 }
 
 export const colorfulConsoleAugmentation = (
-  console: Console
+  console: Console,
 ): ColorfulConsole => {
   const colorfulConsole = console as ColorfulConsole
 
@@ -81,24 +81,24 @@ export const colorfulConsoleProxy = (console: Console): ColorfulConsole => {
       if (property === 'red') {
         return (message: unknown, ...rest: unknown[]) => {
           console.log(
-            `${colors.red}${message} ${rest.join(' ')}${colors.reset}`
+            `${colors.red}${message} ${rest.join(' ')}${colors.reset}`,
           )
         }
       } else if (property === 'yellow') {
         return (message: unknown, ...rest: unknown[]) => {
           console.log(
-            `${colors.yellow}${message} ${rest.join(' ')}${colors.reset}`
+            `${colors.yellow}${message} ${rest.join(' ')}${colors.reset}`,
           )
         }
       } else if (property === 'green') {
         return (message: unknown, ...rest: unknown[]) => {
           console.log(
-            `${colors.green}${message} ${rest.join(' ')}${colors.reset}`
+            `${colors.green}${message} ${rest.join(' ')}${colors.reset}`,
           )
         }
       }
       return Reflect.get(target, property)
-    }
+    },
   })
   return colorfulConsole as ColorfulConsole
 }

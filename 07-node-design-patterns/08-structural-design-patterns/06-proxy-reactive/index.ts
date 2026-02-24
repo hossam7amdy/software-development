@@ -7,7 +7,7 @@ function calculateTotal(invoice) {
 const invoice = {
   subtotal: 100,
   discount: 10,
-  tax: 20
+  tax: 20,
 }
 let total = calculateTotal(invoice)
 console.log(`Starting total: ${total}`)

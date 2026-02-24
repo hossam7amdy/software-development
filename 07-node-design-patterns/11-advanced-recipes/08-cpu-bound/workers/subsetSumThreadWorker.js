@@ -1,17 +1,17 @@
 import { parentPort } from 'worker_threads'
 import { SubsetSum } from '../subsetSum.js'
 
-parentPort.on('message', msg => {
+parentPort.on('message', (msg) => {
   const subsetSum = new SubsetSum(msg.sum, msg.set)
 
-  subsetSum.on('match', data => {
+  subsetSum.on('match', (data) => {
     parentPort.postMessage({ event: 'match', data: data })
   })
 
-  subsetSum.on('end', data => {
+  subsetSum.on('end', (data) => {
     parentPort.postMessage({
       event: 'finish',
-      data: subsetSum.totalSubsets
+      data: subsetSum.totalSubsets,
     })
     parentPort.postMessage({ event: 'end', data: data })
   })

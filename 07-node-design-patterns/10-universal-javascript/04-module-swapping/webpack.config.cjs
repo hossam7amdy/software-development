@@ -32,7 +32,7 @@ module.exports = {
 
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 
   plugins: [
@@ -40,8 +40,8 @@ module.exports = {
     new HtmlWebpackPlugin(),
     new webpack.NormalModuleReplacementPlugin(
       /src\/say-hello\.js$/,
-      path.resolve(__dirname, 'src', 'say-hello-browser.js')
-    )
+      path.resolve(__dirname, 'src', 'say-hello-browser.js'),
+    ),
   ],
 
   module: {
@@ -58,13 +58,13 @@ module.exports = {
             [
               '@babel/preset-env',
               {
-                modules: false
-              }
-            ]
-          ]
-        }
-      }
-    ]
+                modules: false,
+              },
+            ],
+          ],
+        },
+      },
+    ],
   },
 
   optimization: {
@@ -72,14 +72,14 @@ module.exports = {
       cacheGroups: {
         vendors: {
           priority: -10,
-          test: /[\\/]node_modules[\\/]/
-        }
+          test: /[\\/]node_modules[\\/]/,
+        },
       },
 
       chunks: 'async',
       minChunks: 1,
       minSize: 30000,
-      name: true
+      name: true,
     },
     minimize: true,
     minimizer: [
@@ -87,18 +87,18 @@ module.exports = {
         terserOptions: {
           mangle: false,
           output: {
-            beautify: true
+            beautify: true,
           },
           compress: {
             dead_code: true,
-            if_return: true
-          }
-        }
-      })
-    ]
+            if_return: true,
+          },
+        },
+      }),
+    ],
   },
 
   devServer: {
-    open: true
-  }
+    open: true,
+  },
 }

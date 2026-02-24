@@ -34,7 +34,7 @@ async function initializeSockets() {
 initializeSockets()
 
 const wss = new WebSocketServer({ server })
-wss.on('connection', client => {
+wss.on('connection', (client) => {
   console.log('Client connected')
   client.on('message', (msg: Buffer) => {
     console.log(`Message: ${msg.toString()}`)

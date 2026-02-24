@@ -27,7 +27,7 @@ const server = fastify({ logger: true })
 
 server.register(fastifyStatic, {
   root: resolve(__dirname, '..', 'public'),
-  prefix: '/public/'
+  prefix: '/public/',
 })
 
 server.get('*', async (req, reply) => {

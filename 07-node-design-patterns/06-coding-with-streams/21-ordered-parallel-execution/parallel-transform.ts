@@ -1,7 +1,7 @@
 import {
   Transform,
   type TransformCallback,
-  type TransformOptions
+  type TransformOptions,
 } from 'stream'
 
 type TransformFn = (chunk: any, callback: TransformCallback) => void
@@ -19,7 +19,7 @@ export class ParallelTransform extends Transform {
   constructor(
     maxParallel: number,
     transformFn: TransformFn,
-    options?: TransformOptions & { ordered?: boolean }
+    options?: TransformOptions & { ordered?: boolean },
   ) {
     super({ ...options, objectMode: true })
     this.maxParallel = maxParallel
@@ -34,7 +34,7 @@ export class ParallelTransform extends Transform {
   _transform(
     chunk: any,
     encoding: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ): void {
     this.running++
     const pos = this.top++

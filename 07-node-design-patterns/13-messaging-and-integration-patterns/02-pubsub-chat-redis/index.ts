@@ -14,14 +14,14 @@ const server = createServer((req, res) => {
   return staticHandler(req, res, { public: 'www' })
 })
 const wss = new WebSocketServer({ server })
-wss.on('connection', client => {
+wss.on('connection', (client) => {
   console.log('Client connected')
   client.on('message', (msg: Buffer) => {
     console.log(`Message: ${msg}`)
     redisPub.publish('chat_messages', msg)
   })
 })
-redisSub.subscribe('chat_messages', msg => {
+redisSub.subscribe('chat_messages', (msg) => {
   for (const client of wss.clients) {
     if (client.readyState === ws.OPEN) {
       client.send(msg)

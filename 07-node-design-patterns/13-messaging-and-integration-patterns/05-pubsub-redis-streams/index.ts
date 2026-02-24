@@ -15,7 +15,7 @@ const server = createServer((req, res) => {
 })
 
 const wss = new WebSocketServer({ server })
-wss.on('connection', async client => {
+wss.on('connection', async (client) => {
   console.log('Client connected')
 
   client.on('message', (msg: Buffer) => {
@@ -44,12 +44,12 @@ const processStreamMessages = async () => {
     const result: any = await redisClientXRead.xRead(
       {
         id: lastRecordId,
-        key: 'chat_stream'
+        key: 'chat_stream',
       },
       {
         BLOCK: 0,
-        COUNT: 100
-      }
+        COUNT: 100,
+      },
     )
 
     if (!result) continue
@@ -63,7 +63,7 @@ const processStreamMessages = async () => {
   }
 }
 
-processStreamMessages().catch(err => console.error(err))
+processStreamMessages().catch((err) => console.error(err))
 
 server.listen(PORT, HOST, () => {
   console.log(`Server is running at http://${HOST}:${PORT}/`)

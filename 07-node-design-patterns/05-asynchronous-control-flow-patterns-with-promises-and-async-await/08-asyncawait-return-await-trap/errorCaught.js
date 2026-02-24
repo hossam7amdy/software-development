@@ -14,6 +14,6 @@ async function errorCaught() {
   }
 }
 
-errorCaught().catch(err =>
-  console.error('Error caught by the caller: ' + err.message)
+errorCaught().catch((err) =>
+  console.error('Error caught by the caller: ' + err.message),
 )

@@ -61,7 +61,7 @@ export class UrlBuilder {
       this.port,
       this.pathname,
       this.search,
-      this.hash
+      this.hash,
     )
   }
 }

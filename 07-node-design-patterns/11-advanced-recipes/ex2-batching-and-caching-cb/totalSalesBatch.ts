@@ -18,6 +18,6 @@ export const totalSales = (product: string, cb: Callback) => {
   totalSalesRaw(product, (err, result) => {
     const waitingCallbacks = runningRequests.get(product)!
     runningRequests.delete(product)
-    waitingCallbacks.forEach(cb => cb(err, result))
+    waitingCallbacks.forEach((cb) => cb(err, result))
   })
 }

@@ -5,7 +5,7 @@ import mkdirp from 'mkdirp'
 import { urlToFilename, getPageLinks } from './utils.js'
 
 function saveFile(filename, contents, cb) {
-  mkdirp(path.dirname(filename), err => {
+  mkdirp(path.dirname(filename), (err) => {
     if (err) {
       return cb(err)
     }
@@ -19,7 +19,7 @@ function download(url, filename, cb) {
     if (err) {
       return cb(err)
     }
-    saveFile(filename, res.text, err => {
+    saveFile(filename, res.text, (err) => {
       if (err) {
         return cb(err)
       }

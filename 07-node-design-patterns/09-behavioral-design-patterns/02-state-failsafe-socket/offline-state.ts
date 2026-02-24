@@ -18,7 +18,7 @@ export class OfflineState {
       () => {
         console.log('Connection established')
         this.failSafeSocket.changeState('online')
-      }
+      },
     )
     this.failSafeSocket.socket.once('error', retry)
   }

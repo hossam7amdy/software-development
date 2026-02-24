@@ -3,11 +3,11 @@ import { SubsetSum } from '../subsetSum.js'
 process.on('message', (msg: any) => {
   const subsetSum = new SubsetSum(msg.sum, msg.set)
 
-  subsetSum.on('match', data => {
+  subsetSum.on('match', (data) => {
     process.send!({ event: 'match', data })
   })
 
-  subsetSum.on('end', data => {
+  subsetSum.on('end', (data) => {
     process.send!({ event: 'finish', data: subsetSum.totalSubsets })
     process.send!({ event: 'end', data })
   })

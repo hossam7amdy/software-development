@@ -18,6 +18,6 @@ export const createPostStatusCmd = (service: Service, status: string) => {
     },
     serialize() {
       return { type: 'status', action: 'post', status }
-    }
+    },
   }
 }

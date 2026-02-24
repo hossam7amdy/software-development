@@ -8,10 +8,10 @@ export function createUploadStream(filename: string) {
     .post('http://localhost:3000', connector, {
       headers: {
         'Content-Type': 'application/octet-stream',
-        'X-Filename': filename
-      }
+        'X-Filename': filename,
+      },
     })
-    .catch(err => {
+    .catch((err) => {
       connector.emit(err)
     })
 

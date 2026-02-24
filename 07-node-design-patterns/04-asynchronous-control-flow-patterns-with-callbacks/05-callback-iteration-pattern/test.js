@@ -1,16 +1,16 @@
 const tasks = [
-  cb => {
+  (cb) => {
     console.log('Task 1')
     setTimeout(cb, 1000)
   },
-  cb => {
+  (cb) => {
     console.log('Task 2')
     setTimeout(cb, 1000)
   },
-  cb => {
+  (cb) => {
     console.log('Task 3')
     setTimeout(cb, 1000)
-  }
+  },
 ]
 
 function iterate(index) {

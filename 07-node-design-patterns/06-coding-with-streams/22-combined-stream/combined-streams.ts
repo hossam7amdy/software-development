@@ -3,7 +3,7 @@ import {
   type BinaryLike,
   createCipheriv,
   createDecipheriv,
-  scryptSync
+  scryptSync,
 } from 'crypto'
 import pumpify from './pumpify.js'
 
@@ -13,7 +13,7 @@ function createKey(password: string) {
 
 export function createCompressAndEncrypt(
   password: string,
-  iv: BinaryLike | Buffer<ArrayBufferLike> | null
+  iv: BinaryLike | Buffer<ArrayBufferLike> | null,
 ) {
   const key = createKey(password)
 
@@ -25,7 +25,7 @@ export function createCompressAndEncrypt(
 
 export function createDecryptAndDecompress(
   password: string,
-  iv: BinaryLike | null
+  iv: BinaryLike | null,
 ) {
   const key = createKey(password)
 

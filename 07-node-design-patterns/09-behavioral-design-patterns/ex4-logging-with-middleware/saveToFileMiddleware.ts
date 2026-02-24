@@ -15,7 +15,7 @@ export const saveToFileMiddleware = (options?: {
 
   return (message: string) => {
     const stream = createWriteStream(join(path, filename), {
-      flags: 'a' // append mode
+      flags: 'a', // append mode
     })
     stream.write(message + EOL)
   }

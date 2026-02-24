@@ -14,14 +14,14 @@ class Profiler {
     const diff = process.hrtime(this.#lastTime)
     console.log(
       `Timer "${this.#label}" took ${diff[0]} seconds ` +
-        `and ${diff[1]} nanoseconds.`
+        `and ${diff[1]} nanoseconds.`,
     )
   }
 }
 
 const noopProfiler = {
   start() {},
-  end() {}
+  end() {},
 }
 
 export function createProfiler(label: string) {

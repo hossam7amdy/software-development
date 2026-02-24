@@ -5,8 +5,8 @@ const PORT = 3001
 const books = [
   {
     id: '1',
-    title: 'Node.js Design Patterns'
-  }
+    title: 'Node.js Design Patterns',
+  },
 ]
 
 const server = createServer((req, res) => {
@@ -32,7 +32,7 @@ const server = createServer((req, res) => {
 server.on('request', (req, res) => {
   req.on('end', () => {
     console.log(
-      `${new Date().toISOString()} [${req.method}] ${req.url} - ${res.statusCode}`
+      `${new Date().toISOString()} [${req.method}] ${req.url} - ${res.statusCode}`,
     )
   })
 })

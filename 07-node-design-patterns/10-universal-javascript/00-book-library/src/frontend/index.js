@@ -11,5 +11,5 @@ ReactDOM.hydrateRoot(
   document.getElementById('root'),
   html`<${BrowserRouter}>
 <${App} />
-</${BrowserRouter}>`
+</${BrowserRouter}>`,
 )

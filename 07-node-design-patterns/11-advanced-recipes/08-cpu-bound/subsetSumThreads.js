@@ -19,7 +19,7 @@ export class SubsetSum extends EventEmitter {
     const worker = await workers.acquire()
     worker.postMessage({ sum: this.sum, set: this.set })
 
-    const onMessage = msg => {
+    const onMessage = (msg) => {
       if (msg.event === 'end') {
         worker.removeListener('message', onMessage)
         workers.release(worker)

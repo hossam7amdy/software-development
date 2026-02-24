@@ -4,7 +4,7 @@ import { Matrix } from './matrix.js'
 const matrix2x2 = new Matrix([
   [1, 2, 3],
   [4, 5, 6],
-  [7, 8, 9]
+  [7, 8, 9],
 ])
 
 const it = matrix2x2[Symbol.iterator]()
@@ -21,6 +21,6 @@ const [oneOne, oneTwo, twoOne, twoTwo] = matrix2x2
 console.log(oneOne, oneTwo, twoOne, twoTwo)
 
 const stream = Readable.from(matrix2x2)
-stream.on('data', chunk => {
+stream.on('data', (chunk) => {
   console.log('chunk', chunk)
 })

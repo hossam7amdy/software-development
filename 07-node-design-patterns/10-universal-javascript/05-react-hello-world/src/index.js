@@ -10,7 +10,7 @@ class Hello extends react.Component {
     return h('h1', null, [
       // ④
       'Hello ',
-      this.props.name || 'World'
+      this.props.name || 'World',
     ])
   }
 }
@@ -18,5 +18,5 @@ class Hello extends react.Component {
 ReactDOM.render(
   // ⑤
   h(Hello, { name: 'React' }),
-  document.getElementsByTagName('body')[0]
+  document.getElementsByTagName('body')[0],
 )

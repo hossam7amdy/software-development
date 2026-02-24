@@ -11,14 +11,14 @@ export const concatFiles = (dest: string, files: string[]): Promise<void> => {
           transform: (
             filename: string,
             _enc: BufferEncoding,
-            done: TransformCallback
+            done: TransformCallback,
           ) => {
             const src = createReadStream(filename)
             src.pipe(destStream, { end: false })
             src.on('error', done)
             src.on('end', done)
-          }
-        })
+          },
+        }),
       )
       .on('error', rejects)
       .on('finish', () => {

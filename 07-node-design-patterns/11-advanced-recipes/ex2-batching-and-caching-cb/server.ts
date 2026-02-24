@@ -14,14 +14,14 @@ const server = createServer((req, res) => {
   console.log(`Processing query: ${url.search}`)
 
   res.writeHead(200, {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
   })
   totalSales(product, (err, sum) => {
     res.write(
       JSON.stringify({
         product,
-        sum: sum.toLocaleString()
-      })
+        sum: sum.toLocaleString(),
+      }),
     )
     return res.end(EOL)
   })

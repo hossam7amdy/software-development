@@ -14,7 +14,7 @@ export class ImmutableBuffer {
         continue
       }
 
-      if (MODIFIER_NAMES.some(m => prop.startsWith(m))) {
+      if (MODIFIER_NAMES.some((m) => prop.startsWith(m))) {
         modifiers[prop] = (buffer[prop] as Buffer['write']).bind(buffer)
       } else {
         this[prop] = (buffer[prop] as Buffer['readInt8']).bind(buffer)

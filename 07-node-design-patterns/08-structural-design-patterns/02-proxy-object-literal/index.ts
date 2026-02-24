@@ -61,7 +61,7 @@ function createSafeCalculator(calculator) {
     },
     multiply() {
       return calculator.multiply()
-    }
+    },
   }
 }
 

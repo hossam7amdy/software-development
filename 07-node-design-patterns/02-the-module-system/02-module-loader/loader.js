@@ -32,7 +32,7 @@ require = function require(moduleName) {
   const module = {
     // ③
     exports: {},
-    id
+    id,
   }
   // Update the cache
   require.cache[id] = module // ④
@@ -45,7 +45,7 @@ require = function require(moduleName) {
 }
 
 require.cache = {}
-require.resolve = moduleName => {
+require.resolve = (moduleName) => {
   // reuse the original resolving algorithm for simplicity
   return originalRequire.resolve(moduleName)
 }

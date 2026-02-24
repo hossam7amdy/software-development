@@ -12,11 +12,11 @@ const randomStream = new Readable({
     if (chance.bool({ likelihood: 5 })) {
       this.push(null)
     }
-  }
+  },
 })
 
 randomStream
-  .on('data', chunk => {
+  .on('data', (chunk) => {
     console.log(`Chunk received (${chunk.length} bytes): ${chunk.toString()}`)
   })
   .on('end', () => {

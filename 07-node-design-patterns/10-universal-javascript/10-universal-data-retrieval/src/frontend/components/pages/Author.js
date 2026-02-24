@@ -10,7 +10,7 @@ const html = htm.bind(react.createElement)
 export class Author extends AsyncPage {
   static async preloadAsyncData(props) {
     const { body } = await superagent.get(
-      `http://localhost:3001/api/author/${props.match.params.authorId}`
+      `http://localhost:3001/api/author/${props.match.params.authorId}`,
     )
     return { author: body }
   }
@@ -37,7 +37,7 @@ export class Author extends AsyncPage {
       <h3>Books</h3>
       <ul>
         ${this.state.author.books.map(
-          book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
+          (book) => html`<li key=${book.id}>${book.title} (${book.year})</li>`,
         )}
       </ul>
     </div>`

@@ -9,7 +9,7 @@ const PORT = 3000
 const destinations: Map<number, Writable> = new Map()
 
 const monitor = new PassThrough()
-monitor.on('data', data => {
+monitor.on('data', (data) => {
   console.log('monitor data:', data.toString())
 })
 
@@ -58,7 +58,7 @@ const saveFileStream = (source: Readable) => {
   })
 }
 
-const server = createServer(socket => {
+const server = createServer((socket) => {
   saveFileStream(socket.pipe(monitor))
 })
 

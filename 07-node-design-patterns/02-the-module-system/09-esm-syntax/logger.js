@@ -13,7 +13,7 @@ export const LEVELS = {
   warn: 2,
   data: 3,
   info: 4,
-  verbose: 5
+  verbose: 5,
 }
 
 // exports a class

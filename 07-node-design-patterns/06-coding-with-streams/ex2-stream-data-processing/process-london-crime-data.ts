@@ -8,19 +8,19 @@ const crimesByArea = {}
 const crimeTypesByArea = {}
 const totalCrimesByType = {}
 
-const processLondonCrimeData: ProcessLondonCrimeData = filePath => {
+const processLondonCrimeData: ProcessLondonCrimeData = (filePath) => {
   return new Promise((resolve, reject) => {
     // Create read stream and interface for line-by-line processing
     const fileStream = createReadStream(filePath)
     const rl = createInterface({
       input: fileStream,
-      crlfDelay: Infinity
+      crlfDelay: Infinity,
     })
 
     let isFirstLine = true
     let headers: string[] = []
 
-    rl.on('line', line => {
+    rl.on('line', (line) => {
       if (isFirstLine) {
         headers = line.split(',')
         isFirstLine = false
@@ -56,11 +56,11 @@ const processLondonCrimeData: ProcessLondonCrimeData = filePath => {
         crimesByYear,
         crimesByArea,
         crimeTypesByArea,
-        totalCrimesByType
+        totalCrimesByType,
       })
     })
 
-    fileStream.on('error', err => {
+    fileStream.on('error', (err) => {
       reject(err)
     })
   })

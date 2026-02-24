@@ -11,7 +11,7 @@ const fetchProductSum = async (query: string) => {
 }
 
 function sendRequest() {
-  fetchProductSum(query).then(result => {
+  fetchProductSum(query).then((result) => {
     console.log(result.status, result.body)
     if (!--pending) {
       console.log(`All completed in: ${Date.now() - start}ms`)

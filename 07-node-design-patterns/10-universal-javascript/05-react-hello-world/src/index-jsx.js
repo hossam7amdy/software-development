@@ -10,5 +10,5 @@ class Hello extends react.Component {
 
 ReactDOM.render(
   <Hello name="React" />,
-  document.getElementsByTagName('body')[0]
+  document.getElementsByTagName('body')[0],
 )

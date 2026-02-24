@@ -16,11 +16,11 @@ async function main() {
     async inbound(message) {
       console.log('Echoed back', message)
       return message
-    }
+    },
   })
 
   setInterval(() => {
-    zmq.send({ action: 'ping', echo: Date.now() } as any).catch(err => {
+    zmq.send({ action: 'ping', echo: Date.now() } as any).catch((err) => {
       console.error(err)
     })
   }, 1000)

@@ -6,14 +6,14 @@ export const routes = [
   {
     exact: true,
     path: '/',
-    component: AuthorsIndex
+    component: AuthorsIndex,
   },
   {
     path: '/author/:authorId',
-    component: Author
+    component: Author,
   },
   {
     path: '*',
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ]

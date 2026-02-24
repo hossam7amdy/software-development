@@ -5,7 +5,7 @@ const html = htm.bind(react.createElement)
 
 function createRequestUri(query) {
   return `https://api.github.com/search/repositories?q=${encodeURIComponent(
-    query
+    query,
   )}&sort=updated`
 }
 
@@ -14,19 +14,19 @@ export class RecentGithubProjects extends react.Component {
     super(props)
     this.state = {
       loading: true,
-      projects: []
+      projects: [],
     }
   }
 
   async loadData() {
     this.setState({ loading: true, projects: [] })
     const response = await fetch(createRequestUri(this.props.query), {
-      mode: 'cors'
+      mode: 'cors',
     })
     const responseBody = await response.json()
     this.setState({
       projects: responseBody.items,
-      loading: false
+      loading: false,
     })
   }
 
@@ -47,12 +47,12 @@ export class RecentGithubProjects extends react.Component {
 
     return html`<ul>
       ${this.state.projects.map(
-        project => html`
+        (project) => html`
           <li key=${project.id}>
             <a href=${project.html_url}>${project.full_name}</a>:
             ${' '}${project.description}
           </li>
-        `
+        `,
       )}
     </ul>`
   }

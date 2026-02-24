@@ -5,7 +5,7 @@ export class SubsetSum extends EventEmitter {
   private runningCombine: number
   constructor(
     readonly sum: number,
-    readonly set: number[]
+    readonly set: number[],
   ) {
     super()
     this.totalSubsets = 0

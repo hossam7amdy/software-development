@@ -16,13 +16,13 @@ const server = createServer(async (req, res) => {
   const sum = await totalSales(product)
 
   res.writeHead(200, {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
   })
   res.write(
     JSON.stringify({
       product,
-      sum: sum.toLocaleString()
-    })
+      sum: sum.toLocaleString(),
+    }),
   )
   return res.end(EOL)
 })

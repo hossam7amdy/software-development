@@ -14,14 +14,14 @@ export class AMQPRequest {
 
     this.channel.consume(
       this.replyQueue,
-      msg => {
+      (msg) => {
         const correlationId = msg.properties.correlationId
         const handler = this.correlationMap.get(correlationId)
         if (handler) {
           handler(JSON.parse(msg.content.toString()))
         }
       },
-      { noAck: true }
+      { noAck: true },
     )
   }
 
@@ -33,7 +33,7 @@ export class AMQPRequest {
         reject(new Error('Request timeout'))
       }, 10000)
 
-      this.correlationMap.set(id, replyData => {
+      this.correlationMap.set(id, (replyData) => {
         this.correlationMap.delete(id)
         clearTimeout(replyTimeout)
         resolve(replyData)
@@ -41,7 +41,7 @@ export class AMQPRequest {
 
       this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
         correlationId: id,
-        replyTo: this.replyQueue
+        replyTo: this.replyQueue,
       })
     })
   }

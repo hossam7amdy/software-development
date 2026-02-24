@@ -4,7 +4,7 @@ const evenNumber = new Proxy([], {
   },
   has(_, index) {
     return Number(index) % 2 === 0
-  }
+  },
 })
 
 // 0,2,4,6,8

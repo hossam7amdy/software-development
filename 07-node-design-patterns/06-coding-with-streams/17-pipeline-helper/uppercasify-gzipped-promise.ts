@@ -8,11 +8,11 @@ const toUpperCase = new Transform({
   transform(
     chunk: any,
     _encoding: BufferEncoding,
-    callback: TransformCallback
+    callback: TransformCallback,
   ) {
     this.push(chunk.toString().toUpperCase())
     callback()
-  }
+  },
 })
 
 async function main() {
@@ -21,7 +21,7 @@ async function main() {
       process.stdin,
       createUnzip(),
       toUpperCase,
-      process.stdout
+      process.stdout,
     )
   } catch (e) {
     console.error(e)

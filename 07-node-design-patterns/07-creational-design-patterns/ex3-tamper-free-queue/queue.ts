@@ -22,7 +22,7 @@ class Queue<T> {
       return Promise.resolve(this.#messages.shift() as T)
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.#resolvers.push(resolve)
     })
   }

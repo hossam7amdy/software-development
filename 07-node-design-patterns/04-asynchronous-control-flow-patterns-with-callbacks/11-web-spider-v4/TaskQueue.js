@@ -21,7 +21,7 @@ export class TaskQueue extends EventEmitter {
 
     while (this.running < this.concurrency && this.queue.length) {
       const task = this.queue.shift()
-      task(err => {
+      task((err) => {
         if (err) {
           this.emit('error', err)
         }

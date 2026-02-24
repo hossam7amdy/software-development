@@ -9,7 +9,7 @@ export class OnlineState {
   }
 
   _safeWrite(data: any) {
-    this.failSafeSocket.socket?.write(data, err => {
+    this.failSafeSocket.socket?.write(data, (err) => {
       if (err) {
         this.failSafeSocket.changeState('offline')
         return

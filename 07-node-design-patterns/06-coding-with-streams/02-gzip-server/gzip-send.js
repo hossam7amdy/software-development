@@ -14,11 +14,11 @@ const httpRequestOptions = {
   headers: {
     'Content-Type': 'application/octet-stream',
     'Content-Encoding': 'gzip',
-    'X-Filename': basename(filename)
-  }
+    'X-Filename': basename(filename),
+  },
 }
 
-const req = request(httpRequestOptions, res => {
+const req = request(httpRequestOptions, (res) => {
   console.log(`Server response: ${res.statusCode}`)
 })
 

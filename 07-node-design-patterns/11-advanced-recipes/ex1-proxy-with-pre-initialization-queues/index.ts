@@ -3,7 +3,7 @@ import { db } from './db.js'
 
 const proxiedDb = createDeferredProxy(db, {
   deferredMethods: ['query'],
-  initProps: 'connected'
+  initProps: 'connected',
 })
 
 proxiedDb.connect()

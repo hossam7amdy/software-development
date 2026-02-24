@@ -18,7 +18,7 @@ export class FailSafeSocket {
     this.socket = null
     this.states = {
       offline: new OfflineState(this),
-      online: new OnlineState(this)
+      online: new OnlineState(this),
     }
     this.changeState('offline')
   }

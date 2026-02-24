@@ -27,14 +27,14 @@ export const createFSAdapter = (db: Level): FSAdapter => {
           return callback && callback(err)
         }
         callback && callback(null, data)
-      }
+      },
     )
   }
   const writeFile = (
     filename: string,
     data: any,
     options?: any,
-    callback?: any
+    callback?: any,
   ) => {
     if (typeof options === 'function') {
       callback = options
@@ -47,7 +47,7 @@ export const createFSAdapter = (db: Level): FSAdapter => {
       resolve(filename),
       data,
       { valueEncoding: options.encoding },
-      callback
+      callback,
     )
   }
 
@@ -61,6 +61,6 @@ export const createFSAdapter2 = (db: Level): FSAdapter => {
 
   return {
     readFile: getCallbackified.bind(db),
-    writeFile: putCallbackified.bind(db)
+    writeFile: putCallbackified.bind(db),
   }
 }

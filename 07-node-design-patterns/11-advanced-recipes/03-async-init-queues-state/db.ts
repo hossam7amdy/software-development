@@ -17,7 +17,7 @@ class QueuingState {
   constructor(readonly db: DB) {
     this.commandsQueue = []
 
-    METHODS_REQUIRING_CONNECTION.forEach(methodName => {
+    METHODS_REQUIRING_CONNECTION.forEach((methodName) => {
       this[methodName] = (...args: unknown[]) => {
         console.log('Command queued:', methodName, args)
         return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ class QueuingState {
   }
 
   [deactivate]() {
-    this.commandsQueue.forEach(command => command())
+    this.commandsQueue.forEach((command) => command())
     this.commandsQueue = []
   }
 }

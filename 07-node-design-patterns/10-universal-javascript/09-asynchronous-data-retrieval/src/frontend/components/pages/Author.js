@@ -11,7 +11,7 @@ export class Author extends react.Component {
     super(props)
     this.state = {
       author: null,
-      loading: true
+      loading: true,
     }
   }
 
@@ -20,7 +20,7 @@ export class Author extends react.Component {
     this.setState({ loading: false, author })
     try {
       const { body } = await superagent.get(
-        `http://localhost:3001/api/author/${this.props.match.params.authorId}`
+        `http://localhost:3001/api/author/${this.props.match.params.authorId}`,
       )
       author = body
     } catch (e) {}
@@ -57,7 +57,7 @@ export class Author extends react.Component {
       <h3>Books</h3>
       <ul>
         ${this.state.author.books.map(
-          book => html`<li key=${book.id}>${book.title} (${book.year})</li>`
+          (book) => html`<li key=${book.id}>${book.title} (${book.year})</li>`,
         )}
       </ul>
     </div>`

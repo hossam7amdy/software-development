@@ -1,7 +1,7 @@
 import { TaskQueue } from './TaskQueue.js'
 
 function makeSampleTask(name) {
-  return cb => {
+  return (cb) => {
     console.log(`${name} started`)
     setTimeout(() => {
       console.log(`${name} completed`)
@@ -32,7 +32,7 @@ function task2(cb) {
   queue
     .pushTask(makeSampleTask('task2 -> subtask 1'))
     .pushTask(makeSampleTask('task2 -> subtask 2'))
-    .pushTask(done => done(new Error('Simulated error')))
+    .pushTask((done) => done(new Error('Simulated error')))
     .pushTask(makeSampleTask('task2 -> subtask 3'))
   setTimeout(() => {
     console.log('Task 2 completed')

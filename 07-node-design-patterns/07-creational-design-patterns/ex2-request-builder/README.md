@@ -52,7 +52,7 @@ const response = await request
   .setQuery('version', '1.0')
   .setBody({
     title: 'Hello World',
-    content: 'This is a test post'
+    content: 'This is a test post',
   })
   .setTimeout(5000) // 5 second timeout
   .invoke()

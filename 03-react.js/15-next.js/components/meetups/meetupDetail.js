@@ -1,4 +1,4 @@
-import classes from "./meetupDetail.module.css";
+import classes from './meetupDetail.module.css'
 
 function MeetupDetail(props) {
   return (
@@ -8,7 +8,7 @@ function MeetupDetail(props) {
       <address>{props.address}</address>
       <p>{props.description}</p>
     </section>
-  );
+  )
 }
 
-export default MeetupDetail;
+export default MeetupDetail

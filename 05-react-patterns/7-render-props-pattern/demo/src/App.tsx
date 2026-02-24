@@ -1,11 +1,11 @@
-import "./App.css";
-import { Fahrenheit } from "./components/Fahrenheit";
-import { Input } from "./components/Input";
-import { Kelvin } from "./components/Kelvin";
+import './App.css'
+import { Fahrenheit } from './components/Fahrenheit'
+import { Input } from './components/Input'
+import { Kelvin } from './components/Kelvin'
 
 function App() {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: 'center' }}>
       <h1>☃️ Temperature Converter 🌞</h1>
       <Input>
         {(value: string) => (
@@ -16,7 +16,7 @@ function App() {
         )}
       </Input>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

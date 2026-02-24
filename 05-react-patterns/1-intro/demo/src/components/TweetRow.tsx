@@ -1,10 +1,10 @@
-import { Tweet } from "../types";
+import { Tweet } from '../types'
 
 interface Props {
-  tweet: Tweet;
+  tweet: Tweet
 }
 export const TweetRow = ({ tweet }: Props) => {
-  const color = tweet.isLocal ? "inherit" : "red";
+  const color = tweet.isLocal ? 'inherit' : 'red'
 
   return (
     <tr>
@@ -13,5 +13,5 @@ export const TweetRow = ({ tweet }: Props) => {
       </td>
       <td>{tweet.retweets}</td>
     </tr>
-  );
-};
+  )
+}

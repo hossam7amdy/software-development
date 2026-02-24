@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
 const Input = (props) => {
   return (
@@ -12,7 +12,7 @@ const Input = (props) => {
         onBlur={props.onBlur}
       />
     </Fragment>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

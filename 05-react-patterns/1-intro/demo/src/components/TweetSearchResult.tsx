@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Tweet } from "../types";
-import { SearchBar } from "./SearchBar";
-import { TweetList } from "./TweetList";
+import { useState } from 'react'
+import { Tweet } from '../types'
+import { SearchBar } from './SearchBar'
+import { TweetList } from './TweetList'
 
 interface Props {
-  tweets: Tweet[];
+  tweets: Tweet[]
 }
 export const TweetSearchResult = ({ tweets }: Props) => {
-  const [filterText, setFilterText] = useState("");
-  const [inThisLocation, setInThisLocation] = useState(false);
+  const [filterText, setFilterText] = useState('')
+  const [inThisLocation, setInThisLocation] = useState(false)
 
   return (
     <div>
@@ -22,5 +22,5 @@ export const TweetSearchResult = ({ tweets }: Props) => {
         inThisLocation={inThisLocation}
       />
     </div>
-  );
-};
+  )
+}

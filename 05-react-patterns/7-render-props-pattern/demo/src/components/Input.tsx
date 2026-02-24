@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 export const Input = (props: any) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('')
 
   return (
     <>
@@ -12,5 +12,5 @@ export const Input = (props: any) => {
       />
       {props.children(value)}
     </>
-  );
-};
+  )
+}

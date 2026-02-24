@@ -4,7 +4,7 @@
 }
 
 .form input {
-  font:inherit;
+  font: inherit;
   padding: 0.25rem;
   border: none;
   border-bottom: 3px solid #ccc;

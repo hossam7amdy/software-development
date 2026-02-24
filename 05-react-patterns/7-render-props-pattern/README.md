@@ -5,9 +5,9 @@ Render props is a pattern that allows us to pass a function as a prop to a compo
 ## Example
 
 ```jsx
-<Title render={() => <h1>I am a render prop!</h1>} />;
+;<Title render={() => <h1>I am a render prop!</h1>} />
 
-const Title = (props) => props.render();
+const Title = (props) => props.render()
 ```
 
 ## Render props
@@ -21,7 +21,7 @@ const Title = (props) => (
     {props.renderSecondComponent()}
     {props.renderThirdComponent()}
   </>
-);
+)
 ```
 
 ## Children as a function
@@ -60,15 +60,15 @@ In some cases, we can replace render props with Hooks. For example, the followin
 
 ```jsx
 function RenderProps(props) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null)
 
   useEffect(() => {
     fetch(props.url)
       .then((response) => response.json())
-      .then((data) => setData(data));
-  }, [props.url]);
+      .then((data) => setData(data))
+  }, [props.url])
 
-  return <div>{data}</div>;
+  return <div>{data}</div>
 }
 ```
 

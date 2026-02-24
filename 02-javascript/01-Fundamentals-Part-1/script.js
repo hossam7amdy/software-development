@@ -167,10 +167,10 @@ Test data:
 Data 1: Test for bill values 275, 40 and 430
 */
 
-const bill = 430;
-const tip = 50 <= bill && bill <= 300 ? 0.15 * bill : 0.2 * bill;
+const bill = 430
+const tip = 50 <= bill && bill <= 300 ? 0.15 * bill : 0.2 * bill
 
 console.log(
-  `The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}.`
-);
+  `The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}.`,
+)
 //////////////////////////////////////////////

@@ -106,7 +106,7 @@ const egypt = {
 
   book(flightNum, name) {
     console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}.`
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}.`,
     );
     this.bookings.push({ Passenger: name, flightNumber: flightNum });
   },
@@ -221,7 +221,7 @@ const poll = {
 
   registerNewAnswer: function () {
     const input = prompt(
-      `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      `${this.question}\n${this.options.join('\n')}\n(Write option number)`,
     );
 
     if (0 <= input && input <= 3) {

@@ -33,7 +33,7 @@ console.log(newBudget3);
 // Pure function
 const checkExpense = function (state) {
   return state.map(entry =>
-    entry.value < -getLimit(entry.user) ? { ...entry, flag: 'limit' } : entry
+    entry.value < -getLimit(entry.user) ? { ...entry, flag: 'limit' } : entry,
   );
 };
 const finalBudget = checkExpense(newBudget3);

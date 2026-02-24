@@ -21,7 +21,7 @@ GREY COLOR: #343a40
 /* GENERAL STYLES */
 /* ------------------------ */
 body {
-  font-family: "inter", sans-serif;
+  font-family: 'inter', sans-serif;
   color: #343a40;
   border-bottom: 8px solid #087f5b;
 }

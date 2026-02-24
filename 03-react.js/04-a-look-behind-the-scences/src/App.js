@@ -1,14 +1,14 @@
-import React, { useCallback, useState } from "react";
-import Button from "./components/UI/Button/Button";
+import React, { useCallback, useState } from 'react'
+import Button from './components/UI/Button/Button'
 
-import "./App.css";
-import DemoOutput from "./components/Demo/DemoOutput";
+import './App.css'
+import DemoOutput from './components/Demo/DemoOutput'
 
 function App() {
-  const [showParagraph, setShowParagraph] = useState(false);
-  const [allowToggle, setAllowToggle] = useState(false);
+  const [showParagraph, setShowParagraph] = useState(false)
+  const [allowToggle, setAllowToggle] = useState(false)
 
-  console.log("App RUNNING");
+  console.log('App RUNNING')
 
   // useCallback(): memoized callback function.
   // Think of memoization as caching a value so that it does not need to be recalculated.
@@ -16,13 +16,13 @@ function App() {
   // Don't re-create the function untile (allowToggle) changes
   const toggleParagraphHandler = useCallback(() => {
     if (allowToggle) {
-      setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+      setShowParagraph((prevShowParagraph) => !prevShowParagraph)
     }
-  }, [allowToggle]);
+  }, [allowToggle])
 
   const allowToggleHandler = useCallback(() => {
-    setAllowToggle(true);
-  }, []);
+    setAllowToggle(true)
+  }, [])
 
   return (
     <div className="app">
@@ -31,7 +31,7 @@ function App() {
       <Button onClick={allowToggleHandler}>Allow Toggling</Button>
       <Button onClick={toggleParagraphHandler}>Toggle Paragraph!</Button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

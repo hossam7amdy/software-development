@@ -1,3 +1,3 @@
-import TWEETS from "./API_DATA.json";
+import TWEETS from './API_DATA.json'
 
-export type Tweet = (typeof TWEETS)[number];
+export type Tweet = (typeof TWEETS)[number]

@@ -1,3 +1,3 @@
 while (!shouldExit) {
-  processEvents();
+  processEvents()
 }

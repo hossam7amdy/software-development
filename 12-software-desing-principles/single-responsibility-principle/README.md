@@ -116,9 +116,9 @@ To follow the SRP, we can refactor the `OrderModule` module into multiple module
 ```ts
 module OrderModule {
   export function placeOrder(order: Order) {
-    OrderService.createOrder(order);
-    EmailService.sendConfirmationEmail(order);
-    InventoryService.updateInventory(order);
+    OrderService.createOrder(order)
+    EmailService.sendConfirmationEmail(order)
+    InventoryService.updateInventory(order)
   }
 }
 

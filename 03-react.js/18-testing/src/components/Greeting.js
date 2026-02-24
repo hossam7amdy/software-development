@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import Output from "./Output";
-import Acync from "./Async";
+import Output from './Output'
+import Acync from './Async'
 
 export const Greeting = () => {
-  const [changeText, setChangeText] = useState(false);
+  const [changeText, setChangeText] = useState(false)
 
   return (
     <div>
@@ -14,5 +14,5 @@ export const Greeting = () => {
       {changeText && <Output>Changed!</Output>}
       <button onClick={() => setChangeText(true)}>Change Text!</button>
     </div>
-  );
-};
+  )
+}

@@ -1,5 +1,5 @@
-import { withHover } from "../HOCs/withHover";
-import { withLoader } from "../HOCs/withLoader";
+import { withHover } from '../HOCs/withHover'
+import { withLoader } from '../HOCs/withLoader'
 
 function DogImages(props: any) {
   return (
@@ -14,9 +14,9 @@ function DogImages(props: any) {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 export default withHover(
-  withLoader(DogImages, "https://dog.ceo/api/breed/labrador/images/random/3")
-);
+  withLoader(DogImages, 'https://dog.ceo/api/breed/labrador/images/random/3'),
+)

@@ -50,7 +50,7 @@ btnScrollTo.addEventListener('click', function (e) {
   console.log(
     'height/width viewport',
     document.documentElement.clientHeight,
-    document.documentElement.clientWidth
+    document.documentElement.clientWidth,
   );
 
   // Scrolling
@@ -108,7 +108,7 @@ tabsContainer.addEventListener('click', function (e) {
 
   // Remove Active Classes
   operationContents.forEach(c =>
-    c.classList.remove('operations__content--active')
+    c.classList.remove('operations__content--active'),
   );
   operationTabs.forEach(t => t.classList.remove('operations__tab--active'));
 
@@ -232,7 +232,7 @@ const Slider = function () {
     slides.forEach(function (_, i) {
       dotContainer.insertAdjacentHTML(
         'beforeend',
-        `<button class="dots__dot" data-slide="${i}"></button>`
+        `<button class="dots__dot" data-slide="${i}"></button>`,
       );
     });
   };

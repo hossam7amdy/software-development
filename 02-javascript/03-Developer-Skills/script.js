@@ -1,5 +1,5 @@
 // Remember, we're gonna use strict mode in all scripts now!
-"use strict";
+'use strict'
 
 /*//// Developer Tools /////
   1- Install prettier
@@ -44,16 +44,16 @@ Test data:
 */
 
 function printForecast(arr) {
-  let result = "...";
+  let result = '...'
   for (let i = 0; i < arr.length; i++) {
-    result += ` ${arr[i]}°C in ${i + 1} days ...`;
+    result += ` ${arr[i]}°C in ${i + 1} days ...`
   }
 
-  console.log(result);
+  console.log(result)
 }
 
-const temps1 = [17, 21, 23];
-const temps2 = [12, 5, -5, 0, 4];
+const temps1 = [17, 21, 23]
+const temps2 = [12, 5, -5, 0, 4]
 
-printForecast(temps1);
-printForecast(temps2);
+printForecast(temps1)
+printForecast(temps2)

@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 
 /*  // TEST STRICT MODE //
 
@@ -183,26 +183,26 @@ Test data: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
 */
 
 const calcTip = (value) =>
-  50 <= value && value <= 300 ? value * 0.15 : value * 0.2;
+  50 <= value && value <= 300 ? value * 0.15 : value * 0.2
 
 function calcAverage(arr) {
   let sum = 0,
-    len = arr.length;
-  for (let i = 0; i < len; i++) sum += arr[i];
+    len = arr.length
+  for (let i = 0; i < len; i++) sum += arr[i]
 
-  return sum / len;
+  return sum / len
 }
 
-const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
-const tips = [];
-const total = [];
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52]
+const tips = []
+const total = []
 
 for (let i = 0; i < bills.length; i++) {
-  tips[i] = calcTip(bills[i]);
-  total[i] = bills[i] + tips[i];
+  tips[i] = calcTip(bills[i])
+  total[i] = bills[i] + tips[i]
 }
 
-console.log(bills, tips, total);
+console.log(bills, tips, total)
 console.log(`Bill Average = ${calcAverage(bills)}
 Tips Average = ${calcAverage(tips)},
-Total Average = ${calcAverage(total)}`);
+Total Average = ${calcAverage(total)}`)

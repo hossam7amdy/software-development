@@ -1,10 +1,10 @@
-import useInput from "../hooks/use-input";
-import Input from "./Input";
+import useInput from '../hooks/use-input'
+import Input from './Input'
 
 const isValidEmail = (email) => {
-  const regex = /^[a-zA-Z]+\w*@[a-zA-Z]+[.][a-zA-Z]{2,}$/g;
-  return regex.test(email);
-};
+  const regex = /^[a-zA-Z]+\w*@[a-zA-Z]+[.][a-zA-Z]{2,}$/g
+  return regex.test(email)
+}
 
 const SimpleInput = (props) => {
   const {
@@ -14,7 +14,7 @@ const SimpleInput = (props) => {
     valueInputChangeHandler: nameInputChangeHandler,
     valueInputBlurHandler: nameInputBlurHandler,
     reset: resetNameInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '')
 
   const {
     value: enteredEmail,
@@ -23,24 +23,24 @@ const SimpleInput = (props) => {
     valueInputChangeHandler: emailInputChangeHandler,
     valueInputBlurHandler: emailInputBlurHandler,
     reset: resetEmailInput,
-  } = useInput(isValidEmail);
+  } = useInput(isValidEmail)
 
-  const formIsValid = enteredNameIsValid && enteredEmailIsValid;
+  const formIsValid = enteredNameIsValid && enteredEmailIsValid
 
   const formSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    console.log(enteredName);
-    console.log(enteredEmail);
+    console.log(enteredName)
+    console.log(enteredEmail)
 
-    resetNameInput();
-    resetEmailInput();
-  };
+    resetNameInput()
+    resetEmailInput()
+  }
 
-  const inputNameClasses = `form-control ${nameInputHasError ? "invalid" : ""}`;
+  const inputNameClasses = `form-control ${nameInputHasError ? 'invalid' : ''}`
   const inputEmailClasses = `form-control ${
-    emailInputHasError ? "invalid" : ""
-  }`;
+    emailInputHasError ? 'invalid' : ''
+  }`
 
   return (
     <form onSubmit={formSubmitHandler}>
@@ -73,7 +73,7 @@ const SimpleInput = (props) => {
         <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SimpleInput;
+export default SimpleInput

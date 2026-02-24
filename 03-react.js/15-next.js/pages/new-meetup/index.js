@@ -1,30 +1,30 @@
 // our-domain.com/new-meetup
 
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { Fragment } from "react";
-import NewCommentForm from "../../components/meetups/NewMeetupForm";
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import { Fragment } from 'react'
+import NewCommentForm from '../../components/meetups/NewMeetupForm'
 
 function NewMeetup() {
-  const router = useRouter();
+  const router = useRouter()
 
   async function addMeetupHandler(enteredMeetupData) {
     try {
-      const response = await fetch("api/new-meetup", {
-        method: "POST",
+      const response = await fetch('api/new-meetup', {
+        method: 'POST',
         body: JSON.stringify(enteredMeetupData),
-        headers: { "Content-Type": "application/json" },
-      });
+        headers: { 'Content-Type': 'application/json' },
+      })
 
       if (!response.ok) {
-        throw new Error(response.statusText || "something went wrong");
+        throw new Error(response.statusText || 'something went wrong')
       }
 
-      const data = await response.json();
-      console.log(data);
-      router.replace("/");
+      const data = await response.json()
+      console.log(data)
+      router.replace('/')
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
@@ -39,7 +39,7 @@ function NewMeetup() {
       </Head>
       <NewCommentForm onAddMeetup={addMeetupHandler} />
     </Fragment>
-  );
+  )
 }
 
-export default NewMeetup;
+export default NewMeetup

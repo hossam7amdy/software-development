@@ -1,5 +1,5 @@
-import Card from "../UI/Card";
-import styles from "./UsersList.module.css";
+import Card from '../UI/Card'
+import styles from './UsersList.module.css'
 
 const UsersList = (props) => {
   return (
@@ -12,7 +12,7 @@ const UsersList = (props) => {
         ))}
       </ul>
     </Card>
-  );
-};
+  )
+}
 
-export default UsersList;
+export default UsersList

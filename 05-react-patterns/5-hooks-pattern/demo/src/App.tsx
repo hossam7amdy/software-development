@@ -1,8 +1,8 @@
-import "./App.css";
-import FunctionCounter from "./components/FunctionCounter";
+import './App.css'
+import FunctionCounter from './components/FunctionCounter'
 
 function App() {
-  return <FunctionCounter />;
+  return <FunctionCounter />
 }
 
-export default App;
+export default App

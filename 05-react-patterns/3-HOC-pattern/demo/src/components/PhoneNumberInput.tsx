@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 export function PhoneNumberInput() {
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value as string;
-    let digits = value.replace(/\D+/g, "").slice(0, 10);
+    const value = e.target.value as string
+    let digits = value.replace(/\D+/g, '').slice(0, 10)
 
     if (digits.length >= 7) {
-      digits = digits.slice(0, 6) + "-" + digits.slice(6);
+      digits = digits.slice(0, 6) + '-' + digits.slice(6)
     }
     if (digits.length >= 4) {
-      digits = "(" + digits.slice(0, 3) + ")" + digits.slice(3);
+      digits = '(' + digits.slice(0, 3) + ')' + digits.slice(3)
     }
 
-    setPhone(digits);
-  };
+    setPhone(digits)
+  }
 
   return (
     <input
@@ -23,5 +23,5 @@ export function PhoneNumberInput() {
       data-testid="phone-number-input"
       onChange={handleChange}
     />
-  );
+  )
 }

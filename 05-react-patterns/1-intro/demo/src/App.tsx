@@ -1,10 +1,10 @@
-import "./App.css";
+import './App.css'
 
-import tweets from "./API_DATA.json";
-import { TweetSearchResult } from "./components/TweetSearchResult";
+import tweets from './API_DATA.json'
+import { TweetSearchResult } from './components/TweetSearchResult'
 
 function App() {
-  return <TweetSearchResult tweets={tweets} />;
+  return <TweetSearchResult tweets={tweets} />
 }
 
-export default App;
+export default App

@@ -1,22 +1,22 @@
-import { useHover } from "../hooks/useHover";
-import { useFetch } from "../hooks/useFetch";
+import { useHover } from '../hooks/useHover'
+import { useFetch } from '../hooks/useFetch'
 
 export default function DogImages(props: any) {
-  const { ref, hovering } = useHover();
+  const { ref, hovering } = useHover()
   const { loading, data, error } = useFetch(
-    "https://dog.ceo/api/breeds/image/random/3"
-  );
+    'https://dog.ceo/api/breeds/image/random/3',
+  )
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   if (error) {
     return (
-      <span style={{ color: "red" }}>
+      <span style={{ color: 'red' }}>
         something went wrong! {JSON.stringify(error)}
       </span>
-    );
+    )
   }
 
   return (
@@ -31,5 +31,5 @@ export default function DogImages(props: any) {
         ))}
       </ul>
     </div>
-  );
+  )
 }

@@ -173,7 +173,7 @@ for (const flight of flights.split('+')) {
   const [status, from, to, time] = flight.trim().replace('_', '').split(';');
   const output = `${status.startsWith('Delayed') ? '🛑' : ''} ${status.replace(
     '_',
-    ' '
+    ' ',
   )} from ${from.slice(0, 3).toUpperCase()} to ${to
     .slice(0, 3)
     .toUpperCase()} (${time.replace(':', 'h')})`;
@@ -389,13 +389,13 @@ console.log(gameEvents);
 // 3.
 const time = Math.max(...gameEvents.keys()); // Get real match duration
 console.log(
-  `An event happened, on average, every ${time / gameEvents.size} minutes`
+  `An event happened, on average, every ${time / gameEvents.size} minutes`,
 );
 
 // 4.
 for (const [minute, event] of gameEvents)
   console.log(
-    `[${minute <= 45 ? 'FIRST' : 'SECOND'} HALF] ${minute}: ${event}`
+    `[${minute <= 45 ? 'FIRST' : 'SECOND'} HALF] ${minute}: ${event}`,
   );
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -425,7 +425,7 @@ document.querySelector('button').addEventListener('click', function () {
 
     const output = `${first}${second.replace(
       second[0],
-      second[0].toUpperCase()
+      second[0].toUpperCase(),
     )}`;
 
     console.log(`${output.padEnd(20)} ${'✅'.repeat(i + 1)}`);

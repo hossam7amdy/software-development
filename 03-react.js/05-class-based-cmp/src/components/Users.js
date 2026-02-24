@@ -1,22 +1,22 @@
-import { Component } from "react";
-import User from "./User";
+import { Component } from 'react'
+import User from './User'
 
-import classes from "./Users.module.css";
+import classes from './Users.module.css'
 
 class Users extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       showUsers: true,
-      more: "Test",
-    };
+      more: 'Test',
+    }
   }
 
   toggleUsersHandler() {
     // this.state.showUsers = false; // NOT
     this.setState((curState) => {
-      return { showUsers: !curState.showUsers };
-    });
+      return { showUsers: !curState.showUsers }
+    })
   }
 
   render() {
@@ -26,16 +26,16 @@ class Users extends Component {
           <User key={user.id} name={user.name} />
         ))}
       </ul>
-    );
+    )
 
     return (
       <div className={classes.users}>
         <button onClick={this.toggleUsersHandler.bind(this)}>
-          {this.state.showUsers ? "Hide" : "Show"} Users
+          {this.state.showUsers ? 'Hide' : 'Show'} Users
         </button>
         {this.state.showUsers && usersList}
       </div>
-    );
+    )
   }
 }
 
@@ -64,4 +64,4 @@ class Users extends Component {
 //   );
 // };
 
-export default Users;
+export default Users

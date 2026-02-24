@@ -1,8 +1,8 @@
-import "./App.css";
-import DogImages from "./components/DogImagesUsingHooks";
+import './App.css'
+import DogImages from './components/DogImagesUsingHooks'
 
 function App() {
-  return <DogImages />;
+  return <DogImages />
 }
 
-export default App;
+export default App

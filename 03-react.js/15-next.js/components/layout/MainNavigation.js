@@ -1,5 +1,5 @@
-import classes from "./MainNavigation.module.css";
-import Link from "next/link";
+import classes from './MainNavigation.module.css'
+import Link from 'next/link'
 
 function MainNavigation() {
   return (
@@ -16,7 +16,7 @@ function MainNavigation() {
         </ul>
       </nav>
     </header>
-  );
+  )
 }
 
-export default MainNavigation;
+export default MainNavigation

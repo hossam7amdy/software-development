@@ -1,3 +1,3 @@
-const myName: string = "hossam hamdy";
+const myName: string = 'hossam hamdy'
 
-console.log(myName);
+console.log(myName)

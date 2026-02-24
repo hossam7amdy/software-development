@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 export const withHover = (Element: React.FC) => {
   return (props: any) => {
-    const [hovering, setHovering] = useState(false);
+    const [hovering, setHovering] = useState(false)
 
     return (
       <Element
@@ -11,6 +11,6 @@ export const withHover = (Element: React.FC) => {
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       />
-    );
-  };
-};
+    )
+  }
+}

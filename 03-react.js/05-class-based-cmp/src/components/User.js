@@ -1,13 +1,13 @@
-import { Component } from "react";
-import classes from "./User.module.css";
+import { Component } from 'react'
+import classes from './User.module.css'
 
 class User extends Component {
   componentWillUnmount() {
-    console.log("User will unmount!");
+    console.log('User will unmount!')
   }
 
   render() {
-    return <li className={classes.user}>{this.props.name}</li>;
+    return <li className={classes.user}>{this.props.name}</li>
   }
 }
 
@@ -17,4 +17,4 @@ class User extends Component {
 //   };
 // }
 
-export default User;
+export default User

@@ -1,41 +1,41 @@
-import { Fragment, Component } from "react";
+import { Fragment, Component } from 'react'
 
-import classes from "./UserFinder.module.css";
-import Users from "./Users";
+import classes from './UserFinder.module.css'
+import Users from './Users'
 
 const DUMMY_USERS = [
-  { id: "u1", name: "Max" },
-  { id: "u2", name: "Manuel" },
-  { id: "u3", name: "Julie" },
-];
+  { id: 'u1', name: 'Max' },
+  { id: 'u2', name: 'Manuel' },
+  { id: 'u3', name: 'Julie' },
+]
 
 class UserFinder extends Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       filteredUsers: [],
-      searchTerm: "",
-    };
+      searchTerm: '',
+    }
   }
 
   componentDidMount() {
     // http request ...
-    this.setState({ filteredUsers: DUMMY_USERS });
+    this.setState({ filteredUsers: DUMMY_USERS })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchTerm !== this.state.searchTerm) {
       this.setState({
         filteredUsers: DUMMY_USERS.filter((user) =>
-          user.name.includes(this.state.searchTerm)
+          user.name.includes(this.state.searchTerm),
         ),
-      });
+      })
     }
   }
 
   searchChangeHandler(event) {
-    this.setState({ searchTerm: event.target.value });
+    this.setState({ searchTerm: event.target.value })
   }
 
   render() {
@@ -46,7 +46,7 @@ class UserFinder extends Component {
         </div>
         <Users users={this.state.filteredUsers} />
       </Fragment>
-    );
+    )
   }
 }
 
@@ -74,4 +74,4 @@ class UserFinder extends Component {
 //   );
 // };
 
-export default UserFinder;
+export default UserFinder

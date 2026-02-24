@@ -137,7 +137,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
     console.log(
       `Dog number ${idx + 1} is ${
         dog >= 3 ? `an adult, and is ${dog} years old` : 'still a puppy 🐶'
-      }.`
+      }.`,
     );
   });
 };
@@ -169,7 +169,7 @@ console.log(movementsUSD);
 const movementsDescription = movementsUSD.map(
   mov,
   idx =>
-    `Movement ${idx + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${abs(mov)}`
+    `Movement ${idx + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${abs(mov)}`,
 );
 console.log(movementsDescription);
 
@@ -201,7 +201,7 @@ const maxVal = movements.reduce(function (acc, mov) {
 // Arrow function
 const maxVal2 = movements.reduce(
   (acc, mov) => (acc = mov > acc ? mov : acc),
-  movements[0]
+  movements[0],
 );
 console.log(maxVal);
 console.log(maxVal2);
@@ -307,7 +307,7 @@ const z = Array.from({ length: 7 }, (_, i) => i + 1);
 console.log(z);
 
 const rand = Array.from({ length: 50 }, () =>
-  Math.trunc(Math.random() * 100 + 1)
+  Math.trunc(Math.random() * 100 + 1),
 );
 console.log(rand);
 
@@ -340,7 +340,7 @@ const summary = accounts
       summary[mov > 0 ? 'deposits' : 'withdrawals'] += mov;
       return summary;
     },
-    { deposits: 0, withdrawals: 0 }
+    { deposits: 0, withdrawals: 0 },
   );
 console.log(summary); // {deposits: 25180, withdrawals: -7340}
 
@@ -351,7 +351,7 @@ const [deposits, withdrawals] = accounts
       arr[mov > 0 ? 0 : 1] += mov;
       return arr;
     },
-    [0, 0]
+    [0, 0],
   );
 console.log(deposits, withdrawals); // 25180 -7340
 
@@ -452,7 +452,7 @@ const dogs = [
 
 // 1.
 dogs.forEach(
-  curDog => (curDog.recFood = Math.round(curDog.weight ** 0.75 * 28))
+  curDog => (curDog.recFood = Math.round(curDog.weight ** 0.75 * 28)),
 );
 console.log(dogs);
 
@@ -461,16 +461,19 @@ const dogSarah = dogs.find(curDog => curDog.owners.includes('Sarah'));
 console.log(
   `Sarah's dog is eating too ${
     dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'
-  }`
+  }`,
 );
 
 // 3.
-const [ownersEatTooMuch, ownersEatTooLittle] = dogs.reduce((array, curDog) => {
-  const index = curDog.curFood > curDog.recFood ? 0 : 1;
-  array[index] = array[index].concat(curDog.owners);
+const [ownersEatTooMuch, ownersEatTooLittle] = dogs.reduce(
+  (array, curDog) => {
+    const index = curDog.curFood > curDog.recFood ? 0 : 1;
+    array[index] = array[index].concat(curDog.owners);
 
-  return array;
-}, new Array([], []));
+    return array;
+  },
+  new Array([], []),
+);
 console.log(ownersEatTooLittle, ownersEatTooMuch);
 
 // 4.
@@ -481,8 +484,8 @@ console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
 console.log(
   dogs.some(
     curDog =>
-      curDog.recFood === curDog.curFood && curDog.curFood === curDog.recFood
-  )
+      curDog.recFood === curDog.curFood && curDog.curFood === curDog.recFood,
+  ),
 );
 
 // 6.

@@ -1,6 +1,6 @@
 const MyParagraph = (props) => {
-  console.log("MyParagraph Evaluating");
-  return <p>{props.children}</p>;
-};
+  console.log('MyParagraph Evaluating')
+  return <p>{props.children}</p>
+}
 
-export default MyParagraph;
+export default MyParagraph

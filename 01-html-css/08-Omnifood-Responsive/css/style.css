@@ -70,7 +70,7 @@
   color: #333;
 }
 
-.icon-mobile-nav[name="close-outline"] {
+.icon-mobile-nav[name='close-outline'] {
   display: none;
 }
 
@@ -191,7 +191,7 @@
 
 .step-img-box::before,
 .step-img-box::after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 50%;
@@ -437,7 +437,7 @@ strong {
 }
 
 .pricing-plan--complete::after {
-  content: "best value";
+  content: 'best value';
   position: absolute;
   padding: 0.8rem 6.4rem;
   top: 5%;
@@ -540,12 +540,13 @@ strong {
 }
 
 .cta-img-box {
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       to right bottom,
       rgba(235, 151, 78, 0.35),
       rgba(230, 125, 34, 0.35)
     ),
-    url("../img/eating.jpg");
+    url('../img/eating.jpg');
   background-size: cover;
   background-position: center;
 }

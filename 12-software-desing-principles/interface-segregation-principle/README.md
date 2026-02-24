@@ -6,9 +6,9 @@ The Interface Segregation Principle (ISP) states that a client should not be for
 
 ```ts
 interface IOrder {
-  processCashOrder(): void;
-  processCreditOrder(): void;
-  processOnlinePaymentOrder(): void;
+  processCashOrder(): void
+  processCreditOrder(): void
+  processOnlinePaymentOrder(): void
 }
 
 class CashOrder implements IOrder {
@@ -17,25 +17,25 @@ class CashOrder implements IOrder {
   }
   processCreditOrder(): void {
     // ISP violation
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
   processOnlinePaymentOrder(): void {
     // ISP violation
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 }
 
 class CreditOrder implements IOrder {
   processCashOrder(): void {
     // ISP violation
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
   processCreditOrder(): void {
     // process the credit order
   }
   processOnlinePaymentOrder(): void {
     // ISP violation
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 }
 ```

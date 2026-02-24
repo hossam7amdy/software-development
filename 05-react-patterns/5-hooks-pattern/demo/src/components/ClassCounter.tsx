@@ -1,42 +1,42 @@
-import React from "react";
-import { Count } from "./Count/Count";
-import { Width } from "./Width/Width";
+import React from 'react'
+import { Count } from './Count/Count'
+import { Width } from './Width/Width'
 
 interface State {
-  count: number;
-  width: number;
+  count: number
+  width: number
 }
 
 export default class ClassCounter extends React.Component<{}, State> {
   constructor() {
-    super({});
+    super({})
 
     this.state = {
       count: 0,
       width: 0,
-    };
+    }
   }
 
   componentDidMount() {
-    this.handleResize();
-    window.addEventListener("resize", this.handleResize);
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener('resize', this.handleResize)
   }
 
   increment = () => {
-    this.setState(({ count }) => ({ count: count + 1 }));
-  };
+    this.setState(({ count }) => ({ count: count + 1 }))
+  }
 
   decrement = () => {
-    this.setState(({ count }) => ({ count: count - 1 }));
-  };
+    this.setState(({ count }) => ({ count: count - 1 }))
+  }
 
   handleResize = () => {
-    this.setState({ width: window.innerWidth });
-  };
+    this.setState({ width: window.innerWidth })
+  }
 
   render() {
     return (
@@ -49,6 +49,6 @@ export default class ClassCounter extends React.Component<{}, State> {
         <div id="divider" />
         <Width width={this.state.width} />
       </div>
-    );
+    )
   }
 }

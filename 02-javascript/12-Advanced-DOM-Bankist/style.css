@@ -38,7 +38,9 @@ body {
   padding: 15rem 3rem;
   border-top: 1px solid #ddd;
 
-  transition: transform 1s, opacity 1s;
+  transition:
+    transform 1s,
+    opacity 1s;
 }
 
 .section--hidden {

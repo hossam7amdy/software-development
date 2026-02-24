@@ -1,9 +1,9 @@
-import "./styles.css";
+import './styles.css'
 
 interface Props {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
+  count: number
+  increment: () => void
+  decrement: () => void
 }
 
 export function Count({ count, increment, decrement }: Props) {
@@ -15,5 +15,5 @@ export function Count({ count, increment, decrement }: Props) {
       </div>
       <p>Current count: {count}</p>
     </div>
-  );
+  )
 }

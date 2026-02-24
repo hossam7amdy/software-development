@@ -1,48 +1,46 @@
-import React, { useState, Fragment, useRef } from "react";
+import React, { useState, Fragment, useRef } from 'react'
 
-import Card from "../UI/Card";
-import Button from "../UI/Button";
-import ErrorModal from "../UI/ErrorModal";
+import Card from '../UI/Card'
+import Button from '../UI/Button'
+import ErrorModal from '../UI/ErrorModal'
 
-import styles from "./AddUser.module.css";
+import styles from './AddUser.module.css'
 
 const AddUser = (props) => {
-  const nameInputRef = useRef();
-  const ageInputRef = useRef();
-  const [error, setError] = useState(null);
+  const nameInputRef = useRef()
+  const ageInputRef = useRef()
+  const [error, setError] = useState(null)
 
   const errorHandler = () => {
-    setError(null);
-  };
+    setError(null)
+  }
 
   const addUserHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const enteredName = nameInputRef.current.value;
-    const enteredAge = ageInputRef.current.value;
+    const enteredName = nameInputRef.current.value
+    const enteredAge = ageInputRef.current.value
 
-    nameInputRef.current.value = ageInputRef.current.value = "";
+    nameInputRef.current.value = ageInputRef.current.value = ''
 
     if (!isValidInputs(enteredName, +enteredAge)) {
       setError({
-        title: "Invalid Input!",
+        title: 'Invalid Input!',
         message: `Please enter a valid ${
           enteredName.trim().length === 0
-            ? "name and age (non-empty values)"
-            : "age between [15 - 65]"
+            ? 'name and age (non-empty values)'
+            : 'age between [15 - 65]'
         }`,
-      });
-      return;
+      })
+      return
     }
 
-    props.onAddUser(enteredName, +enteredAge);
-  };
+    props.onAddUser(enteredName, +enteredAge)
+  }
 
   const isValidInputs = (enteredName, enteredAge) => {
-    return (
-      enteredName.trim().length > 0 && 15 <= enteredAge && enteredAge <= 65
-    );
-  };
+    return enteredName.trim().length > 0 && 15 <= enteredAge && enteredAge <= 65
+  }
 
   return (
     <Fragment>
@@ -70,7 +68,7 @@ const AddUser = (props) => {
         </form>
       </Card>
     </Fragment>
-  );
-};
+  )
+}
 
-export default AddUser;
+export default AddUser

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import Button from "../../UI/Button/Button";
-import styles from "./CourseInput.module.css";
+import Button from '../../UI/Button/Button'
+import styles from './CourseInput.module.css'
 
 // import styled from "styled-components";
 // const FormControl = styled.div`
@@ -31,23 +31,23 @@ import styles from "./CourseInput.module.css";
 // `;
 
 const CourseInput = (props) => {
-  const [enteredValue, setEnteredValue] = useState("");
-  const [isValid, setIsValid] = useState(true);
+  const [enteredValue, setEnteredValue] = useState('')
+  const [isValid, setIsValid] = useState(true)
 
   const goalInputChangeHandler = (event) => {
-    setIsValid(true);
-    setEnteredValue(event.target.value);
-  };
+    setIsValid(true)
+    setEnteredValue(event.target.value)
+  }
 
   const formSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (enteredValue.trim().length === 0) {
-      setIsValid(false);
-      return;
+      setIsValid(false)
+      return
     }
-    props.onAddGoal(enteredValue);
-  };
+    props.onAddGoal(enteredValue)
+  }
 
   return (
     <form onSubmit={formSubmitHandler}>
@@ -57,7 +57,7 @@ const CourseInput = (props) => {
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
-  );
-};
+  )
+}
 
-export default CourseInput;
+export default CourseInput

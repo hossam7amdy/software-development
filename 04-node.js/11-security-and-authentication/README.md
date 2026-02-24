@@ -45,23 +45,19 @@
 - **Deserializing**: Read the session from the cookie.
 
 - **Software Design and Security**:
-
   - **Application Security** encompasses authentication, authorization, web, data, network, and infrastructure security.
   - **Authentication** verifies user/process identity while **Authorization** confirms permissions for resource access.
 
 - **Web Application Security**:
-
   - **XSS (Cross-Site Scripting)**: Allows injection of scripts into web pages viewed by other users.
   - **SQL Injection**: A technique that can harm databases through code injection.
 
 - **Data Security**:
-
   - **Data Security**: Crucial for protecting data from unauthorized access and corruption.
   - **Data-in-transit**: Secured via encryption and authentication (SSL/TLS).
   - **Data-at-rest**: Protected by encryption and access controls. Regular compliance is essential.
 
 - **Security Categories in Node JS**:
-
   - **Application Security**: Addressed through request size limits, validation, output escaping, CSRF prevention.
   - **Error & Exception Handling**: Focuses on unexpected errors, EventEmitter errors, and unhandled promise rejections.
   - **Server Security**: Involves appropriate cookie flags, HTTPS usage, and HTTP header adjustment.

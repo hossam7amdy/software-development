@@ -1,36 +1,36 @@
-import Cart from "./components/Cart/Cart";
-import Layout from "./components/Layout/Layout";
-import Products from "./components/Shop/Products";
-import Notification from "./components/UI/Notification";
+import Cart from './components/Cart/Cart'
+import Layout from './components/Layout/Layout'
+import Products from './components/Shop/Products'
+import Notification from './components/UI/Notification'
 
-import { useSelector, useDispatch } from "react-redux";
-import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { Fragment, useEffect } from 'react'
 
-import { sendCartData, fetchCartData } from "./store/cart-actions";
+import { sendCartData, fetchCartData } from './store/cart-actions'
 
-let isInitial = true;
+let isInitial = true
 
 function App() {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const changed = useSelector((state) => state.cart.changed);
-  const showCart = useSelector((state) => state.ui.cartIsVisible);
-  const notification = useSelector((state) => state.ui.notification);
+  const dispatch = useDispatch()
+  const cart = useSelector((state) => state.cart)
+  const changed = useSelector((state) => state.cart.changed)
+  const showCart = useSelector((state) => state.ui.cartIsVisible)
+  const notification = useSelector((state) => state.ui.notification)
 
   useEffect(() => {
-    dispatch(fetchCartData());
-  }, [dispatch]);
+    dispatch(fetchCartData())
+  }, [dispatch])
 
   useEffect(() => {
     if (isInitial) {
-      isInitial = false;
-      return;
+      isInitial = false
+      return
     }
 
     if (changed) {
-      dispatch(sendCartData(cart));
+      dispatch(sendCartData(cart))
     }
-  }, [cart, changed, dispatch]);
+  }, [cart, changed, dispatch])
 
   return (
     <Fragment>
@@ -46,7 +46,7 @@ function App() {
         <Products />
       </Layout>
     </Fragment>
-  );
+  )
 }
 
-export default App;
+export default App

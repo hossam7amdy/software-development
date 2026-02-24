@@ -1,4 +1,4 @@
-import { Flyout } from "./Flyout/Flyout";
+import { Flyout } from './Flyout/Flyout'
 
 export default function FlyoutMenu() {
   return (
@@ -9,5 +9,5 @@ export default function FlyoutMenu() {
         <Flyout.Item>Delete</Flyout.Item>
       </Flyout.List>
     </Flyout>
-  );
+  )
 }

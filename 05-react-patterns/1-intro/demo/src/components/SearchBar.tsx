@@ -1,6 +1,6 @@
 interface Props {
-  setFilterText: (text: string) => void;
-  setInThisLocation: (onlyShowLocalTweets: boolean) => void;
+  setFilterText: (text: string) => void
+  setInThisLocation: (onlyShowLocalTweets: boolean) => void
 }
 
 export const SearchBar = (props: Props) => {
@@ -8,7 +8,7 @@ export const SearchBar = (props: Props) => {
     <form>
       <div>
         <input
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           type="text"
           placeholder="Search..."
           onChange={(e) => props.setFilterText(e.target.value)}
@@ -24,5 +24,5 @@ export const SearchBar = (props: Props) => {
         </label>
       </p>
     </form>
-  );
-};
+  )
+}

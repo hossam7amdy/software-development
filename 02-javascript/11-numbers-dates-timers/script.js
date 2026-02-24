@@ -196,7 +196,7 @@ const pizzaTimer = setTimeout(
     console.log(`time to eat pizza with ${ing1}, ${ing2}, and ${ing3} 🍕.`);
   },
   3000,
-  ...ingredient
+  ...ingredient,
 );
 
 console.log('Waiting...');

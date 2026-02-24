@@ -1,13 +1,13 @@
-import { authActions } from "../store/auth";
-import { useDispatch } from "react-redux";
-import classes from "./Auth.module.css";
+import { authActions } from '../store/auth'
+import { useDispatch } from 'react-redux'
+import classes from './Auth.module.css'
 
 const Auth = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const loginHandler = () => {
-    dispatch(authActions.login());
-  };
+    dispatch(authActions.login())
+  }
 
   return (
     <main className={classes.auth}>
@@ -25,7 +25,7 @@ const Auth = () => {
         </form>
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth

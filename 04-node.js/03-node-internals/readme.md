@@ -12,19 +12,19 @@ The call stack is a data structure that records where in the program we are `FIF
 
 ```javascript
 function multiply(x, y) {
-  return x * y;
+  return x * y
 }
 
 function square(x) {
-  return multiply(x, x);
+  return multiply(x, x)
 }
 
 function printSquare(x) {
-  var s = square(x);
-  console.log(s);
+  var s = square(x)
+  console.log(s)
 }
 
-printSquare(5);
+printSquare(5)
 ```
 
 ### Reactor Pattern
@@ -87,35 +87,35 @@ There are two types of tasks in the EventLoop: _Macrotasks_ and _Microtasks_.
 ## Microtasks & Macrotasks in practice
 
 ```javascript
-const fs = require("fs");
+const fs = require('fs')
 
 fs.readFile(__filename, () => {
-  console.log("1. readFile");
+  console.log('1. readFile')
 
   process.nextTick(() => {
-    console.log("2. nextTick in fs");
-  });
+    console.log('2. nextTick in fs')
+  })
 
   setTimeout(() => {
-    console.log("6. setTimeout");
+    console.log('6. setTimeout')
 
     process.nextTick(() => {
-      console.log("7. nextTick in setTimeout");
-    });
-  }, 0);
+      console.log('7. nextTick in setTimeout')
+    })
+  }, 0)
 
   setImmediate(() => {
-    console.log("3. setImmediate");
+    console.log('3. setImmediate')
 
     process.nextTick(() => {
-      console.log("4. nextTick in setImmediate");
+      console.log('4. nextTick in setImmediate')
 
       Promise.resolve().then(() => {
-        console.log("5. Promise in setImmediate");
-      });
-    });
-  });
-});
+        console.log('5. Promise in setImmediate')
+      })
+    })
+  })
+})
 ```
 
 Look at the final diagram of the EventLoop and try to guess the order of the logs.

@@ -1,5 +1,5 @@
-import BasicForm from "./components/BasicForm";
-import SimpleInput from "./components/SimpleInput";
+import BasicForm from './components/BasicForm'
+import SimpleInput from './components/SimpleInput'
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       {/* <SimpleInput /> */}
       <BasicForm />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

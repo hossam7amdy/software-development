@@ -1,14 +1,14 @@
-import useInput from "../hooks/use-input";
-import Input from "./Input";
+import useInput from '../hooks/use-input'
+import Input from './Input'
 
 const isNotEmpty = (value) => {
-  return value.trim() !== "";
-};
+  return value.trim() !== ''
+}
 
 const isValidEmail = (email) => {
-  const regex = /^[a-zA-Z]+\w*@[a-zA-Z]+[.][a-zA-Z]{2,}$/g;
-  return regex.test(email);
-};
+  const regex = /^[a-zA-Z]+\w*@[a-zA-Z]+[.][a-zA-Z]{2,}$/g
+  return regex.test(email)
+}
 
 const BasicForm = (props) => {
   const {
@@ -18,7 +18,7 @@ const BasicForm = (props) => {
     valueInputBlurHandler: firstNameInputHandler,
     valueInputChangeHandler: firstNameInputChangeHandler,
     reset: resetFirstNameInput,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty)
 
   const {
     value: lastName,
@@ -27,7 +27,7 @@ const BasicForm = (props) => {
     valueInputBlurHandler: lastNameInputHandler,
     valueInputChangeHandler: lastNameInputChangeHandler,
     reset: resetlastNameInput,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty)
 
   const {
     value: email,
@@ -36,34 +36,34 @@ const BasicForm = (props) => {
     valueInputBlurHandler: emailInputHandler,
     valueInputChangeHandler: emailInputChangeHandler,
     reset: resetEmailInput,
-  } = useInput(isValidEmail);
+  } = useInput(isValidEmail)
 
-  const formIsValid = firstNameIsValid && lastNameIsValid && emailIsValid;
+  const formIsValid = firstNameIsValid && lastNameIsValid && emailIsValid
 
   const formSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (!formIsValid) {
-      return;
+      return
     }
 
-    console.log("Submitted!");
-    console.log(firstName, lastName, email);
+    console.log('Submitted!')
+    console.log(firstName, lastName, email)
 
-    resetFirstNameInput();
-    resetlastNameInput();
-    resetEmailInput();
-  };
+    resetFirstNameInput()
+    resetlastNameInput()
+    resetEmailInput()
+  }
 
   const inputFirstNameClasses = `form-control ${
-    firstNameInputHasError ? "invalid" : ""
-  }`;
+    firstNameInputHasError ? 'invalid' : ''
+  }`
   const inputLastNameClasses = `form-control ${
-    lastNameInputHasError ? "invalid" : ""
-  }`;
+    lastNameInputHasError ? 'invalid' : ''
+  }`
   const inputEmailClasses = `form-control ${
-    emailInputHasError ? "invalid" : ""
-  }`;
+    emailInputHasError ? 'invalid' : ''
+  }`
 
   return (
     <form onSubmit={formSubmitHandler}>
@@ -112,7 +112,7 @@ const BasicForm = (props) => {
         <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default BasicForm;
+export default BasicForm

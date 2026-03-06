@@ -1,48 +1,56 @@
 ## Chapter 2. Defining Nonfunctional Requirements
 
-**Functional requirements** define what an application is supposed to do, while **nonfunctional requirements** describe the general qualities the system must possess, such as _performance_, _reliability_, _scalability_, and _maintainability_. Chapter 2 explores these core nonfunctional requirements, using a social network timeline case study to demonstrate how architectural decisions (like **fan-out** and **materialization**) impact system design at scale.
+**Functional requirements** define what an application is supposed to do, while **nonfunctional requirements** describe the general qualities the system must possess, such as _performance_, _reliability_, _scalability_, and _maintainability_.
 
-### 1. Performance
+### 1. The Case Study: Social Network Home Timelines
 
-Performance is typically described using two main metrics:
+The chapter grounds these abstract concepts in a case study of a social network (like X/Twitter). It highlights the challenge of serving user timelines using standard relational queries, which can require hundreds of millions of expensive database lookups per second.
 
-- **Throughput:** The number of requests processed per second, or the data volume handled per second.
-- **Response time:** The time elapsed from a client making a request to receiving the answer.
+To optimize reads, we can use **materialization**, precomputing the results of a query and storing them in a cache (a **materialized view**). When a user posts, the system actively pushes the new post to the precomputed timelines of their followers. This downstream amplification of a single request into multiple requests is called **fan-out**. While it speeds up read operations, it makes writes much heavier, especially when dealing with celebrity accounts with millions of followers.
 
-**Key Terms & Comparisons:**
+### 2. Describing Performance
 
-- **Response Time vs. Latency:** While often used interchangeably,
-  - **Response time** is what the client actually experiences (including network and queueing delays)
-  - **Latency** strictly refers to the time a request spends waiting or being latent (not actively being processed).
-- **Averages vs. Percentiles:** The average (mean) response time is poor for understanding typical user experiences; instead **percentiles** (like the median/p50, p95, p99, and p999) are preferred. High percentiles, known as **tail latencies**, are critical because they affect the user experience of the most active users, and a single slow backend call can delay an entire end-user request (an effect called **tail latency amplification**).
-- **Queueing and Overload:** As throughput reaches hardware limits, queueing delays spike. This can cause clients to resend requests, triggering a **retry storm** and leading to a **metastable failure** where the system remains overloaded. Techniques like **exponential backoff**, **circuit breakers**, and **load shedding** prevent this.
+When evaluating performance, we rely on two primary metrics:
 
-### 2. Reliability and Fault Tolerance
+- **Throughput:** The volume of data or number of requests the system processes per second.
+- **Response time:** The total time from when a client sends a request to when they receive the response.
 
-Reliability means the system continues to work correctly even when things go wrong.
+**Key Terminology in Performance:**
 
-**Key Terms & Comparisons:**
+- **Latency vs. Response Time:**
+  - **Latency** is the time a request spends strictly waiting (latent), such as network delay.
+  - **Response time** is what the client actually experiences. Response time includes both latency/queueing delays and **service time** (the duration the server is actively processing the request).
+- **Queueing and Head-of-line blocking:** As throughput approaches maximum hardware capacity, **queueing delays** spike. A single slow request can hold up the processing of subsequent fast requests, an effect known as **head-of-line blocking**.
+- **Percentiles and Tail Latencies:** Because network delay varies (known as **jitter**), averages (means) are not good indicators of user experience. Instead, we use **percentiles** like the **median (p50)**, **p95**, **p99**, and **p999**. High percentiles are called **tail latencies**.
+- **Tail Latency Amplification:** If an end-user request requires multiple backend calls, just one slow backend call delays the entire response, amplifying the chance that users experience tail latencies.
+- **SLOs and SLAs:** Percentiles are commonly used to define **service level objectives (SLOs)** (internal performance targets) and **service level agreements (SLAs)** (business contracts promising specific performance).
+- **Handling Overload:** Spikes in queueing delays can cause client timeouts, leading them to resend requests. This creates a **retry storm** and pushes the system into a **metastable failure**, where it remains overloaded even after the initial traffic spike passes. To mitigate this, engineers use **exponential backoff**, **circuit breakers**, **token bucket algorithms**, **load shedding**, and **backpressure**.
 
-- **Fault vs. Failure:** A **fault** occurs when a specific component (like a hard drive or a single machine) stops working. A **failure** occurs when the system _as a whole_ stops providing the required service to the user. Reliable systems are **fault-tolerant**—they prevent component faults from escalating into system-wide failures.
+### 3. Reliability and Fault Tolerance
+
+Reliability means the system continues to work correctly even when things break.
+
+- **Fault vs. Failure:** A **fault** is a localized issue, like a single disk crashing. A **failure** is when the system as a whole stops meeting its SLOs. Reliable systems are **fault-tolerant**; they prevent faults from escalating into failures. A component that will bring down the whole system if it fails is called a **single point of failure (SPOF)**.
+- **Fault Injection & Chaos Engineering:** To build confidence in a system, engineers deliberately trigger faults in production (e.g., killing processes) to ensure fault-tolerance mechanisms work, a practice known as **chaos engineering**.
 - **Types of Faults:**
-  - **Hardware Faults:** Hard drive crashes, RAM corruption, or datacenter power outages. They are often mitigated by adding **redundancy** (e.g., RAID arrays, backup power, or multi-node clusters).
-  - **Software Faults:** Bugs, runaway processes, or cascading failures. These are harder to handle because they are strongly correlated across nodes and can cause simultaneous crashes.
-  - **Human Errors:** Mistakes made by operators (e.g., misconfigurations). Instead of blaming individuals, organizations are shifting toward **blameless postmortems** to learn from incidents and improve system resilience.
+  - **Hardware Faults:** Mitigated by adding redundancy (e.g., RAID arrays, backup power, deploying across multiple cloud **availability zones**). Multi-node systems also allow for **rolling upgrades**, patching one node at a time without downtime.
+  - **Software Faults:** Harder to anticipate and highly correlated (e.g., memory leaks, **cascading failures**, or runaway processes that exhaust shared resources).
+  - **Human Errors:** Operators inevitably make mistakes. Rather than blaming individuals, mature engineering cultures treat "human error" as a symptom of a poorly designed sociotechnical system and utilize **blameless postmortems** to learn from incidents.
 
-### 3. Scalability
+### 4. Scalability
 
-Scalability is a system's ability to cope with increased load (e.g., concurrent users, data volume) while maintaining performance.
+Scalability is the system's ability to cope with increased load. Doing this too early is a **premature optimization**. If doubling your hardware resources allows you to handle twice the load with the same performance, the system has **linear scalability**.
 
-**Key Comparisons in Scalability Architectures:**
+**Architectural Approaches to Scaling:**
 
-- **Shared-Memory (Scaling Up/Vertical Scaling):** Uses a single, powerful machine with multiple CPUs and threads that share the same RAM. While simple, cost grows faster than linearly and hardware bottlenecks limit ultimate scale.
-- **Shared-Disk:** Multiple machines with independent CPUs and RAM that store data on a shared network-attached storage array (NAS or SAN). It is common in data warehousing but limited by locking overhead and network contention.
-- **Shared-Nothing (Scaling Out/Horizontal Scaling):** A distributed system of multiple independent nodes, each with its own CPU, RAM, and disk, coordinating via a standard network. This approach dominates cloud deployments because it scales linearly and offers better fault tolerance, though it introduces the complexities of data sharding and distributed systems.
+- **Shared-Memory (Vertical Scaling / Scaling Up):** Moving to a single, more powerful machine with shared RAM. Cost grows faster than linearly and is bottlenecked by physical hardware limits.
+- **Shared-Disk:** Multiple independent compute nodes sharing an array of disks over a network (NAS/SAN). Often bottlenecked by network contention and locking overhead.
+- **Shared-Nothing (Horizontal Scaling / Scaling Out):** A distributed system where each node has its own CPU, RAM, and disk, coordinating over a standard network. This is the standard for modern scaling, but it introduces the complex necessity of distributed system coordination and data sharding. Remember, there is no **magic scaling sauce**; architectures must be purpose-built for their specific load profile.
 
-### 4. Maintainability
+### 5. Maintainability
 
-Because the majority of software costs lie in ongoing maintenance rather than initial development, systems should be designed to minimize pain for the engineers running them. This relies on three principles:
+The vast majority of software cost is in ongoing maintenance, not initial development. We can design legacy-proof systems by focusing on three principles:
 
-- **Operability:** Making routine tasks easy for operations teams through automation, good default behaviors, self-healing, and strong observability.
-- **Simplicity:** Managing complexity so new engineers can easily understand the system. A key tool here is **abstraction**, which hides complex implementation details (like machine code or complex data structures) behind a clean, reusable interface.
-- **Evolvability:** Making it easy to change the system to meet future, unanticipated requirements. Simple, loosely coupled systems reduce the risk of changes, and minimizing **irreversibility** (e.g., easily reverting a database migration) greatly improves flexibility.
+- **Operability:** Making the system easy for operations teams to run through automation, **observability**, good default behaviors, and predictable self-healing.
+- **Simplicity:** Preventing the codebase from becoming a highly coupled **big ball of mud**. We differentiate between **essential complexity** (inherent to the problem domain) and **accidental complexity** (caused by bad tooling or architecture). The best tool for managing complexity is **abstraction**, which hides complex implementation details behind clean, reusable interfaces.
+- **Evolvability:** Making it easy to change the system for future, unanticipated requirements. We achieve this by decoupling systems and minimizing **irreversibility** (making sure actions like database migrations can be safely rolled back).

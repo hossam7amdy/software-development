@@ -8,9 +8,10 @@
   "author": "Hossam Hamdy <hossamhamdy117@gmail.com>",
   "packageManager": "pnpm@10.26.2",
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "husky": "^9.1.7",
-    "prettier": "3.8.1",
-    "lint-staged": "^16.2.7"
+    "lint-staged": "^16.2.7",
+    "prettier": "3.8.1"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

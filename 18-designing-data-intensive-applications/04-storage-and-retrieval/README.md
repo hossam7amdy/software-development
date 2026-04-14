@@ -1,61 +1,47 @@
-# Chapter 4. Storage and Retrieval
+## Chapter 4. Storage and Retrieval
 
-Explores the fundamental principles of how databases store data on disk and find it again. The chapter highlights that there is no single "best" storage engine; rather, different engines are optimized for different workloads—specifically distinguishing between transactional (OLTP) and analytical (OLAP) use cases.
+The chapter divides storage systems into two primary categories: those optimized for **transaction processing (OLTP)** and those optimized for **analytics (OLAP)**.
 
-Here is a summary of the core concepts, data structures, and architectures discussed in the chapter.
+### Storage and Indexing for Transaction Processing (OLTP)
 
-## 1. The Core Data Structures of Storage
+OLTP systems are designed for high volumes of fast read and write requests for a small number of records, typically accessed via indexes. The chapter details two main philosophies for OLTP storage engines:
 
-At its most basic level, a database can be a text file where new entries are simply appended to the end. While this **log** (an append-only sequence of records) offers excellent write performance, it requires an **index** to allow for efficient read performance ($O(1)$) rather than scanning the entire file ($O(n)$).
+**1. Log-Structured Storage and LSM-Trees**
 
-The chapter details two primary families of storage engines used in modern databases:
+- **Core Concepts:** This approach relies on an append-only log, where data is sequentially appended to files rather than overwritten. To make searching efficient, systems use **SSTables (Sorted String Tables)**, which group key-value pairs into blocks and sort them by key.
+- **Architecture:** Writes are first added to an in-memory data structure called a **memtable**. When the memtable reaches a certain size, it is flushed to disk as an immutable SSTable segment. Over time, a background process merges and compacts these segments to remove deleted or overwritten values. This architecture is known as a **Log-Structured Merge-Tree (LSM-Tree)**.
+- **Bloom Filters:** Because reading from an LSM-tree might require checking multiple segments, **Bloom filters** (probabilistic data structures) are used to quickly determine if a key does _not_ exist, saving unnecessary disk reads.
 
-### Log-Structured Storage Engines
+**2. Update-in-Place Storage and B-Trees**
 
-These engines rely on appending data to files and merging them in the background.
+- **Core Concepts:** **B-trees** remain the standard index in almost all relational databases. Instead of appending to logs, a B-tree breaks data down into fixed-size pages or blocks (e.g., 4 KiB to 16 KiB) and overwrites these pages in place.
+- **Architecture:** The pages form a balanced tree structure where each parent page contains references to child pages covering specific key ranges, allowing a database to traverse down to a leaf page holding the target data. The depth of the tree scales efficiently at $O(\log n)$.
+- **Write-Ahead Log (WAL):** Overwriting pages is risky if a system crashes mid-write. To ensure data resilience, B-trees maintain an append-only **Write-Ahead Log (WAL)** that records modifications before they are applied to the actual tree.
 
-- **Hash Indexes:** The simplest strategy involves keeping an in-memory hash map where every key maps to a byte offset in a data file on disk. This is fast but requires all keys to fit in RAM.
-- **SSTables (Sorted String Tables):** To overcome the limitations of hash indexes, data is stored in **Sorted String Tables**, where key-value pairs are sorted by key. This allows for efficient merging of files (similar to mergesort) and sparse in-memory indexing (you don't need to keep every key in RAM).
-- **LSM-Trees (Log-Structured Merge-Trees):** Storage engines based on the principle of merging and compacting sorted files are called **LSM-Trees**.
-  - Writes are first added to an in-memory balanced tree called a **memtable**.
-  - When the **memtable** fills up, it is flushed to disk as an **SSTable**.
-  - **Bloom filters** are often used to optimize performance by quickly checking if a key does _not_ exist in the database, saving unnecessary disk reads.
+**Comparison: LSM-Trees vs. B-Trees**
 
-### Page-Oriented Storage Engines
+- **Workload Suitability:** As a general rule, LSM-trees handle write-heavy workloads better, whereas B-trees provide faster and more predictable read performance.
+- **Write Amplification:** This refers to one application write turning into multiple disk writes. Both systems experience write amplification, but LSM-trees typically have a lower rate than B-trees, making them more efficient for SSD lifespan and write throughput.
+- **Write Patterns:** LSM-trees convert scattered random writes into sequential writes, which hardware processes much faster. However, B-trees do not require background compaction, which can sometimes cause latency spikes in LSM-trees when write throughput outpaces the compaction process.
 
-- **B-Trees:** The most widely used indexing structure (standard in SQL databases). Unlike LSM-trees, **B-trees** break the database down into fixed-size **pages** (usually 4KB) and read or write one page at a time.
-  - They enable efficient lookups by following pointers down a tree structure with a high **branching factor**.
-  - To modify data, B-trees overwrite pages on disk. To ensure reliability in the event of a crash, they utilize a **write-ahead log (WAL)** (or redo log), which records every modification before it is applied to the tree.
+### Additional Indexing and Memory Concepts
 
-**Comparison:**
+- **Secondary Indexes:** While primary keys uniquely identify a row, secondary indexes allow searching by other attributes, though the values may not be unique.
+- **Storing Values in Indexes:** A **clustered index** stores the actual row data inside the index. A **heap file** stores data without specific order while indexes point to it, and a **covering index** stores a specific subset of columns inside the index to speed up certain queries.
+- **In-Memory Databases:** As RAM becomes cheaper, some databases keep entire datasets in memory (e.g., Redis). They achieve higher performance not just by avoiding disk reads, but by avoiding the CPU overhead of encoding data structures into a disk-readable format.
 
-- **LSM-trees** generally offer faster write throughput (due to sequential writes) but may suffer from slower reads and **write amplification** (rewriting data during compaction).
-- **B-trees** typically offer faster, more predictable read performance.
+### Data Storage for Analytics (OLAP)
 
-## 2. Advanced Indexing Strategies
+Data warehouses handle complex analytical queries that scan millions of records and aggregate data.
 
-Beyond basic key-value lookups, the chapter introduces variations on indexing:
+- **Cloud Data Warehouses:** Modern cloud warehouses decouple query computation from the object storage layer to scale resources independently. They separate components like the query engine, storage format (e.g., Parquet), table format (e.g., Iceberg), and data catalogs.
+- **Column-Oriented Storage:** Instead of a row-oriented layout (where all attributes of a row sit together), analytical databases store all values from a single column together. Since analytical queries often only need a few columns out of a 100-column table, this drastically reduces the amount of data loaded from disk.
+- **Compression and Sorting:** Columnar storage allows for highly efficient compression. **Bitmap encoding** and **run-length encoding** can shrink columns containing repetitive data down to a fraction of their size. Sorting the table by specific columns further groups identical values, boosting compression rates.
+- **Query Execution:** To maximize CPU efficiency, query engines use either **query compilation** (generating machine code on the fly) or **vectorized processing** (processing batches of column data sequentially in tight CPU loops).
+- **Materialized Views and Data Cubes:** To avoid repeatedly calculating complex aggregates (like SUM or COUNT), databases use **materialized views** to write query results to disk. A **data cube** (or OLAP cube) is a multidimensional materialized view that caches aggregates grouped by different dimensions to dramatically speed up reporting.
 
-- **Clustered Index:** Stores the actual row data directly within the index (e.g., the primary key index in InnoDB) to avoid an extra disk seek.
-- **Covering Index:** Stores specific columns within the index so that some queries can be answered by the index alone.
-- **Multi-column Indexes:** Used when queries target multiple columns. A **concatenated index** combines fields into one key (e.g., _lastname, firstname_).
-- **Multi-dimensional Indexes:** Used for geospatial data (e.g., R-trees) to search for points within a range.
-- **Full-Text Indexes:** Specialized indexes for searching text data, often using an inverted index structure.
+### Advanced Indexing
 
-## 3. Transaction Processing (OLTP) vs. Analytics (OLAP)
-
-The chapter distinguishes between two broad categories of access patterns:
-
-- **OLTP (Online Transaction Processing):** Characterized by user-facing applications, huge volumes of requests, small queries, and random-access writes. These systems typically use row-oriented storage.
-- **OLAP (Online Analytic Processing):** Characterized by business intelligence and data analysis. Queries scan massive numbers of records to calculate aggregates (sum, count, average) rather than returning raw rows.
-
-## 4. Column-Oriented Storage for Analytics
-
-For **OLAP** workloads, row-oriented storage is inefficient because an analytic query might read millions of rows but only need a few columns.
-
-- **Data Warehousing:** A separate database populated via an **Extract–Transform–Load (ETL)** process, designed specifically for analytics without affecting OLTP performance.
-- **Star Schema:** A standard modeling pattern for analytics consisting of a central **fact table** (events) surrounded by **dimension tables** (who, what, where).
-- **Column-Oriented Storage:** Stores values from each column together rather than storing all values for a row together. This allows queries to read only the specific columns they need.
-- **Column Compression:** Because column data is often repetitive, it compresses very well using techniques like **bitmap encoding**.
-- **Vectorized Processing:** A technique where the CPU processes a chunk of compressed column data in a tight loop, significantly speeding up analytic queries.
-- **Materialized Views:** Precomputed caches of query results (aggregates) used to speed up expensive read queries. A common special case is a **data cube** (or OLAP cube), which caches aggregates across multiple dimensions.
+- **Multidimensional Indexes:** Standard concatenated indexes cannot search multiple distinct ranges simultaneously. Specialized indexes like **R-trees** are used for geospatial data to find points within a specific latitude and longitude simultaneously.
+- **Full-Text Search:** To search for keywords within text, search engines build an **inverted index** mapping terms to a "postings list" of all document IDs containing that term. Systems like Lucene use Levenshtein automatons to allow for typo tolerance (searching within a certain edit distance).
+- **Vector Embeddings:** Used for semantic search (understanding meaning rather than exact keywords), embedding models (like Large Language Models) translate documents into vectors representing points in a multidimensional space. Distance functions like **cosine similarity** determine how semantically close two documents are. These are stored in specialized **vector indexes** (such as Flat, IVF, or HNSW indexes) to rapidly find the nearest neighbor to a user's search query.
